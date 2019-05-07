@@ -1,10 +1,10 @@
 /**
- * Diese Klasse modelliert Rï¿½ume in der Welt von Zuul.
+ * Diese Klasse modelliert Räume in der Welt von Zuul.
  *
- * Ein "Raum" reprï¿½sentiert einen Ort in der virtuellen Landschaft des
- * Spiels. Ein Raum ist mit anderen Rï¿½umen ï¿½ber Ausgï¿½nge verbunden.
- * Mï¿½gliche Ausgï¿½nge liegen im Norden, Osten, Sï¿½den und Westen.
- * Fï¿½r jede Richtung hï¿½lt ein Raum eine Referenz auf den 
+ * Ein "Raum" repräsentiert einen Ort in der virtuellen Landschaft des
+ * Spiels. Ein Raum ist mit anderen Räumen über Ausgänge verbunden.
+ * Mögliche Ausgänge liegen im Norden, Osten, Süden und Westen.
+ * Für jede Richtung hält ein Raum eine Referenz auf den 
  * benachbarten Raum.
  *
  * @author  Michael Kolling and David J. Barnes
