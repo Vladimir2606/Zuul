@@ -11,16 +11,16 @@ public class WorldGenerator {
     }
 
     private void raeumeAnlegen() {
-        lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen");
-        waldstueck = new Raum("im dunklen Wald");
-        taverne = new Raum("in der Taverne, mit zwielichten Gestalten an der Theke");
-        hexenhaus = new Raum("im Hexenhaus, mit einem größem Symbol auf dem Boden");
-        dorfplatz = new Raum("auf dem Dorfplatz");
-        piratenHoehle = new Raum("in einer alten Piratenhöhle");
-        kellerDerTaverne = new Raum("im Keller der Taverne");
-        geheimgang = new Raum("in einem schmalen modrigen Geheimgang");
-        taverneErsterStock=new Raum("bei den den Gästezimmern im ersten Stock der Taverne");
-        teleporter = new Raum("in einem kleinem Raum mit einem größem Symbol auf dem Boden");
+        lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
+        waldstueck = new Raum("im dunklen Wald", 13);
+        taverne = new Raum("in der Taverne, mit zwielichten Gestalten an der Theke", 20);
+        hexenhaus = new Raum("im Hexenhaus, mit einem größem Symbol auf dem Boden", 18);
+        dorfplatz = new Raum("auf dem Dorfplatz", 15);
+        piratenHoehle = new Raum("in einer kalten und nassen alten Piratenhöhle", 2);
+        kellerDerTaverne = new Raum("im Keller der Taverne", 9);
+        geheimgang = new Raum("in einem schmalen modrigen Geheimgang", 7);
+        taverneErsterStock=new Raum("bei den den Gästezimmern im ersten Stock der Taverne", 20);
+        teleporter = new Raum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3);
     }
 
     private void setzeAusgaenge() {

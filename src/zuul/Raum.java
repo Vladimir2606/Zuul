@@ -20,18 +20,21 @@ public class Raum
     private String beschreibung;
     private HashMap<String, Raum> ausgaenge;
     private ArrayList<Gegenstand> gegenstaende;
+    private int temperatur;
 
     /**
      * Erzeuge einen Raum mit einer Beschreibung. Ein Raum
      * hat anfangs keine Ausgänge.
      * @param beschreibung enthält eine Beschreibung in der Form
      *        "in einer Küche" oder "auf einem Sportplatz".
+     * @param temperatur ist die Temperatur die jeder Raum hat.
      */
-    public Raum(String beschreibung)
+    public Raum(String beschreibung, int temperatur)
     {
         this.gegenstaende=new ArrayList<>();
         this.ausgaenge=new HashMap<>();
         this.beschreibung = beschreibung;
+        this.temperatur = temperatur;
     }
 
     public void gegenstandAblegen(Gegenstand neuerGegenstand) {
@@ -49,10 +52,11 @@ public class Raum
     public String getLangeBeschreibung() {
         String erg=  "Sie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
         if(this.gegenstaende.size()>0) {
-            erg+="\nGegenstände in diesem Raum:\n";
+            erg+="\nGegenstände in diesem Umgebung:\n";
             for(Gegenstand g: this.gegenstaende) {
                 erg+=" - " + g.toString() + "\n";
             }
+            erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad";
         }
         return erg;
     }
