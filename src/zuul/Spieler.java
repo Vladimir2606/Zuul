@@ -8,7 +8,7 @@ public class Spieler {
     private int tragkraft;
     private ArrayList<Gegenstand> gegenstaende;
     private int hunger;
-    private double lebenspunkte;
+    private int lebenspunkte;
 
     public Spieler() {
         this.gegenstaende=new ArrayList<>();
@@ -16,12 +16,13 @@ public class Spieler {
         this.hunger = 10;
         this.lebenspunkte = 10;
     }
-    
+    // diese Methode sorgt dafür das der Spieler hunger bekommt
     public void hungern() {
-    	if (this.hunger < 1) {
-    		this.lebenspunkte -= 0.5;
-    	}
     	this.hunger -= 1;
+    	if (this.hunger <= 0) {
+    		this.hunger = 0;
+    		this.lebenspunkte -= 1;
+    	}
     }
 
     public int ermittleGewicht() {
@@ -91,7 +92,9 @@ public class Spieler {
         }
         erg+=this.tragkraft-ermittleGewicht() + "kg kann ich noch tragen!\n";
         erg += "Ich habe noch ";
-    	erg += this.hunger + " Hungerpunkte";
+    	erg += this.hunger + " Hungerpunkte\n";
+    	erg += "Ich habe noch ";
+    	erg += this.lebenspunkte + " Lebenspunkte";
         return erg;
     }
 
