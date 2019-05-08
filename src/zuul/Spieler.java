@@ -8,14 +8,19 @@ public class Spieler {
     private int tragkraft;
     private ArrayList<Gegenstand> gegenstaende;
     private int hunger;
+    private double lebenspunkte;
 
     public Spieler() {
         this.gegenstaende=new ArrayList<>();
         this.tragkraft = 30;
         this.hunger = 10;
+        this.lebenspunkte = 10;
     }
     
     public void hungern() {
+    	if (this.hunger < 1) {
+    		this.lebenspunkte -= 0.5;
+    	}
     	this.hunger -= 1;
     }
 
