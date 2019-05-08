@@ -1,7 +1,8 @@
 package zuul;
 
 public class WorldGenerator {
-    private Raum lichtung, waldstueck, taverne, hexenhaus, dorfplatz, kellerDerTaverne, geheimgang, taverneErsterStock, piratenHoehle;
+    private Raum lichtung, waldstueck, taverne, hexenhaus, dorfplatz, kellerDerTaverne, geheimgang, taverneErsterStock,
+    				piratenHoehle, teleporter;
 
     public WorldGenerator() {
         this.raeumeAnlegen();
@@ -13,12 +14,13 @@ public class WorldGenerator {
         lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen");
         waldstueck = new Raum("im dunklen Wald");
         taverne = new Raum("in der Taverne, mit zwielichten Gestalten an der Theke");
-        hexenhaus = new Raum("im Hexenhaus");
+        hexenhaus = new Raum("im Hexenhaus, mit einem größem Symbol auf dem Boden");
         dorfplatz = new Raum("auf dem Dorfplatz");
         piratenHoehle = new Raum("in einer alten Piratenhöhle");
         kellerDerTaverne = new Raum("im Keller der Taverne");
         geheimgang = new Raum("in einem schmalen modrigen Geheimgang");
         taverneErsterStock=new Raum("bei den den Gästezimmern im ersten Stock der Taverne");
+        teleporter = new Raum("in einem kleinem Raum mit einem größem Symbol auf dem Boden");
     }
 
     private void setzeAusgaenge() {
@@ -32,6 +34,7 @@ public class WorldGenerator {
         dorfplatz.setAusgang("north", waldstueck);
         dorfplatz.setAusgang("south", taverne);
         hexenhaus.setAusgang("east", dorfplatz);
+        hexenhaus.setAusgang("teleport", teleporter);
         taverne.setAusgang("north", dorfplatz);
         taverne.setAusgang("up", taverneErsterStock);
         taverne.setAusgang("down", kellerDerTaverne);
@@ -41,8 +44,11 @@ public class WorldGenerator {
         kellerDerTaverne.setAusgang("north", geheimgang);
         geheimgang.setAusgang("south", kellerDerTaverne);
         geheimgang.setAusgang("east", piratenHoehle);
+        geheimgang.setAusgang("north", teleporter);
         piratenHoehle.setAusgang("west", geheimgang);
         piratenHoehle.setAusgang("up", lichtung);
+        teleporter.setAusgang("south", geheimgang);
+        teleporter.setAusgang("teleport", hexenhaus);
 
     }
 
