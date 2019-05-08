@@ -105,6 +105,7 @@ public class Spieler {
                 if(g instanceof Essen) {
                     Essen e=(Essen)g;
                     this.tragkraft+=e.getBonus();
+                    this.hunger += e.getEssen();
                     this.gegenstaende.remove(g);
                     return;
                 }
