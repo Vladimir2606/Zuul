@@ -23,9 +23,9 @@ public class Raum
 
     /**
      * Erzeuge einen Raum mit einer Beschreibung. Ein Raum
-     * hat anfangs keine Ausgï¿½nge.
-     * @param beschreibung enthï¿½lt eine Beschreibung in der Form
-     *        "in einer Kï¿½che" oder "auf einem Sportplatz".
+     * hat anfangs keine Ausgänge.
+     * @param beschreibung enthält eine Beschreibung in der Form
+     *        "in einer Küche" oder "auf einem Sportplatz".
      */
     public Raum(String beschreibung)
     {
@@ -47,9 +47,9 @@ public class Raum
     }
 
     public String getLangeBeschreibung() {
-        String erg=  "Sie sind " + this.beschreibung + "\nAusgÃ¤nge: " + this.ausgaengeToString();
+        String erg=  "Sie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
         if(this.gegenstaende.size()>0) {
-            erg+="\nGegenstÃ¤nde in diesem Raum:\n";
+            erg+="\nGegenstände in diesem Raum:\n";
             for(Gegenstand g: this.gegenstaende) {
                 erg+=" - " + g.toString() + "\n";
             }
@@ -80,7 +80,7 @@ public class Raum
     public Gegenstand sucheGegenstand(String name) {
         for(Gegenstand g: this.gegenstaende) {
             // if(g.getName() == name) --> funktioniert nicht,
-            // da hier nur die Referenz auf Gleichheit geprÃ¼ft wird
+            // da hier nur die Referenz auf Gleichheit geprüft wird
             // d.h. ob die im gleichen Speicher stehen
             if(g.getName().equalsIgnoreCase(name)) {
                 return g;

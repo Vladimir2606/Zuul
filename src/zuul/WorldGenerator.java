@@ -15,15 +15,15 @@ public class WorldGenerator {
         taverne = new Raum("in der Taverne, mit zwielichten Gestalten an der Theke");
         hexenhaus = new Raum("im Hexenhaus");
         dorfplatz = new Raum("auf dem Dorfplatz");
-        piratenHoehle = new Raum("in einer alten Piratenhï¿½hle");
+        piratenHoehle = new Raum("in einer alten Piratenhöhle");
         kellerDerTaverne = new Raum("im Keller der Taverne");
         geheimgang = new Raum("in einem schmalen modrigen Geheimgang");
-        taverneErsterStock=new Raum("bei den den Gï¿½stezimmern im ersten Stock der Taverne");
+        taverneErsterStock=new Raum("bei den den Gästezimmern im ersten Stock der Taverne");
     }
 
     private void setzeAusgaenge() {
 
-        // die Ausgï¿½nge initialisieren
+        // die Ausgänge initialisieren
         lichtung.setAusgang("down", piratenHoehle);
         lichtung.setAusgang("east", waldstueck);
         waldstueck.setAusgang("west", lichtung);
@@ -49,11 +49,11 @@ public class WorldGenerator {
 
     private void addGegenstaende() {
         taverne.gegenstandAblegen(new Gegenstand("Bierkrug", "ein leckeres dunkles Pils in einem edlen Krug", 2));
-        taverne.gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit SoÃŸe", 5 ));
-        piratenHoehle.gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Golf gefÃ¼llte Holzkiste", 40));
+        taverne.gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit Soße", 5 ));
+        piratenHoehle.gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Golf gefüllte Holzkiste", 40));
         piratenHoehle.gegenstandAblegen(new Gegenstand("Schwert", "das Schwert des alten PiratenkapitÃ¤ns", 10));
         waldstueck.gegenstandAblegen(new Essen("Pilz", "ein seltsam aussehender Pilz", 1, 20));
-        lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefÃ¼llt mit Brot", 4));
+        lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
         lichtung.gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5));
     }
 

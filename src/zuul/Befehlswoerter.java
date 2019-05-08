@@ -1,22 +1,22 @@
 /*
- * Diese Klasse hï¿½lt eine Aufzï¿½hlung aller Befehlswï¿½rter, die dem
+ * Diese Klasse hält eine Aufzählung aller Befehlswörter, die dem
  * Spiel bekannt sind. Mit ihrer Hilfe werden eingetippte Befehle
  * erkannt.
  *
- * @author  Michael Kï¿½lling und David J. Barnes
+ * @author  Michael Kölling und David J. Barnes
  * @version 2008.03.30
  */
 package zuul;
 
 public class Befehlswoerter
 {
-    // ein konstantes Array mit den gï¿½ltigen Befehlswï¿½rtern
+    // ein konstantes Array mit den gültigen Befehlswörtern
     private static final String gueltigeBefehle[] = {
         "go", "look", "quit", "help", "take", "drop", "status", "eat", "sleep"
     };
 
     /**
-     * Konstruktor - initialisiere die Befehlswï¿½rter.
+     * Konstruktor - initialisiere die Befehlswörter.
      */
     public Befehlswoerter()
     {
@@ -32,9 +32,9 @@ public class Befehlswoerter
     }
 
     /**
-     * Prï¿½fe, ob eine gegebene Zeichenkette ein gï¿½ltiger
+     * Prüfe, ob eine gegebene Zeichenkette ein gültiger
      * Befehl ist.
-     * @return 'true', wenn die gegebene Zeichenkette ein gï¿½ltiger
+     * @return 'true', wenn die gegebene Zeichenkette ein gültiger
      * Befehl ist, 'false' sonst.
      */
     public boolean istBefehl(String eingabe)
@@ -44,7 +44,7 @@ public class Befehlswoerter
                 return true;
         }
         // Wenn wir hierher gelangen, wurde die Eingabe nicht
-        // in den Befehlswï¿½rter gefunden.
+        // in den Befehlswörter gefunden.
         return false;
     }
 }
