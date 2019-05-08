@@ -61,7 +61,7 @@ public class Spiel
     }
 
     /**
-     * Die Hauptmethode zum Spielen. LÃ¤uft bis zum Ende des Spiels
+     * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels
      * in einer Schleife.
      */
     public void spielen()
@@ -69,23 +69,23 @@ public class Spiel
         willkommenstextAusgeben();
 
         // Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
-        // und fÃ¼hren sie aus, bis das Spiel beendet wird.
+        // und führen sie aus, bis das Spiel beendet wird.
 
         while (! beendet) {
             Befehl befehl = parser.liefereBefehl();
             verarbeiteBefehl(befehl);
         }
-        System.out.println("Danke fÃ¼r dieses Spiel. Auf Wiedersehen.");
+        System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
     }
 
     /**
-     * Einen BegrÃ¼ÃŸungstext fÃ¼r den Spieler ausgeben.
+     * Einen Begrüßungstext für den Spieler ausgeben.
      */
     private void willkommenstextAusgeben()
     {
         System.out.println();
         System.out.println("Willkommen zu Zuul!");
-        System.out.println("Entdecke die Welt von Zuul. Doch Vorsicht, Ã¼berall lauern Gefahren!");
+        System.out.println("Entdecke die Welt von Zuul. Doch Vorsicht, überall lauern Gefahren!");
         System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
         System.out.println();
         raumInfoAusgeben();
@@ -94,7 +94,7 @@ public class Spiel
     private void verarbeiteBefehl(Befehl befehl)
     {
         if(befehl.istUnbekannt()) {
-            System.out.println("Ich weiÃŸ nicht, was Sie meinen...");
+            System.out.println("Ich weiß nicht, was Sie meinen...");
 
         } else {
             String befehlswort = befehl.gibBefehlswort();

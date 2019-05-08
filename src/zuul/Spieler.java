@@ -36,17 +36,17 @@ public class Spieler {
 
      *
      * Dieser Gegenstand sollte dann im aktuellen Raum
-     * gesucht werden (Methode dafÃ¼r erstellen!).
+     * gesucht werden (Methode dafür erstellen!).
      * Sofern dieser Gegenstand mit diesem Namen
-     * existiert und sofern die Tragkraft es zulÃ¤sst,
+     * existiert und sofern die Tragkraft es zulässt,
      * wird dieser Gegenstand aufgenommen.
      *
-     * Das bedeutet natÃ¼rlich, dass der Raum diesen
+     * Das bedeutet natürlich, dass der Raum diesen
      * Gegenstand dann nicht mehr haben kann
-     * (Methode dafÃ¼r erstellen!).
+     * (Methode dafür erstellen!).
      *
      * Die Methode gegenstandAufnehmen() liefert dann
-     * true oder false zurÃ¼ck, je nachdem ob es
+     * true oder false zurück, je nachdem ob es
      * geklappt hat oder nicht.
      */
     public boolean gegenstandAufnehmen(String name) {

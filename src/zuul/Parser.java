@@ -5,23 +5,23 @@ import java.util.Scanner;
 
 /**
  * Dieser Parser liest Benutzereingaben und wandelt sie in
- * Befehle fï¿½r das Adventure-Game um. Bei jedem Aufruf
+ * Befehle für das Adventure-Game um. Bei jedem Aufruf
  * liest er eine Zeile von der Konsole und versucht, diese als
- * einen Befehl aus bis zu zwei Wï¿½rtern zu interpretieren. Er
+ * einen Befehl aus bis zu zwei Wörtern zu interpretieren. Er
  * liefert den Befehl als ein Objekt der Klasse Befehl zurï¿½ck.
  * 
- * Der Parser verfï¿½gt ï¿½ber einen Satz an bekannten Befehlen. Er
+ * Der Parser verfügt über einen Satz an bekannten Befehlen. Er
  * vergleicht die Eingabe mit diesen Befehlen. Wenn die Eingabe
- * keinen bekannten Befehl enthï¿½lt, dann liefert der Parser ein als 
+ * keinen bekannten Befehl enthält, dann liefert der Parser ein als 
  * unbekannter Befehl gekennzeichnetes Objekt zurï¿½ck.
  * 
- * @author  Michael Kï¿½lling und David J. Barnes
+ * @author  Michael Kölling und David J. Barnes
  * @version 2008.03.30
  */
 public class Parser 
 {
-    private Befehlswoerter befehle;  // hï¿½lt die gï¿½ltigen Befehlswï¿½rter
-    private Scanner leser;         // Lieferant fï¿½r eingegebene Befehle
+    private Befehlswoerter befehle;  // hält die gültigen Befehlswörter
+    private Scanner leser;         // Lieferant für eingegebene Befehle
 
     /**
      * Erzeuge einen Parser, der Befehle von der Konsole einliest.
@@ -33,11 +33,11 @@ public class Parser
     }
 
     /**
-     * @return Den nï¿½chsten Befehl des Benutzers.
+     * @return Den nächsten Befehl des Benutzers.
      */
     public Befehl liefereBefehl()
     {
-        String eingabezeile;   // fï¿½r die gesamte Eingabezeile
+        String eingabezeile;   // für die gesamte Eingabezeile
         String wort1 = null;
         String wort2 = null;
 
@@ -45,7 +45,7 @@ public class Parser
 
         eingabezeile = leser.nextLine();
 
-        // Finde bis zu zwei Wï¿½rter in der Zeile
+        // Finde bis zu zwei Wörter in der Zeile
         Scanner zerleger = new Scanner(eingabezeile);
         if(zerleger.hasNext()) {
             wort1 = zerleger.next();     // erstes Wort lesen
@@ -55,7 +55,7 @@ public class Parser
             }
         }
 
-        // Jetzt prï¿½fen, ob der Befehl bekannt ist. Wenn ja, erzeugen
+        // Jetzt prüfen, ob der Befehl bekannt ist. Wenn ja, erzeugen
         // wir das passende Befehl-Objekt. Wenn nicht, erzeugen wir
         // einen unbekannten Befehl mit 'null'.
         if(befehle.istBefehl(wort1)) {
