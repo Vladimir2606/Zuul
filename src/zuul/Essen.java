@@ -11,7 +11,7 @@ public class Essen extends Gegenstand{
         this.bonus = bonus;
         this.essen = essen;
     }
-
+    
     public int getBonus() {
         return this.bonus;
     }

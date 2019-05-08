@@ -58,16 +58,11 @@ public class WorldGenerator {
         taverne.gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit Soße", 5 ));
         piratenHoehle.gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Golf gefüllte Holzkiste", 40));
         piratenHoehle.gegenstandAblegen(new Gegenstand("Schwert", "das Schwert des alten PiratenkapitÃ¤ns", 10));
-<<<<<<< HEAD
         waldstueck.gegenstandAblegen(new Essen("Pilz", "ein seltsam aussehender Pilz", 1, 20, 0));
         lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefÃ¼llt mit Brot", 4));
         lichtung.gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 0));
         dorfplatz.gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
-=======
-        waldstueck.gegenstandAblegen(new Essen("Pilz", "ein seltsam aussehender Pilz", 1, 20));
-        lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
-        lichtung.gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5));
->>>>>>> fafc4e4495a5a47c8c5812726b235ac371b75f22
+
     }
 
     public Raum getStartRaum() {
