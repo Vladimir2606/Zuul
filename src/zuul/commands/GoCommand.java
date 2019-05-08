@@ -35,6 +35,7 @@ public class GoCommand implements CommandFunction {
         else {
             this.spieler.geheZu(naechsterRaum);
             raumInfoAusgeben();
+            spieler.hungern();
         }
     }
 

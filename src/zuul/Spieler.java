@@ -7,10 +7,16 @@ public class Spieler {
     private Raum aktuellerRaum;
     private int tragkraft;
     private ArrayList<Gegenstand> gegenstaende;
+    private int hunger;
 
     public Spieler() {
         this.gegenstaende=new ArrayList<>();
         this.tragkraft = 30;
+        this.hunger = 10;
+    }
+    
+    public void hungern() {
+    	this.hunger -= 1;
     }
 
     public int ermittleGewicht() {
@@ -74,11 +80,13 @@ public class Spieler {
 
     public String zeigeStatus() {
         String erg="Ich kann insgesamt ";
-        erg+=this.tragkraft + "kg tragen\n";
+        erg += this.tragkraft + "kg tragen\n";
         for(Gegenstand g: this.gegenstaende) {
-            erg+=" - " + g.getName() + " " + g.getGewicht()+"kg\n";
+            erg += " - " + g.getName() + " " + g.getGewicht()+"kg\n";
         }
-        erg+=this.tragkraft-ermittleGewicht() + "kg kann ich noch tragen!";
+        erg+=this.tragkraft-ermittleGewicht() + "kg kann ich noch tragen!\n";
+        erg += "Ich habe noch ";
+    	erg += this.hunger + " Hungerpunkte";
         return erg;
     }
 
