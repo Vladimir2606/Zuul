@@ -35,7 +35,7 @@ public class Spiel
     public Spiel()
     {
         this.beendet=false;
-        this.spieler=new Spieler();
+        this.spieler=new Spieler(this);
         raeumeAnlegen();
         parser = new Parser();
         this.commands=new HashMap<>();

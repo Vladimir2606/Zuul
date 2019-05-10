@@ -6,23 +6,29 @@ public class Spieler {
 
     private Raum aktuellerRaum;
     private int tragkraft;
+    private Spiel spiel;
     private ArrayList<Gegenstand> gegenstaende;
     private int hunger;
     private int lebenspunkte;
 
-    public Spieler() {
+    public Spieler(Spiel spiel) {
         this.gegenstaende=new ArrayList<>();
         this.tragkraft = 30;
-        this.hunger = 10;
-        this.lebenspunkte = 10;
+        this.hunger = 2;
+        this.lebenspunkte = 2;
+        this.spiel = spiel;
     }
-    // diese Methode sorgt dafür das der Spieler hunger bekommt
+    // diese Methode sorgt dafür das der Spieler hunger bekommt und sterben kann
     public void hungern() {
     	this.hunger -= 1;
     	if (this.hunger <= 0) {
     		this.hunger = 0;
     		this.lebenspunkte -= 1;
     	}
+    	if (this.lebenspunkte <= 0) {
+			System.out.println("Du bist gestorben!");
+			spiel.quit();
+		}
     }
 
     public int ermittleGewicht() {
