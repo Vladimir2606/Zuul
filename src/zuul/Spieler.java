@@ -9,7 +9,7 @@ public class Spieler {
     private Spiel spiel;
     private ArrayList<Gegenstand> gegenstaende;
     private int hunger;
-    private int lebenspunkte;
+    protected int lebenspunkte;
 
     public Spieler(Spiel spiel) {
         this.gegenstaende=new ArrayList<>();
@@ -18,6 +18,7 @@ public class Spieler {
         this.lebenspunkte = 20;
         this.spiel = spiel;
     }
+      
     // diese Methode sorgt dafür das der Spieler hunger bekommt und sterben kann.
     public void hungern() {
     	this.hunger -= 1;
@@ -101,7 +102,8 @@ public class Spieler {
         erg += "Ich habe noch ";
     	erg += this.hunger + " Hungerpunkte\n";
     	erg += "Ich habe noch ";
-    	erg += this.lebenspunkte + " Lebenspunkte";
+    	erg += this.lebenspunkte + " Lebenspunkte\n";
+    	erg += "Ich habe zur Zeit ";
         return erg;
     }
 

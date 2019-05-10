@@ -64,7 +64,9 @@ public class WorldGenerator {
         dorfplatz.gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
         kellerDerTaverne.gegenstandAblegen(new Essen("Bier", "ein Glas Bier", 1, 0, 1));
         hexenhaus.gegenstandAblegen(new Essen("Fleisch", "ein vergiftetes Stück Fleisch", 1, 0, -2));
-
+        lichtung.gegenstandAblegen(new Rüstung("Holzhaube", "schützt vor Angriffen", 3, 1));
+        taverne.gegenstandAblegen(new Rüstung("Stahlrüstung", "schützt vor Angriffen", 10, 3));
+        
     }
 
     public Raum getStartRaum() {
