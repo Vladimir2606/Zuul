@@ -2,8 +2,6 @@ package zuul;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 
 
 public class WorldGenerator {
@@ -22,10 +20,10 @@ public class WorldGenerator {
     
     private Raum getZufaelligerRaum() {
     	Raum zufaelligerRaum = null;
-    	Random r = new Random(alleRaume.size()); // Random r gib eine -... zahl zurück.. ?!*************************
-    	System.out.println(r.nextInt()); // Diese Zeile weg..
-    	zufaelligerRaum = new ArrayList<Raum>(alleRaume.values()).get(r.nextInt());
-    	
+
+    //	int zufaelligeRaumZahl = (int)((Math.random()) * alleRaume.size() + 1);
+    //	zufaelligerRaum = (Raum) alleRaume.get(zufaelligeRaumZahl);
+
     	return zufaelligerRaum;
     }
     
