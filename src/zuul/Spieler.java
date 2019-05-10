@@ -14,11 +14,11 @@ public class Spieler {
     public Spieler(Spiel spiel) {
         this.gegenstaende=new ArrayList<>();
         this.tragkraft = 30;
-        this.hunger = 2;
-        this.lebenspunkte = 2;
+        this.hunger = 10;
+        this.lebenspunkte = 20;
         this.spiel = spiel;
     }
-    // diese Methode sorgt dafür das der Spieler hunger bekommt und sterben kann
+    // diese Methode sorgt dafür das der Spieler hunger bekommt und sterben kann.
     public void hungern() {
     	this.hunger -= 1;
     	if (this.hunger <= 0) {
@@ -31,6 +31,7 @@ public class Spieler {
 		}
     }
 
+    // das Gewicht der gegenstände im Inventar wird ermittelt.
     public int ermittleGewicht() {
         int gesamtgewicht=0;
 
