@@ -13,7 +13,7 @@ public class SleepCommand implements CommandFunction{
 
     @Override
     public void execute(Befehl befehl) {
-        System.out.println("Ist auch schon sp√§t, geh schlafen!");
+        System.out.println("Ist auch schon sp‰t, geh schlafen!");
         this.spieler.sleep();
     }
 }

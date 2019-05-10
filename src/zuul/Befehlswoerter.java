@@ -43,6 +43,7 @@ public class Befehlswoerter
             if(gueltigeBefehle[i].equals(eingabe))
                 return true;
         }
+        
         // Wenn wir hierher gelangen, wurde die Eingabe nicht
         // in den Befehlswörter gefunden.
         return false;

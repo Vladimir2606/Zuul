@@ -1,16 +1,21 @@
 package zuul;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class WorldGenerator {
     private Raum lichtung, waldstueck, taverne, hexenhaus, dorfplatz, kellerDerTaverne, geheimgang, taverneErsterStock,
     				piratenHoehle, teleporter;
-
+    
     public WorldGenerator() {
         this.raeumeAnlegen();
         this.setzeAusgaenge();
         this.addGegenstaende();
     }
-
+    
+    //** legt die Räume an mit beschreibung (String) und kälte (int)
     private void raeumeAnlegen() {
+    	
         lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
         waldstueck = new Raum("im dunklen Wald", 13);
         taverne = new Raum("in der Taverne, mit zwielichten Gestalten an der Theke", 20);
@@ -22,10 +27,10 @@ public class WorldGenerator {
         taverneErsterStock=new Raum("bei den den Gästezimmern im ersten Stock der Taverne", 20);
         teleporter = new Raum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3);
     }
-
+    
+//** die Ausgänge initialisieren/ den Räumen ein befehlswort zum raumwechsel und den ausgang (Raum) zuweisen
     private void setzeAusgaenge() {
-
-        // die Ausgänge initialisieren
+    	
         lichtung.setAusgang("down", piratenHoehle);
         lichtung.setAusgang("east", waldstueck);
         waldstueck.setAusgang("west", lichtung);
@@ -52,11 +57,12 @@ public class WorldGenerator {
 
     }
 
-
+    	//** legt fest welche Gegenstaende mit Name (string), Beschreibung (String) und Gewicht (int)
+    	//* und bei Essen zusätzlich noch einen Bonuswert (int) und Essenswert (int) zum satt werden
     private void addGegenstaende() {
         taverne.gegenstandAblegen(new Gegenstand("Bierkrug", "ein leckeres dunkles Pils in einem edlen Krug", 2));
         taverne.gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit Soße", 5 ));
-        piratenHoehle.gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Golf gefüllte Holzkiste", 40));
+        piratenHoehle.gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Gold gefüllte Holzkiste", 40));
         piratenHoehle.gegenstandAblegen(new Gegenstand("Schwert", "das Schwert des alten PiratenkapitÃ¤ns", 10));
         waldstueck.gegenstandAblegen(new Essen("Pilz", "ein seltsam aussehender Pilz", 1, 20, 0));
         lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
@@ -66,6 +72,7 @@ public class WorldGenerator {
 
     }
 
+    //* @retrun gibt den Startraum wieder
     public Raum getStartRaum() {
         return this.lichtung;
     }

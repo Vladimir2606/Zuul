@@ -9,13 +9,28 @@ public class Spieler {
     private ArrayList<Gegenstand> gegenstaende;
     private int hunger;
     private double lebenspunkte;
+    private int auszuhaltendeKaelte;
 
+    /** @param tragkraft = das maximalgewicht in kg das getragen werden kann
+    *	@param hunger = die hungerpunkte des spielers, wie satt er ist
+    *	@param lebenspunkte = wie viel leben der spieler hat
+    *	@param auszuhaltendeKaelte = die niedrichste temperatur, welche er aushält ohne schaden zuzunehmen
+    */
     public Spieler() {
         this.gegenstaende=new ArrayList<>();
         this.tragkraft = 30;
         this.hunger = 10;
-        this.lebenspunkte = 10;
+        this.lebenspunkte = 20;
+        this.auszuhaltendeKaelte = 12;
     }
+    
+    public void frieren() {
+		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
+			this.lebenspunkte -= 0.5;
+			System.out.println("Du frierst!");
+		}
+		
+	}
     
     public void hungern() {
     	if (this.hunger < 1) {
@@ -89,9 +104,11 @@ public class Spieler {
         for(Gegenstand g: this.gegenstaende) {
             erg += " - " + g.getName() + " " + g.getGewicht()+"kg\n";
         }
-        erg+=this.tragkraft-ermittleGewicht() + "kg kann ich noch tragen!\n";
-        erg += "Ich habe noch ";
-    	erg += this.hunger + " Hungerpunkte";
+        erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n";
+        erg += "Ich habe noch\n ";
+    	erg += this.hunger + " Hungerpunkte\n ";
+    	erg += this.lebenspunkte +" Lebenspunkte\n ";
+    			
         return erg;
     }
 

@@ -50,7 +50,7 @@ public class Raum
     }
 
     public String getLangeBeschreibung() {
-        String erg=  "Sie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
+        String erg=  "\nSie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
         if(this.gegenstaende.size()>0) {
             erg+="\nGegenstände in diesem Umgebung:\n";
             for(Gegenstand g: this.gegenstaende) {
@@ -94,5 +94,9 @@ public class Raum
         // Falls diese Stelle erreicht wird, wurde kein
         // Gegenstand gefunden
         return null;
+    }
+    
+    public int getTemperatur() {
+    	return this.temperatur;
     }
 }
