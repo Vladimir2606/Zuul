@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class Raum
 {
     private String beschreibung;
-    private HashMap<String, Raum> ausgaenge;
+    protected HashMap<String, Raum> ausgaenge;
     private ArrayList<Gegenstand> gegenstaende;
     private int temperatur;
 

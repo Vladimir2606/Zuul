@@ -108,6 +108,7 @@ public class Spieler {
         erg += "Ich habe noch\n ";
     	erg += this.hunger + " Hungerpunkte\n ";
     	erg += this.lebenspunkte +" Lebenspunkte\n ";
+    	erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte;
     			
         return erg;
     }

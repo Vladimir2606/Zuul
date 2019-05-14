@@ -22,10 +22,12 @@ public class HelpCommand implements CommandFunction {
      */
     private void hilfstextAusgeben()
     {
-        System.out.println("Sie haben sich verlaufen. Sie sind allein.");
-        System.out.println("Sie irren in der Welt von Zuul herum");
-        System.out.println();
-        System.out.println("Ihnen stehen folgende Befehle zur Verfügung:");
-        System.out.println("   " + this.parser.getAlleBefehle());
+    	String erg = "";
+        erg += "Sie haben sich verlaufen. Sie sind allein.";
+        erg += "\nSie irren in der Welt von Zuul herum";
+        erg += "\nIhnen stehen folgende Befehle zur Verfügung:";
+        erg += "\n   " + this.parser.getAlleBefehle();
+       
+        System.out.println(erg);
     }
 }

@@ -3,6 +3,7 @@ package zuul.commands;
 import zuul.Befehl;
 import zuul.Raum;
 import zuul.Spieler;
+import zuul.WorldGenerator;
 
 public class GoCommand implements CommandFunction {
     private Spieler spieler;
@@ -30,13 +31,14 @@ public class GoCommand implements CommandFunction {
         Raum naechsterRaum = this.spieler.getAktuellerRaum().getAusgang(richtung);
 
         if (naechsterRaum == null) {
-            System.out.println("Dort ist keine Tür!");
+            System.out.println("Dort ist kein Weg!");
         }
         else {
             this.spieler.geheZu(naechsterRaum);
             raumInfoAusgeben();
             spieler.hungern();
             spieler.frieren();
+            
         }
     }
 
