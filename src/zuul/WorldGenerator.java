@@ -68,11 +68,9 @@ public class WorldGenerator {
         lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
         lichtung.gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 1));
         dorfplatz.gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
-<<<<<<< HEAD
+
         lichtung.gegenstandAblegen(new Waffen("Dolch", "ist ein spitzer Dolch", 3, 2));
 
-
-=======
         kellerDerTaverne.gegenstandAblegen(new Essen("Bier", "ein Glas Bier", 1, 0, 1));
         hexenhaus.gegenstandAblegen(new Essen("Fleisch", "ein vergiftetes Stück Fleisch", 1, 0, -2));
         lichtung.gegenstandAblegen(new Helm("Holzhaube", "schützt vor Angriffen", 3, 2));
@@ -80,8 +78,7 @@ public class WorldGenerator {
         dorfplatz.gegenstandAblegen(new Hose("Stoffhose", "schützt eher weniger vor Angriffen", 1, 1));
         piratenHoehle.gegenstandAblegen(new Schuhe("Stahlschuhe", "schützt vor Angriffen", 6, 3));
         lichtung.gegenstandAblegen(new Helm("Stahlhelm", "schützt vor Angriffen", 6, 3));
-        
->>>>>>> b01aeaf06db671fbd21f3d0857fe9676f283d908
+
     }
     
     private void addMonster() {
