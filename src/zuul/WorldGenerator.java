@@ -8,6 +8,7 @@ public class WorldGenerator {
         this.raeumeAnlegen();
         this.setzeAusgaenge();
         this.addGegenstaende();
+        this.addMonster();
     }
 
     private void raeumeAnlegen() {
@@ -62,13 +63,16 @@ public class WorldGenerator {
         lichtung.gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
         lichtung.gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 0));
         dorfplatz.gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
+        lichtung.gegenstandAblegen(new Waffen("Dolch", "ist ein spitzer Dolch", 3, 2));
 
 
+    }
+    
+    private void addMonster() {
+    	waldstueck.setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1));
     }
 
     public Raum getStartRaum() {
         return this.lichtung;
     }
-
-
 }

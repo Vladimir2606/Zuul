@@ -5,7 +5,6 @@ public class Gegenstand {
     private String name;
     private String beschreibung;
     private int gewicht;
-    private boolean essbar;
 
     public Gegenstand(String name, String beschreibung, int gewicht) {
         this.beschreibung=beschreibung;
