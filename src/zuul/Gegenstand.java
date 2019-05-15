@@ -1,3 +1,4 @@
+
 package zuul;
 
 public class Gegenstand {
@@ -18,7 +19,7 @@ public class Gegenstand {
         return name + ", " + this.beschreibung +", " + this.gewicht+"kg";
     }
 
-    //*
+    //* @return gibt das gewicht wieder
     public int getGewicht() {
         return this.gewicht;
     }

@@ -1,4 +1,10 @@
+
 package zuul;
+
+import zuul.rüstung.Helm;
+import zuul.rüstung.Brust;
+import zuul.rüstung.Hose;
+import zuul.rüstung.Schuhe;
 
 import java.util.HashMap;
 
@@ -12,6 +18,7 @@ public class WorldGenerator {
 		this.raeumeAnlegen();
 		this.setzeAusgaenge();
 		this.addGegenstaende();
+		this.addMonster();
 	}
 
 	private Raum getZufaelligerRaum() {
@@ -23,7 +30,7 @@ public class WorldGenerator {
 	/** legt die Räume an mit beschreibung (String) und kälte (int)
 	 */
 	private void raeumeAnlegen() {
-		
+
 		this.alleRaume.put("lichtung", new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12));
 		this.alleRaume.put("waldstueck", new Raum("im dunklen Wald", 13));
 		this.alleRaume.put("taverne", new Raum("in der Taverne, mit zwielichten Gestalten an der Theke", 20));
@@ -34,7 +41,7 @@ public class WorldGenerator {
 		this.alleRaume.put("geheimgang", new Raum("in einem schmalen modrigen Geheimgang", 7));
 		this.alleRaume.put("taverneErsterStock", new Raum("bei den den Gästezimmern im ersten Stock der Taverne", 20));
 		this.alleRaume.put("teleporter", new TeleporterRaum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3));
-	
+
 
 		/*
 		 * lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
@@ -54,7 +61,7 @@ public class WorldGenerator {
 
 	/** die Ausgänge initialisieren/ den Räumen ein befehlswort zum raumwechsel
 	 * und den ausgang (Raum) zuweisen
-	*/ 
+	 */ 
 	private void setzeAusgaenge() {
 		Raum zufaelligerRaum = getZufaelligerRaum();
 
@@ -99,12 +106,25 @@ public class WorldGenerator {
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 0));
 		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
-
+		
+		this.alleRaume.get("lichtung").gegenstandAblegen(new Waffen("Dolch", "ist ein spitzer Dolch", 3, 2));
+		
+		this.alleRaume.get("kellerDerTaverne").gegenstandAblegen(new Essen("Bier", "ein Glas Bier", 1, 0, 1));
+		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Essen("Fleisch", "ein vergiftetes Stück Fleisch", 1, 0, -2));
+		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Holzhaube", "schützt vor Angriffen", 3, 2));
+		this.alleRaume.get("taverne").gegenstandAblegen(new Brust("Stahlbrust", "schützt vor Angriffen", 10, 4));
+		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Hose("Stoffhose", "schützt eher weniger vor Angriffen", 1, 1));
+		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Schuhe("Stahlschuhe", "schützt vor Angriffen", 6, 3));
+		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Stahlhelm", "schützt vor Angriffen", 6, 3));
 	}
 
 	// * @retrun gibt den Startraum wieder
 	public Raum getStartRaum() {
 		return this.alleRaume.get("lichtung");
+	}
+
+	private void addMonster() {
+		this.alleRaume.get("waldstueck").setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1));
 	}
 
 }

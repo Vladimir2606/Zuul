@@ -22,3 +22,4 @@ public class Essen extends Gegenstand{
     	return this.essenspunkte;
     }
 }
+

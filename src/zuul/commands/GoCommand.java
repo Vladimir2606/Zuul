@@ -1,3 +1,4 @@
+
 package zuul.commands;
 
 import zuul.Befehl;
@@ -47,3 +48,4 @@ public class GoCommand implements CommandFunction {
     }
 
 }
+

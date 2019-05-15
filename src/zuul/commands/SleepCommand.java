@@ -1,3 +1,4 @@
+
 package zuul.commands;
 
 import zuul.Befehl;
@@ -17,3 +18,4 @@ public class SleepCommand implements CommandFunction{
         this.spieler.sleep();
     }
 }
+

@@ -17,86 +17,100 @@ import java.util.HashMap;
 
 public class Raum
 {
-    private String beschreibung;
-    protected HashMap<String, Raum> ausgaenge;
-    private ArrayList<Gegenstand> gegenstaende;
-    private int temperatur;
 
-    /**
-     * Erzeuge einen Raum mit einer Beschreibung. Ein Raum
-     * hat anfangs keine Ausgänge.
-     * @param beschreibung enthält eine Beschreibung in der Form
-     *        "in einer Küche" oder "auf einem Sportplatz".
-     * @param temperatur ist die Temperatur die jeder Raum hat.
-     */
-    public Raum(String beschreibung, int temperatur)
-    {
-        this.gegenstaende=new ArrayList<>();
-        this.ausgaenge=new HashMap<>();
-        this.beschreibung = beschreibung;
-        this.temperatur = temperatur;
-    }
+	private String beschreibung;
+	protected HashMap<String, Raum> ausgaenge;
+	private ArrayList<Gegenstand> gegenstaende;
+	private ArrayList<Monster> monster;
+	private int temperatur;
 
-    public void gegenstandAblegen(Gegenstand neuerGegenstand) {
-        this.gegenstaende.add(neuerGegenstand);
-    }
+	/**
+	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum
+	 * hat anfangs keine Ausgänge.
+	 * @param beschreibung enthält eine Beschreibung in der Form
+	 *        "in einer Küche" oder "auf einem Sportplatz".
+	 * @param temperatur ist die Temperatur die jeder Raum hat.
+	 */
+	public Raum(String beschreibung, int temperatur)
+	{
+		this.gegenstaende=new ArrayList<>();
+		this.monster= new ArrayList<>();
+		this.ausgaenge=new HashMap<>();
+		this.beschreibung = beschreibung;
+		this.temperatur = temperatur;
+	}
 
-    public void setAusgang(String richtung, Raum nachbar) {
-        this.ausgaenge.put(richtung, nachbar);
-    }
+	public void gegenstandAblegen(Gegenstand neuerGegenstand) {
+		this.gegenstaende.add(neuerGegenstand);
+	}
 
-    public Raum getAusgang(String name) {
-        return this.ausgaenge.get(name);
-    }
+	public void setMonster(Monster neuesMonster) {
+		this.monster.add(neuesMonster);
+	}
 
-    public String getLangeBeschreibung() {
-        String erg=  "\nSie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
-        if(this.gegenstaende.size()>0) {
-            erg+="\nGegenstände in diesem Umgebung:\n";
-            for(Gegenstand g: this.gegenstaende) {
-                erg+=" - " + g.toString() + "\n";
-            }
-            erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad";
-        }
-        return erg;
-    }
+	public void setAusgang(String richtung, Raum nachbar) {
+		this.ausgaenge.put(richtung, nachbar);
+	}
 
-    public String ausgaengeToString() {
-        String erg="";
-        for(String richtung: ausgaenge.keySet()) {
-            erg+=richtung + " ";
-        }
-        return erg;
-    }
+	public Raum getAusgang(String name) {
+		return this.ausgaenge.get(name);
+	}
 
-    /**
-     * @return Die Beschreibung dieses Raums.
-     */
-    public String gibBeschreibung()
-    {
-        return beschreibung;
-    }
+	public String getLangeBeschreibung() {
+		String erg=  "\nSie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
+		if(this.gegenstaende.size()>0) {
+			erg+="\nGegenstände in diesem Umgebung:\n";
+			for(Gegenstand g: this.gegenstaende) {
+				erg+=" - " + g.toString() + "\n";
+			}
+			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad";
+		}
+		if(this.monster.size()>0) {
+			erg+="\nIn deiner nähe ist ein Monster:\n";
+			for(Monster m: this.monster) {
+				erg+=" - " + m.toString();
+			}
+		}
+		return erg;
+	}
 
-    public void entferneGegenstand(Gegenstand gesucht) {
-        this.gegenstaende.remove(gesucht);
-    }
+	public String ausgaengeToString() {
+		String erg="";
+		for(String richtung: ausgaenge.keySet()) {
+			erg+=richtung + " ";
+		}
+		return erg;
+	}
 
-    public Gegenstand sucheGegenstand(String name) {
-        for(Gegenstand g: this.gegenstaende) {
-            // if(g.getName() == name) --> funktioniert nicht,
-            // da hier nur die Referenz auf Gleichheit geprüft wird
-            // d.h. ob die im gleichen Speicher stehen
-            if(g.getName().equalsIgnoreCase(name)) {
-                return g;
-                // Dieses return beendet die Methode
-            }
-        }
-        // Falls diese Stelle erreicht wird, wurde kein
-        // Gegenstand gefunden
-        return null;
-    }
-    
-    public int getTemperatur() {
-    	return this.temperatur;
-    }
+	/**
+	 * @return Die Beschreibung dieses Raums.
+	 */
+	public String gibBeschreibung()
+	{
+		return beschreibung;
+	}
+
+	public void entferneGegenstand(Gegenstand gesucht) {
+		this.gegenstaende.remove(gesucht);
+	}
+
+
+	public Gegenstand sucheGegenstand(String name) {
+		for(Gegenstand g: this.gegenstaende) {
+			// if(g.getName() == name) --> funktioniert nicht,
+			// da hier nur die Referenz auf Gleichheit geprüft wird
+			// d.h. ob die im gleichen Speicher stehen
+			if(g.getName().equalsIgnoreCase(name)) {
+				return g;
+				// Dieses return beendet die Methode
+			}
+		}
+		// Falls diese Stelle erreicht wird, wurde kein
+		// Gegenstand gefunden
+		return null;
+	}
+
+	public int getTemperatur() {
+		return this.temperatur;
+	}
 }
