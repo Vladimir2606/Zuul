@@ -12,7 +12,7 @@ public class Befehlswoerter
 {
     // ein konstantes Array mit den gültigen Befehlswörtern
     private static final String gueltigeBefehle[] = {
-        "go", "look", "quit", "help", "take", "drop", "status", "eat", "sleep" , "equipe"
+        "go", "look", "quit", "help", "take", "drop", "status", "eat", "sleep" , "equipe", "fight"
     };
 
     /**
@@ -43,7 +43,6 @@ public class Befehlswoerter
             if(gueltigeBefehle[i].equals(eingabe))
                 return true;
         }
-        
         // Wenn wir hierher gelangen, wurde die Eingabe nicht
         // in den Befehlswörter gefunden.
         return false;

@@ -22,7 +22,7 @@ public class Spieler {
 	private Helm helm;
 	private Schuhe schuhe;
 	private int ruestung;
-
+	private double schaden;
 	/** @param tragkraft = das maximalgewicht in kg das getragen werden kann
 	 *	@param hunger = die hungerpunkte des spielers, wie satt er ist
 	 *	@param lebenspunkte = wie viel leben der spieler hat
@@ -34,8 +34,7 @@ public class Spieler {
 		this.hunger = 10;
 		this.lebenspunkte = 20;
 		this.auszuhaltendeKaelte = 12;
-		this.ruestung = 0;
-		this.spiel = spiel;
+
 	}
 
 
@@ -122,21 +121,21 @@ public class Spieler {
 		return false;
 	}
 
-
-
 	public String zeigeStatus() {
-		String erg="Ich kann insgesamt ";
+		String erg = "Ich kann insgesamt ";
 		erg += this.tragkraft + "kg tragen\n";
-		for(Gegenstand g: this.gegenstaende) {
-			erg += " - " + g.getName() + " " + g.getGewicht()+"kg\n";
+		for (Gegenstand g : this.gegenstaende) {
+			erg += " - " + g.getName() + " " + g.getGewicht() + "kg\n";
 		}
 		erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n";
-		erg += "Ich habe noch\n ";
-		erg += this.hunger + " Hungerpunkte\n ";
-		erg += this.lebenspunkte +" Lebenspunkte\n ";
+		erg += "Ich habe noch ";
+		erg += this.hunger + " Hungerpunkte\n";
+		erg += "Ich habe noch ";
+		erg += this.lebenspunkte + " Lebenspunkte\n";
+		erg += "Ich habe ";
+		erg += this.schaden +"Schaden\n";
+		erg += "Ich habe ";
 		erg += this.ruestung + " Rüstungspunkte\n";
-		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte;
-
 		return erg;
 	}
 
@@ -196,6 +195,14 @@ public class Spieler {
 		if (g instanceof Schuhe) {
 			Schuhe s = (Schuhe) g;
 			this.ruestung += s.getRuestung();
+		}
+	}
+	
+	public void schaden(String name) {
+		Gegenstand g= getGegenstandByName(name);
+		if (g instanceof Waffen) {
+			Waffen wa = (Waffen) g;
+			this.schaden += wa.getSchaden();
 		}
 	}
 

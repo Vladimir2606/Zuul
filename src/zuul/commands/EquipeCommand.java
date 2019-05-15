@@ -13,6 +13,7 @@ public class EquipeCommand implements CommandFunction {
 	@Override
 	public void execute(Befehl befehl) {
 		this.spieler.ruestung(befehl.gibZweitesWort());
+		this.spieler.schaden(befehl.gibZweitesWort());
 		
 	}
 
