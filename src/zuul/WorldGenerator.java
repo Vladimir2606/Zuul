@@ -55,7 +55,6 @@ public class WorldGenerator {
         piratenHoehle.setAusgang("up", lichtung);
         teleporter.setAusgang("south", geheimgang);
         teleporter.setAusgang("teleport", hexenhaus);
-
     }
 
 
@@ -82,7 +81,7 @@ public class WorldGenerator {
     }
     
     private void addMonster() {
-    	waldstueck.setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1));
+    	waldstueck.setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 0.5));
     }
 
     public Raum getStartRaum() {

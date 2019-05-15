@@ -20,6 +20,7 @@ public class Spieler {
 	private int hunger;
 	private int lebenspunkte;
 	private int ruestung;
+	private double schaden;
 
 	public Spieler(Spiel spiel) {
 		this.gegenstaende = new ArrayList<>();
@@ -28,6 +29,7 @@ public class Spieler {
 		this.lebenspunkte = 20;
 		this.ruestung = 0;
 		this.spiel = spiel;
+		this.schaden = schaden;
 	}
 
 	/**
@@ -117,6 +119,8 @@ public class Spieler {
 		erg += "Ich habe noch ";
 		erg += this.lebenspunkte + " Lebenspunkte\n";
 		erg += "Ich habe ";
+		erg += this.schaden +"Schaden\n";
+		erg += "Ich habe ";
 		erg += this.ruestung + " Rüstungspunkte\n";
 		return erg;
 	}
@@ -175,6 +179,14 @@ public class Spieler {
 		if (g instanceof Schuhe) {
 			Schuhe s = (Schuhe) g;
 			this.ruestung += s.getRuestung();
+		}
+	}
+	
+	public void schaden(String name) {
+		Gegenstand g= getGegenstandByName(name);
+		if (g instanceof Waffen) {
+			Waffen wa = (Waffen) g;
+			this.schaden += wa.getSchaden();
 		}
 	}
 
