@@ -72,6 +72,7 @@ public class WorldGenerator {
 		this.alleRaume.get("dorfplatz").setAusgang("west", this.alleRaume.get("hexenhaus"));
 		this.alleRaume.get("dorfplatz").setAusgang("north", this.alleRaume.get("waldstueck"));
 		this.alleRaume.get("dorfplatz").setAusgang("south", this.alleRaume.get("taverne"));
+		this.alleRaume.get("dorfplatz").setAusgang("east", this.alleRaume.get("trophäenHalle"));
 		this.alleRaume.get("hexenhaus").setAusgang("east", this.alleRaume.get("dorfplatz"));
 		this.alleRaume.get("hexenhaus").setAusgang("teleport", zufaelligerRaum);
 		this.alleRaume.get("taverne").setAusgang("north", this.alleRaume.get("dorfplatz"));
@@ -88,6 +89,7 @@ public class WorldGenerator {
 		this.alleRaume.get("piratenHoehle").setAusgang("up", this.alleRaume.get("lichtung"));
 		this.alleRaume.get("teleporter").setAusgang("south", this.alleRaume.get("geheimgang"));
 		this.alleRaume.get("teleporter").setAusgang("teleport", zufaelligerRaum);
+		this.alleRaume.get("trophäenHalle").setAusgang("west", this.alleRaume.get("dorfplatz"));
 
 	}
 
@@ -102,25 +104,31 @@ public class WorldGenerator {
 		this.alleRaume.get("taverne").gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit Soße", 5));
 		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Gold gefüllte Holzkiste", 40));
 		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Gegenstand("Schwert", "das Schwert des alten PiratenkapitÃ¤ns", 10));
-		this.alleRaume.get("waldstueck").gegenstandAblegen(new Essen("Pilz", "ein seltsam aussehender Pilz", 1, 20, 0));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
+		
+		this.alleRaume.get("waldstueck").gegenstandAblegen(new Essen("Pilz", "ein seltsam aussehender Pilz", 1, 20, 0));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 0));
 		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
-		
-		this.alleRaume.get("lichtung").gegenstandAblegen(new Waffen("Dolch", "ist ein spitzer Dolch", 3, 2));
-		
 		this.alleRaume.get("kellerDerTaverne").gegenstandAblegen(new Essen("Bier", "ein Glas Bier", 1, 0, 1));
 		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Essen("Fleisch", "ein vergiftetes Stück Fleisch", 1, 0, -2));
-		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Holzhaube", "schützt vor Angriffen", 3, 2));
-		this.alleRaume.get("taverne").gegenstandAblegen(new Brust("Stahlbrust", "schützt vor Angriffen", 10, 4));
-		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Hose("Stoffhose", "schützt eher weniger vor Angriffen", 1, 1));
-		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Schuhe("Stahlschuhe", "schützt vor Angriffen", 6, 3));
+		this.alleRaume.get("trophäenHalle").gegenstandAblegen(new Essen("Kackhaufen", "ein großer glänzender haufen Kacke", 5, 0, -5));
+		
+		this.alleRaume.get("lichtung").gegenstandAblegen(new Waffen("Dolch", "ist ein spitzer Dolch", 3, 2));
+		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
+		
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Stahlhelm", "schützt vor Angriffen", 6, 3));
+		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Holzhaube", "schützt vor Angriffen", 3, 2));
+		
+		this.alleRaume.get("taverne").gegenstandAblegen(new Brust("Stahlbrust", "schützt vor Angriffen", 10, 4));
+		
+		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Hose("Stoffhose", "schützt eher weniger vor Angriffen", 1, 1));
+		
+		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Schuhe("Stahlschuhe", "schützt vor Angriffen", 6, 3));
 	}
 
 	// * @retrun gibt den Startraum wieder
 	public Raum getStartRaum() {
-		return this.alleRaume.get("lichtung");
+		return this.alleRaume.get("teleporter");
 	}
 
 	private void addMonster() {
