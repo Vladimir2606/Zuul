@@ -185,14 +185,11 @@ public class Spieler {
 				this.helm = (Helm) g;
 				this.ruestung += this.helm.getRuestung();
 				System.out.println("Rüstungsstück wurde ausgerüstet!");
-			} else if (this.helm != null) {
-				this.ruestung -= this.helm.getRuestung();
-				this.gegenstaende.remove(g);
-				this.aktuellerRaum.gegenstandAblegen(this.helm);
 			}
 		} else {
 			System.out.println("Du kannst nur einen Helm ausrüsten");
 		}
+		
 		if (this.brust == null) {
 			if (g instanceof Brust) {
 				this.brust = (Brust) g;
@@ -202,6 +199,7 @@ public class Spieler {
 		} else {
 			System.out.println("Du kannst nur eine Brust ausrüsten");
 		}
+		
 		if (this.hose == null) {
 			if (g instanceof Hose) {
 				this.hose = (Hose) g;
@@ -211,6 +209,7 @@ public class Spieler {
 		} else {
 			System.out.println("Du kannst nur eine Hose ausrüsten");
 		}
+		
 		if (this.schuhe == null) {
 			if (g instanceof Schuhe) {
 				this.schuhe = (Schuhe) g;
@@ -220,6 +219,11 @@ public class Spieler {
 		} else {
 			System.out.println("Du kannst nur ein paar Schuhe ausrüsten");
 		}
+	}
+	
+	public boolean entrüsten(String name) {
+		return true;
+		
 	}
 
 	private Gegenstand getGegenstandByName(String name) {
