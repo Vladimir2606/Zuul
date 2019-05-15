@@ -27,7 +27,7 @@ public class HelpCommand implements CommandFunction {
         erg += "Sie haben sich verlaufen. Sie sind allein.";
         erg += "\nSie irren in der Welt von Zuul herum";
         erg += "\nIhnen stehen folgende Befehle zur Verfügung:";
-        erg += "\n   " + this.parser.getAlleBefehle();
+        erg += "\n   " + this.parser.getAlleBefehle()+"\n";
        
         System.out.println(erg);
     }

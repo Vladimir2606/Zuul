@@ -16,6 +16,6 @@ public class StatusCommand implements CommandFunction {
     }
 
     private void status() {
-        System.out.println(this.spieler.zeigeStatus());
+        System.out.println(this.spieler.zeigeStatus()+"\n");
     }
 }

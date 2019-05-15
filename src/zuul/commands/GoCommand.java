@@ -22,7 +22,7 @@ public class GoCommand implements CommandFunction {
     {
         if(!befehl.hatZweitesWort()) {
             // Gibt es kein zweites Wort, wissen wir nicht, wohin...
-            System.out.println("Wohin möchten Sie gehen?");
+            System.out.println("Wohin möchten Sie gehen?\n");
             return;
         }
 
@@ -32,7 +32,7 @@ public class GoCommand implements CommandFunction {
         Raum naechsterRaum = this.spieler.getAktuellerRaum().getAusgang(richtung);
 
         if (naechsterRaum == null) {
-            System.out.println("Dort ist kein Weg!");
+            System.out.println("Dort ist kein Weg!\n");
         }
         else {
             this.spieler.geheZu(naechsterRaum);

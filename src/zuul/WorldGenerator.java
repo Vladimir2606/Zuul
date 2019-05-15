@@ -34,13 +34,13 @@ public class WorldGenerator {
 		this.alleRaume.put("lichtung", new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12));
 		this.alleRaume.put("waldstueck", new Raum("im dunklen Wald", 13));
 		this.alleRaume.put("taverne", new Raum("in der Taverne, mit zwielichten Gestalten an der Theke", 20));
-		this.alleRaume.put("hexenhaus", new TeleporterRaum("im Hexenhaus, mit einem größem Symbol auf dem Boden", 18));
+		this.alleRaume.put("hexenhaus", new TeleporterRaum("im Hexenhaus, mit einem größem Symbol auf dem Boden", 18, this));
 		this.alleRaume.put("dorfplatz", new Raum("auf dem Dorfplatz", 15));
 		this.alleRaume.put("piratenHoehle", new Raum("in einer kalten und nassen alten Piratenhöhle", 2));
 		this.alleRaume.put("kellerDerTaverne", new Raum("im Keller der Taverne", 9));
 		this.alleRaume.put("geheimgang", new Raum("in einem schmalen modrigen Geheimgang", 7));
 		this.alleRaume.put("taverneErsterStock", new Raum("bei den den Gästezimmern im ersten Stock der Taverne", 20));
-		this.alleRaume.put("teleporter", new TeleporterRaum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3));
+		this.alleRaume.put("teleporter", new TeleporterRaum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3, this));
 
 
 		/*

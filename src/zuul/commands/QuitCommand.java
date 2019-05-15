@@ -21,7 +21,7 @@ public class QuitCommand implements CommandFunction {
     private void beenden(Befehl befehl)
     {
         if(befehl.hatZweitesWort()) {
-            System.out.println("Was soll beendet werden?");
+            System.out.println("Was soll beendet werden?\n");
         }
         else {
             this.spiel.quit();

@@ -17,6 +17,6 @@ public class LookCommand implements CommandFunction {
 
     private void umsehen() {
 
-        System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
+        System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung()+"\n");
     }
 }
