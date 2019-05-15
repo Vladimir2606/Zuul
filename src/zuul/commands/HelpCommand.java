@@ -1,3 +1,4 @@
+
 package zuul.commands;
 
 import zuul.Befehl;
@@ -18,14 +19,16 @@ public class HelpCommand implements CommandFunction {
     /**
      * Gib Hilfsinformationen aus.
      * Hier geben wir eine etwas alberne und unklare Beschreibung
-     * aus, sowie eine Liste der Befehlswï¿½rter.
+     * aus, sowie eine Liste der Befehlswörter.
      */
     private void hilfstextAusgeben()
     {
-        System.out.println("Sie haben sich verlaufen. Sie sind allein.");
-        System.out.println("Sie irren in der Welt von Zuul herum");
-        System.out.println();
-        System.out.println("Ihnen stehen folgende Befehle zur VerfÃ¼gung:");
-        System.out.println("   " + this.parser.getAlleBefehle());
+    	String erg = "";
+        erg += "Sie haben sich verlaufen. Sie sind allein.";
+        erg += "\nSie irren in der Welt von Zuul herum";
+        erg += "\nIhnen stehen folgende Befehle zur Verfügung:";
+        erg += "\n   " + this.parser.getAlleBefehle()+"\n";
+       
+        System.out.println(erg);
     }
 }

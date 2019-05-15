@@ -1,8 +1,10 @@
+
 package zuul.commands;
 
 import zuul.Befehl;
 import zuul.Raum;
 import zuul.Spieler;
+import zuul.WorldGenerator;
 
 public class GoCommand implements CommandFunction {
     private Spieler spieler;
@@ -20,7 +22,7 @@ public class GoCommand implements CommandFunction {
     {
         if(!befehl.hatZweitesWort()) {
             // Gibt es kein zweites Wort, wissen wir nicht, wohin...
-            System.out.println("Wohin möchten Sie gehen?");
+            System.out.println("Wohin m�chten Sie gehen?\n");
             return;
         }
 
@@ -30,12 +32,14 @@ public class GoCommand implements CommandFunction {
         Raum naechsterRaum = this.spieler.getAktuellerRaum().getAusgang(richtung);
 
         if (naechsterRaum == null) {
-            System.out.println("Dort ist keine Tür!");
+            System.out.println("Dort ist kein Weg!\n");
         }
         else {
             this.spieler.geheZu(naechsterRaum);
             raumInfoAusgeben();
             spieler.hungern();
+            spieler.frieren();
+            
         }
     }
 
@@ -44,3 +48,4 @@ public class GoCommand implements CommandFunction {
     }
 
 }
+

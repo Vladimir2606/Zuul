@@ -19,9 +19,9 @@ public class TakeCommand implements CommandFunction {
 
         boolean geklappt=this.spieler.gegenstandAufnehmen(befehl.gibZweitesWort());
         if(geklappt) {
-            System.out.println("Gegenstand aufgenommen");
+            System.out.println("Gegenstand aufgenommen\n");
         } else {
-            System.out.println("Gegenstand konnte nicht aufgenommen werden");
+            System.out.println("Gegenstand konnte nicht aufgenommen werden\n");
         }
     }
 }

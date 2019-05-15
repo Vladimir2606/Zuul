@@ -12,11 +12,14 @@ public class Essen extends Gegenstand{
         this.essenspunkte = essenspunkte;
     }
     
+    //* @return gibt die bonuspunkte des Essens wieder
     public int getBonus() {
         return this.bonus;
     }
     
+    //* @return gibt die essenspunkte des Essens wieder
     public int getEssen() {
     	return this.essenspunkte;
     }
 }
+

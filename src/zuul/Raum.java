@@ -17,29 +17,33 @@ import java.util.HashMap;
 
 public class Raum
 {
+
 	private String beschreibung;
-	private HashMap<String, Raum> ausgaenge;
+	protected HashMap<String, Raum> ausgaenge;
 	private ArrayList<Gegenstand> gegenstaende;
 	private ArrayList<Monster> monster;
+	private int temperatur;
 
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum
 	 * hat anfangs keine Ausgänge.
 	 * @param beschreibung enthält eine Beschreibung in der Form
 	 *        "in einer Küche" oder "auf einem Sportplatz".
+	 * @param temperatur ist die Temperatur die jeder Raum hat.
 	 */
-	public Raum(String beschreibung)
+	public Raum(String beschreibung, int temperatur)
 	{
 		this.gegenstaende=new ArrayList<>();
 		this.monster= new ArrayList<>();
 		this.ausgaenge=new HashMap<>();
 		this.beschreibung = beschreibung;
+		this.temperatur = temperatur;
 	}
 
 	public void gegenstandAblegen(Gegenstand neuerGegenstand) {
 		this.gegenstaende.add(neuerGegenstand);
 	}
-	
+
 	public void setMonster(Monster neuesMonster) {
 		this.monster.add(neuesMonster);
 	}
@@ -53,17 +57,18 @@ public class Raum
 	}
 
 	public String getLangeBeschreibung() {
-		String erg=  "Sie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
+		String erg=  "\nSie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
+		if(this.gegenstaende.size()>0) {
+			erg+="\nGegenstände in diesem Umgebung:\n";
+			for(Gegenstand g: this.gegenstaende) {
+				erg+=" - " + g.toString() + "\n";
+			}
+			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad";
+		}
 		if(this.monster.size()>0) {
 			erg+="\nIn deiner nähe ist ein Monster:\n";
 			for(Monster m: this.monster) {
 				erg+=" - " + m.toString();
-			}
-		}
-		if(this.gegenstaende.size()>0) {
-			erg+="\nGegenstände in diesem Raum:\n";
-			for(Gegenstand g: this.gegenstaende) {
-				erg+=" - " + g.toString() + "\n";
 			}
 		}
 		return erg;
@@ -89,6 +94,7 @@ public class Raum
 		this.gegenstaende.remove(gesucht);
 	}
 
+
 	public Gegenstand sucheGegenstand(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			// if(g.getName() == name) --> funktioniert nicht,
@@ -102,5 +108,9 @@ public class Raum
 		// Falls diese Stelle erreicht wird, wurde kein
 		// Gegenstand gefunden
 		return null;
+	}
+
+	public int getTemperatur() {
+		return this.temperatur;
 	}
 }
