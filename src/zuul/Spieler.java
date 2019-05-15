@@ -159,26 +159,47 @@ public class Spieler {
 	 */
 	public void ruestung(String name) {
 		Gegenstand g = getGegenstandByName(name);
-		if (g instanceof Helm) {
-			Helm he = (Helm) g;
-			this.ruestung += he.getRuestung();
+		if (this.helm == null) {
+			if (g instanceof Helm) {
+				this.helm = (Helm) g;
+				this.ruestung += this.helm.getRuestung();
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			} else if (this.helm != null) {
+				this.ruestung -= this.helm.getRuestung();
+				this.gegenstaende.remove(g);
+				this.aktuellerRaum.gegenstandAblegen(this.helm);
+			}
+		} else {
+			System.out.println("Du kannst nur einen Helm ausrüsten");
 		}
-		if (g instanceof Brust) {
-			Brust b = (Brust) g;
-			this.ruestung += b.getRuestung();
-
+		if (this.brust == null) {
+			if (g instanceof Brust) {
+				this.brust = (Brust) g;
+				this.ruestung += this.brust.getRuestung();
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			} 
+		} else {
+			System.out.println("Du kannst nur eine Brust ausrüsten");
 		}
-		if (g instanceof Hose) {
-			Hose ho = (Hose) g;
-			this.ruestung += ho.getRuestung();
+		if (this.hose == null) {
+			if (g instanceof Hose) {
+				this.hose = (Hose) g;
+				this.ruestung += this.hose.getRuestung();
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			} 
+		} else {
+			System.out.println("Du kannst nur eine Hose ausrüsten");
 		}
-		if (g instanceof Schuhe) {
-			Schuhe s = (Schuhe) g;
-			this.ruestung += s.getRuestung();
+		if (this.schuhe == null) {
+			if (g instanceof Schuhe) {
+				this.schuhe = (Schuhe) g;
+				this.ruestung += this.schuhe.getRuestung();
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			}
+		} else {
+			System.out.println("Du kannst nur ein paar Schuhe ausrüsten");
 		}
 	}
-
-
 
 	private Gegenstand getGegenstandByName(String name) {
 		for (Gegenstand g : this.gegenstaende) {
@@ -193,7 +214,6 @@ public class Spieler {
 	 * 
 	 */
 	public void sleep() {
-
 		System.out.println("Ich schlaf dann mal");
 	}
 }
