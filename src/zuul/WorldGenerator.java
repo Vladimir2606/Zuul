@@ -27,7 +27,7 @@ public class WorldGenerator {
 		return (Raum)alleRaume.values().toArray()[zufaelligeRaumZahl];
 	}
 
-	/** legt die Räume an mit beschreibung (String) und kälte (int)
+	/** legt die Räume an mit beschreibung (String) und kälte (int) und beem Teleporter noch den worldGenerator (this).
 	 */
 	private void raeumeAnlegen() {
 
@@ -41,7 +41,7 @@ public class WorldGenerator {
 		this.alleRaume.put("geheimgang", new Raum("in einem schmalen modrigen Geheimgang", 7));
 		this.alleRaume.put("taverneErsterStock", new Raum("bei den den Gästezimmern im ersten Stock der Taverne", 20));
 		this.alleRaume.put("teleporter", new TeleporterRaum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3, this));
-
+		this.alleRaume.put("trophäenHalle", new Raum("in einer großen Halle voller Trophäen", 21));
 
 		/*
 		 * lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
@@ -115,6 +115,7 @@ public class WorldGenerator {
 		
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Waffen("Dolch", "ist ein spitzer Dolch", 3, 2));
 		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
+		this.alleRaume.get("trophäenHalle").gegenstandAblegen(new Waffen("Thors Hammer", "Der mächtige Hammer Thors durchströmt von Blitzen", 25, 15));
 		
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Stahlhelm", "schützt vor Angriffen", 6, 3));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Holzhaube", "schützt vor Angriffen", 3, 2));
@@ -128,7 +129,7 @@ public class WorldGenerator {
 
 	// * @retrun gibt den Startraum wieder
 	public Raum getStartRaum() {
-		return this.alleRaume.get("teleporter");
+		return this.alleRaume.get("lichtung");
 	}
 
 	private void addMonster() {
