@@ -57,9 +57,6 @@ public class WorldGenerator {
         teleporter.setAusgang("teleport", hexenhaus);
     }
 
-    
-
-
     private void addGegenstaende() {
         taverne.gegenstandAblegen(new Gegenstand("Bierkrug", "ein leckeres dunkles Pils in einem edlen Krug", 2));
         taverne.gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit Soße", 5 ));
