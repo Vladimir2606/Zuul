@@ -4,6 +4,7 @@ package zuul;
 import zuul.rüstung.Brust;
 import zuul.rüstung.Helm;
 import zuul.rüstung.Hose;
+import zuul.rüstung.Rüstung;
 import zuul.rüstung.Schuhe;
 
 import java.util.ArrayList;
@@ -114,11 +115,8 @@ public class Spieler {
 				this.gegenstaende.remove(g);
 				this.aktuellerRaum.gegenstandAblegen(g);
 				return true;
-				// Methode wird abgebrochen (damit auch die Schleife)
 			}
 		}
-		// Falls das hier erreicht wird, wurde der Gegenstand
-		// nicht gefunden
 		return false;
 	}
 
@@ -153,7 +151,6 @@ public class Spieler {
 	public void essen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
-				// Ist g ein Objekt vom Typ Essen
 				if(g instanceof Essen) {
 					Essen e=(Essen)g;
 					this.tragkraft+=e.getBonus();
@@ -189,7 +186,7 @@ public class Spieler {
 		} else {
 			System.out.println("Du kannst nur einen Helm ausrüsten");
 		}
-		
+
 		if (this.brust == null) {
 			if (g instanceof Brust) {
 				this.brust = (Brust) g;
@@ -199,7 +196,7 @@ public class Spieler {
 		} else {
 			System.out.println("Du kannst nur eine Brust ausrüsten");
 		}
-		
+
 		if (this.hose == null) {
 			if (g instanceof Hose) {
 				this.hose = (Hose) g;
@@ -209,7 +206,7 @@ public class Spieler {
 		} else {
 			System.out.println("Du kannst nur eine Hose ausrüsten");
 		}
-		
+
 		if (this.schuhe == null) {
 			if (g instanceof Schuhe) {
 				this.schuhe = (Schuhe) g;
@@ -220,12 +217,22 @@ public class Spieler {
 			System.out.println("Du kannst nur ein paar Schuhe ausrüsten");
 		}
 	}
-	
-	public boolean entrüsten(String name) {
-		return true;
-		
-	}
 
+	public boolean entrüsten(String name) {
+		for(Gegenstand g: this.gegenstaende) {
+			if(g.getName().equalsIgnoreCase(name)) {
+				this.gegenstaende.remove(g);
+				this.aktuellerRaum.gegenstandAblegen(g);
+				this.ruestung -= ruestung;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public ArrayList<Gegenstand> getGegenstand() {
+		return this.gegenstaende;
+	}	
 	private Gegenstand getGegenstandByName(String name) {
 		for (Gegenstand g : this.gegenstaende) {
 			if (g.getName().equalsIgnoreCase(name)) {

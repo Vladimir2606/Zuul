@@ -43,7 +43,7 @@ public class Raum
 	public void gegenstandAblegen(Gegenstand neuerGegenstand) {
 		this.gegenstaende.add(neuerGegenstand);
 	}
-
+	
 	public void setMonster(Monster neuesMonster) {
 		this.monster.add(neuesMonster);
 	}
