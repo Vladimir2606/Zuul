@@ -106,8 +106,7 @@ public class Spieler {
 		}
 	}
 
-
-
+	
 	public boolean gegenstandAblegen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
