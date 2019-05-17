@@ -28,6 +28,7 @@ public class Spiel
     private Spieler spieler;
     private HashMap<String, CommandFunction> commands;
     private boolean beendet;
+	private Kampf kampf;
 
     /**
      * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
@@ -50,6 +51,7 @@ public class Spiel
         this.commands.put("quit", new QuitCommand(this));
         this.commands.put("sleep", new SleepCommand(this.spieler));
         this.commands.put("equipe", new EquipeCommand(this.spieler));
+        this.commands.put("fight", new FightCommand(this.kampf));
     }
 
     private void raeumeAnlegen()

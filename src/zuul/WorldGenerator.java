@@ -8,12 +8,14 @@ import zuul.rüstung.Schuhe;
 public class WorldGenerator {
     private Raum lichtung, waldstueck, taverne, hexenhaus, dorfplatz, kellerDerTaverne, geheimgang, taverneErsterStock,
     				piratenHoehle, teleporter;
+    private Monster harald;
 
     public WorldGenerator() {
         this.raeumeAnlegen();
         this.setzeAusgaenge();
         this.addGegenstaende();
         this.addMonster();
+        this.addGegenstaendeMonster();
     }
 
     private void raeumeAnlegen() {
@@ -28,6 +30,8 @@ public class WorldGenerator {
         taverneErsterStock=new Raum("bei den den Gästezimmern im ersten Stock der Taverne");
         teleporter = new Raum("in einem kleinem Raum mit einem größem Symbol auf dem Boden");
     }
+    
+    
 
     private void setzeAusgaenge() {
 
@@ -81,7 +85,12 @@ public class WorldGenerator {
     }
     
     private void addMonster() {
-    	waldstueck.setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 0.5));
+    	harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, true);
+    	waldstueck.setMonster(harald);
+    }
+    
+    private void addGegenstaendeMonster() {
+    	harald.gegenstandAufnehmen(new Gegenstand("Ring", "...", 1));
     }
 
     public Raum getStartRaum() {

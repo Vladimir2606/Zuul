@@ -103,4 +103,15 @@ public class Raum
 		// Gegenstand gefunden
 		return null;
 	}
+	
+	public Monster sucheMonster() {
+		if(!monster.isEmpty()) {
+			return monster.get(0);
+		}
+			return null;
+	}
+	
+	public void monsterEntfernen(Monster m) {
+		monster.remove(m);
+	}
 }

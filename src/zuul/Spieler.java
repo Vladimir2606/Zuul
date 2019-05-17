@@ -20,7 +20,7 @@ public class Spieler {
 	private int hunger;
 	private int lebenspunkte;
 	private int ruestung;
-	private double schaden;
+	private int schaden;
 
 	public Spieler(Spiel spiel) {
 		this.gegenstaende = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Spieler {
 		this.lebenspunkte = 20;
 		this.ruestung = 0;
 		this.spiel = spiel;
-		this.schaden = schaden;
+		this.schaden = 0;
 	}
 
 	/**
@@ -207,5 +207,17 @@ public class Spieler {
 	public void sleep() {
 
 		System.out.println("Ich schlaf dann mal");
+	}
+	
+	public int getLeben() {
+		return lebenspunkte;
+	}
+	
+	public int getSchaden() {
+		return schaden;
+	}
+	
+	public void reduziereLeben(int schaden) {
+		lebenspunkte-=schaden;
 	}
 }

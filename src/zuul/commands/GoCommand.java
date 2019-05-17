@@ -1,6 +1,8 @@
 package zuul.commands;
 
 import zuul.Befehl;
+import zuul.Kampf;
+import zuul.Monster;
 import zuul.Raum;
 import zuul.Spieler;
 
@@ -13,14 +15,16 @@ public class GoCommand implements CommandFunction {
 
     @Override
     public void execute(Befehl befehl) {
-        wechsleRaum(befehl);
+    	wechsleRaum(befehl);
     }
 
     private void wechsleRaum(Befehl befehl)
     {
-        if(!befehl.hatZweitesWort()) {
+        Monster erg;
+        Kampf kampf;
+    	if(!befehl.hatZweitesWort()) {
             // Gibt es kein zweites Wort, wissen wir nicht, wohin...
-            System.out.println("Wohin mÃ¶chten Sie gehen?");
+            System.out.println("Wohin möchten Sie gehen?");
             return;
         }
 
@@ -35,6 +39,11 @@ public class GoCommand implements CommandFunction {
         else {
             this.spieler.geheZu(naechsterRaum);
             raumInfoAusgeben();
+            erg = naechsterRaum.sucheMonster();
+            if(erg.testAgro()) {
+            	kampf = new Kampf(spieler, erg, naechsterRaum);
+            	kampf.kaempfen();
+            }
             spieler.hungern();
         }
     }
