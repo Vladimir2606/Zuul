@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class WorldGenerator {
 
 	HashMap<String, Raum> alleRaume;
-	
+
 	public WorldGenerator() {
 		this.alleRaume = new HashMap<>();
 		this.raeumeAnlegen();
@@ -52,7 +52,7 @@ public class WorldGenerator {
 		this.alleRaume.put("hotel", new Raum("im Hotel des Dorfes", 20));
 		this.alleRaume.put("strandweg", new Raum("auf einem Weg am Strand", 12));
 		this.alleRaume.put("strand", new Raum("am Strand", 9));
-		
+
 		/*
 		 * lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
 		 * waldstueck = new Raum("im dunklen Wald", 13); taverne = new
@@ -129,11 +129,11 @@ public class WorldGenerator {
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
 		this.alleRaume.get("kirche").gegenstandAblegen(new Gegenstand("Kerzenständer", "ein mit Gold verzierter Kerzenständer", 5));
 	}
-	
+
 	/** erstellt Essen und legt sie in einem Raum ab
 	 */
 	private void addEssen() {
-		
+
 		this.alleRaume.get("waldstueck").gegenstandAblegen(new Essen("Pilz", "ein seltsam-magisch aussehender Pilz", 1, 20, 0));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 20));
 		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
@@ -143,43 +143,54 @@ public class WorldGenerator {
 		this.alleRaume.get("gartenDerTaverne").gegenstandAblegen(new Essen("Gurke", "eine leckere Gurke", 2, 0, 6));
 	}
 
+	private void addHeilungstraenke() {
+
+		this.alleRaume.get("kirche").gegenstandAblegen(new Heilungstraenke("Kleiner Heilungstrank", "ein Trank der das leben ein wenig auffüllt", 1, 3));
+		this.alleRaume.get("taverneErsterStock").gegenstandAblegen(new Heilungstraenke("Kleiner Heilungstrank", "ein Trank der das leben ein wenig auffüllt", 1, 3));
+		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Heilungstraenke("Kleiner Heilungstrank", "ein Trank der das leben ein wenig auffüllt", 1, 3));
+		this.alleRaume.get("strandweg").gegenstandAblegen(new Heilungstraenke("Mittlerer Heilungstrank", "ein Trank der das leben auffüllt", 2, 5));
+		this.alleRaume.get("gefängnis").gegenstandAblegen(new Heilungstraenke("Mittlerer Heilungstrank", "ein Trank der das leben auffüllt", 2, 5));
+		this.alleRaume.get("").gegenstandAblegen(new Heilungstraenke("Großer Heilungstrank", "ein Trank der das leben viel auffüllt", 5, 10));
+		this.alleRaume.get("").gegenstandAblegen(new Heilungstraenke("Großer Heilungstrank", "ein Trank der das leben viel auffüllt", 5, 10));
+	}
+
 	/** erstellt Waffen und legt sie in einem Raum ab
 	 */
 	private void addWaffen() {
-		
+
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Waffen("Dolch", "ein spitzer Dolch", 3, 3));
 		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
 		this.alleRaume.get("trophäenHalle").gegenstandAblegen(new Waffen("Thors Hammer", "Der mächtige Hammer Thors durchströmt von Blitzen", 25, 15));
 		this.alleRaume.get("taverneErsterStock").gegenstandAblegen(new Waffen("Langschwert", "Ein großes Schwert aus Metall", 12, 13));
 		this.alleRaume.get("strandweg").gegenstandAblegen(new Waffen("Messer", "Ein altes verrostetes Messer", 3, 2));
 	}
-	
+
 	/** erstellt Rüstungen und legt sie in einem Raum ab
 	 */
 	private void addRuestungen() {
-		
+
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Stahlhelm", "ein massiver Stahlhelm", 6, 3));
 		this.alleRaume.get("hotel").gegenstandAblegen(new Helm("Holzhaube", "einfach aber schützend", 3, 2));
 		this.alleRaume.get("trophäenHalle").gegenstandAblegen(new Helm("Lokis Helm", "ein magisch glänzender Helm aus Plastahl", 9, 7));
-		
+
 		this.alleRaume.get("taverne").gegenstandAblegen(new Brust("Stahlbrustplatte", "aus dicken Stahlplatten", 10, 8));
 		this.alleRaume.get("strandweg").gegenstandAblegen(new Brust("Plastahlbrustplatte", "aus gehärtetem Plastahl", 16, 12));
-		
+
 		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Hose("Stoffhose", "schützt ein wenig vor Angriffen", 1, 1));
 		this.alleRaume.get("kellerDerTaverne").gegenstandAblegen(new Hose("Kettenhemdhose", "eine Kettenhemdhose, wie die Soldaten sie tragen", 4, 5));
-		
+
 		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Schuhe("Stahlschuhe", "massive Schuhe mit eingenähten Stahlplatten", 6, 4));
 		this.alleRaume.get("geheimgang").gegenstandAblegen(new Schuhe("Lederschuhe", "ein paar Schuhe aus Rinderleder", 3, 2));
 	}
-	
+
 	/** @retrun gibt den Startraum wieder
 	 */
 	public Raum getStartRaum() {
 		return this.alleRaume.get("lichtung");
 	}
 
-    private void addMonster() {
-    	this.alleRaume.get("waldstueck").setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 0.5));
-    }
+	private void addMonster() {
+		this.alleRaume.get("waldstueck").setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 0.5));
+	}
 
 }

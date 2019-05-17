@@ -105,7 +105,7 @@ public class Spieler {
 		}
 	}
 
-	
+
 	public boolean gegenstandAblegen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
@@ -147,7 +147,8 @@ public class Spieler {
 		return aktuellerRaum;
 	}
 
-
+	/** 
+	 */
 	public void essen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
@@ -163,6 +164,19 @@ public class Spieler {
 		}
 	}
 
+	public void benutzen(String name) {
+		for(Gegenstand g: this.gegenstaende) {
+			if(g.getName().equalsIgnoreCase(name)) {
+				// Ist t ein Objekt vom Typ traenke
+				if(g instanceof Heilungstraenke) {
+					Heilungstraenke t=(Heilungstraenke)g;
+					this.lebenspunkte+=t.getHeilungsBonus();
+					this.gegenstaende.remove(g);
+					return;
+				}
+			}
+		}
+	}
 
 	public void sleep() {
 
@@ -196,7 +210,7 @@ public class Spieler {
 			this.ruestung += s.getRuestung();
 		}
 	}
-	
+
 	public void schaden(String name) {
 		Gegenstand g= getGegenstandByName(name);
 		if (g instanceof Waffen) {

@@ -50,6 +50,7 @@ public class Spiel
         this.commands.put("quit", new QuitCommand(this));
         this.commands.put("sleep", new SleepCommand(this.spieler));
         this.commands.put("equipe", new EquipeCommand(this.spieler));
+        this.commands.put("use", new UseCommand(this.spieler));
     }
 
     private void raeumeAnlegen()
