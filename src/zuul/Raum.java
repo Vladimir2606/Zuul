@@ -15,6 +15,8 @@ package zuul;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import zuul.items.Gegenstand;
+
 public class Raum
 {
 

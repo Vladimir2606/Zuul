@@ -1,5 +1,7 @@
 package zuul;
 
+import zuul.items.Gegenstand;
+
 public class Waffen extends Gegenstand {
 
 	private double schaden;

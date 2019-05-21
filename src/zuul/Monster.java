@@ -18,7 +18,7 @@ public class Monster {
 	
 	@Override
     public String toString() {
-        return name + ", " + this.beschreibung + ", " + this.schaden + "dmg" + this.lebenspunkte + " HP" + ", " + this.rüstung +" Rüstung";
+        return name + ", " + this.beschreibung + ", " + this.schaden + "dmg" + ", " + this.lebenspunkte + " HP" + ", " + this.rüstung +" Rüstung";
     }
     
     public String getName(){

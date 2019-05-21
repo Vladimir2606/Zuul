@@ -1,6 +1,6 @@
 package zuul.rüstung;
 
-import zuul.Gegenstand;
+import zuul.items.Gegenstand;
 
 public class Rüstung extends Gegenstand {
 

@@ -1,4 +1,4 @@
-package zuul;
+package zuul.items;
 
 public class Essen extends Gegenstand{
 
@@ -12,12 +12,14 @@ public class Essen extends Gegenstand{
         this.essenspunkte = essenspunkte;
     }
     
-    //* @return gibt die bonuspunkte des Essens wieder
+    /** @return gibt die bonuspunkte des Essens wieder
+     */
     public int getBonus() {
         return this.bonus;
     }
     
-    //* @return gibt die essenspunkte des Essens wieder
+    /** @return gibt die essenspunkte des Essens wieder
+     */
     public int getEssen() {
     	return this.essenspunkte;
     }

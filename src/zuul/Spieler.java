@@ -1,6 +1,10 @@
 
 package zuul;
 
+import zuul.items.Essen;
+import zuul.items.Gegenstand;
+import zuul.items.Heilungstraenke;
+import zuul.items.Krafttraenke;
 import zuul.rüstung.Brust;
 import zuul.rüstung.Helm;
 import zuul.rüstung.Hose;
@@ -171,6 +175,11 @@ public class Spieler {
 				if(g instanceof Heilungstraenke) {
 					Heilungstraenke t=(Heilungstraenke)g;
 					this.lebenspunkte+=t.getHeilungsBonus();
+					this.gegenstaende.remove(g);
+					return;
+				} else if (g instanceof Krafttraenke) {
+					Krafttraenke t=(Krafttraenke)g;
+					this.tragkraft+=t.getKraftBonus();
 					this.gegenstaende.remove(g);
 					return;
 				}
