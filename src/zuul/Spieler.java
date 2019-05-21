@@ -22,22 +22,24 @@ public class Spieler {
 	private Helm helm;
 	private Schuhe schuhe;
 	private int ruestung;
-	private double schaden;
+	private int schaden;
+	
 	/** @param tragkraft = das maximalgewicht in kg das getragen werden kann
 	 *	@param hunger = die hungerpunkte des spielers, wie satt er ist
 	 *	@param lebenspunkte = wie viel leben der spieler hat
 	 *	@param auszuhaltendeKaelte = die niedrichste temperatur, welche er aushält ohne schaden zuzunehmen
+	 * @return 
 	 */
-	public Spieler(Spiel spiel) {
+	public  Spieler(Spiel spiel) {
 		this.gegenstaende=new ArrayList<>();
 		this.tragkraft = 30;
 		this.hunger = 10;
 		this.lebenspunkte = 20;
 		this.auszuhaltendeKaelte = 12;
-
+		this.ruestung = 0;
+		this.spiel = spiel;
+		this.schaden = 1;
 	}
-
-
 
 	public void frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
@@ -148,6 +150,15 @@ public class Spieler {
 	}
 
 
+	private Gegenstand getGegenstandByName(String name) {
+		for (Gegenstand g : this.gegenstaende) {
+			if (g.getName().equalsIgnoreCase(name)) {
+				return g;
+			}
+		}
+		return null;
+	}
+
 	public void essen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
@@ -197,6 +208,7 @@ public class Spieler {
 		}
 	}
 	
+	
 	public void schaden(String name) {
 		Gegenstand g= getGegenstandByName(name);
 		if (g instanceof Waffen) {
@@ -205,14 +217,15 @@ public class Spieler {
 		}
 	}
 
-
-
-	private Gegenstand getGegenstandByName(String name) {
-		for (Gegenstand g : this.gegenstaende) {
-			if (g.getName().equalsIgnoreCase(name)) {
-				return g;
-			}
-		}
-		return null;
+	public int getLeben() {
+		return (int) lebenspunkte;
+	}
+	
+	public int getSchaden() {
+		return schaden;
+	}
+	
+	public void reduziereLeben(int schaden) {
+		lebenspunkte-=schaden;
 	}
 }

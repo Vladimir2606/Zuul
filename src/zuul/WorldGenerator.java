@@ -12,7 +12,9 @@ public class WorldGenerator {
 
 	HashMap<String, Raum> alleRaume;
 	
-	public WorldGenerator() {
+	private Monster harald;
+        
+    public WorldGenerator() {
 		this.alleRaume = new HashMap<>();
 		this.raeumeAnlegen();
 		this.setzeAusgaenge();
@@ -20,6 +22,7 @@ public class WorldGenerator {
 		this.addEssen();
 		this.addWaffen();
 		this.addRuestungen();
+		this.addMonster();
 		this.addMonster();
 	}
 
@@ -177,9 +180,10 @@ public class WorldGenerator {
 	public Raum getStartRaum() {
 		return this.alleRaume.get("lichtung");
 	}
-
-    private void addMonster() {
-    	this.alleRaume.get("waldstueck").setMonster(new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 0.5));
+	
+	private void addMonster() {
+    	this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, true);
+    	this.alleRaume.get("waldstueck").setMonster(harald);
+    	this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
     }
-
 }

@@ -113,4 +113,15 @@ public class Raum
 	public int getTemperatur() {
 		return this.temperatur;
 	}
+
+	public Monster sucheMonster() {
+		if(!monster.isEmpty()) {
+			return monster.get(0);
+		}
+		return null;
+	}
+
+	public void monsterEntfernen(Monster m) {
+		monster.remove(m);
+	}
 }
