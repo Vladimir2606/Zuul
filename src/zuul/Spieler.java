@@ -4,7 +4,6 @@ package zuul;
 import zuul.rüstung.Brust;
 import zuul.rüstung.Helm;
 import zuul.rüstung.Hose;
-import zuul.rüstung.Rüstung;
 import zuul.rüstung.Schuhe;
 
 import java.util.ArrayList;
@@ -162,7 +161,6 @@ public class Spieler {
 		}
 	}
 
-
 	public void sleep() {
 
 		System.out.println("Ich schlaf dann mal");
@@ -175,6 +173,7 @@ public class Spieler {
 	}
 
 
+
 	public void ruestung(String name) {
 		Gegenstand g = getGegenstandByName(name);
 		if (this.helm == null) {
@@ -183,8 +182,6 @@ public class Spieler {
 				this.ruestung += this.helm.getRuestung();
 				System.out.println("Rüstungsstück wurde ausgerüstet!");
 			}
-		} else {
-			System.out.println("Du kannst nur einen Helm ausrüsten");
 		}
 
 		if (this.brust == null) {
@@ -192,9 +189,7 @@ public class Spieler {
 				this.brust = (Brust) g;
 				this.ruestung += this.brust.getRuestung();
 				System.out.println("Rüstungsstück wurde ausgerüstet!");
-			} 
-		} else {
-			System.out.println("Du kannst nur eine Brust ausrüsten");
+			}
 		}
 
 		if (this.hose == null) {
@@ -202,9 +197,7 @@ public class Spieler {
 				this.hose = (Hose) g;
 				this.ruestung += this.hose.getRuestung();
 				System.out.println("Rüstungsstück wurde ausgerüstet!");
-			} 
-		} else {
-			System.out.println("Du kannst nur eine Hose ausrüsten");
+			}
 		}
 
 		if (this.schuhe == null) {
@@ -213,14 +206,32 @@ public class Spieler {
 				this.ruestung += this.schuhe.getRuestung();
 				System.out.println("Rüstungsstück wurde ausgerüstet!");
 			}
-		} else {
-			System.out.println("Du kannst nur ein paar Schuhe ausrüsten");
 		}
 	}
 
 	public boolean entrüsten(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
+				if(g instanceof Helm) {
+					this.helm = null;
+				} else if (this.helm != null) {
+					System.out.println("Du kannst nur einen Helm ausrüsten!");
+				}
+				if(g instanceof Brust) {
+					this.brust = null;
+				} else if (this.brust != null) {
+					System.out.println("Du kannst nur eine Brust ausrüsten!");
+				}
+				if(g instanceof Hose) {
+					this.hose = null;
+				} else if (this.hose != null) {
+					System.out.println("Du kannst nur eine Hose ausrüsten!");
+				}
+				if(g instanceof Schuhe) {
+					this.schuhe = null;
+				} else if (this.schuhe != null) {
+					System.out.println("Du kannst nur ein paar Schuhe ausrüsten!");
+				}
 				this.gegenstaende.remove(g);
 				this.aktuellerRaum.gegenstandAblegen(g);
 				this.ruestung -= ruestung;
@@ -229,10 +240,11 @@ public class Spieler {
 		}
 		return false;
 	}
-	
+
 	public ArrayList<Gegenstand> getGegenstand() {
 		return this.gegenstaende;
-	}	
+	}
+
 	private Gegenstand getGegenstandByName(String name) {
 		for (Gegenstand g : this.gegenstaende) {
 			if (g.getName().equalsIgnoreCase(name)) {

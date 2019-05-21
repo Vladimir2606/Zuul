@@ -14,7 +14,11 @@ public class DropCommand implements CommandFunction{
     public void execute(Befehl befehl) {
         gegenstandAblegen(befehl);
     }
-
+    
+    /**
+     * 
+     * @param befehl
+     */
     private void gegenstandAblegen(Befehl befehl) {
         boolean geklappt=this.spieler.gegenstandAblegen(befehl.gibZweitesWort());
         if(geklappt) {
