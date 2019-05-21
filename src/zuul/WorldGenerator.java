@@ -9,7 +9,7 @@ import zuul.rüstung.Brust;
 import zuul.rüstung.Hose;
 import zuul.rüstung.Schuhe;
 
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WorldGenerator {
@@ -82,6 +82,14 @@ public class WorldGenerator {
 	private void setzeAusgaenge() {
 		Raum zufaelligerRaum = getZufaelligerRaum();
 
+		
+		
+		ArrayList<Raum> gefRaume=new ArrayList<Raum>();
+		gefRaume.add(new Raum("Gefängnis", 15));
+		
+		Raumgruppe gefaengnis=new Raumgruppe(gefRaume, new Ausgang(gefa));
+
+
 		//		this.alleRaume.get("lichtung").setAusgang("down", this.alleRaume.get("piratenHoehle"));
 		//		this.alleRaume.get("lichtung").setAusgang("east", this.alleRaume.get("waldstueck"));
 		//		this.alleRaume.get("lichtung").setAusgang("north", this.alleRaume.get("kirche"));
@@ -137,10 +145,11 @@ public class WorldGenerator {
 
 		// Raumgruppe 2
 		this.alleRaume.get("dorfplatz").setAusgang("west", this.alleRaume.get("hexenhaus"));
+		this.alleRaume.get("dorfplatz").setAusgang("north", this.alleRaume.get("waldstueck"));
 		this.alleRaume.get("hexenhaus").setAusgang("east", this.alleRaume.get("dorfplatz"));
 		this.alleRaume.get("hexenhaus").setAusgang("teleport", zufaelligerRaum);
 		this.alleRaume.get("waldstueck").setAusgang("south", this.alleRaume.get("dorfplatz"));
-		this.alleRaume.get("dorfplatz").setAusgang("north", this.alleRaume.get("waldstueck"));
+
 
 		// Raumgruppe 3
 		this.alleRaume.get("taverneErsterStock").setAusgang("down", this.alleRaume.get("taverne"));
@@ -151,6 +160,8 @@ public class WorldGenerator {
 		this.alleRaume.get("taverne").setAusgang("up", this.alleRaume.get("taverneErsterStock"));
 		this.alleRaume.get("taverne").setAusgang("down", this.alleRaume.get("kellerDerTaverne"));
 		this.alleRaume.get("taverne").setAusgang("hintertür", this.alleRaume.get("gartenDerTaverne"));
+		this.alleRaume.get("geheimgang").setAusgang("south", this.alleRaume.get("kellerDerTaverne"));
+
 
 		// Raumgruppe 4
 		this.alleRaume.get("gefängnis").setAusgang("zelle1", this.alleRaume.get("zelle1"));
@@ -173,7 +184,7 @@ public class WorldGenerator {
 		this.alleRaume.get("hexenhaus").setAusgang("south", this.alleRaume.get("gefängnis"));
 
 
-		this.alleRaume.get("geheimgang").setAusgang("south", this.alleRaume.get("kellerDerTaverne"));
+
 		this.alleRaume.get("trophäenHalle").setAusgang("west", this.alleRaume.get("dorfplatz"));
 		this.alleRaume.get("gefängnis").setAusgang("north", this.alleRaume.get("hexenhaus"));
 
