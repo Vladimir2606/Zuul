@@ -1,7 +1,6 @@
 package zuul.commands;
 
 import zuul.Befehl;
-import zuul.Kampf;
 import zuul.Spiel;
 
 public class FightCommand implements CommandFunction {

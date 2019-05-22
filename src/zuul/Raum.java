@@ -15,6 +15,8 @@ package zuul;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import zuul.items.Gegenstand;
+
 public class Raum
 {
 
@@ -61,14 +63,14 @@ public class Raum
 		if(this.gegenstaende.size()>0) {
 			erg+="\nGegenstände in diesem Umgebung:\n";
 			for(Gegenstand g: this.gegenstaende) {
-				erg+=" - " + g.toString() + "\n";
+				erg+=" - " + g.toString();
 			}
-			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad";
+			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad" + "\n";
 		}
 		if(this.monster.size()>0) {
 			erg+="\nIn deiner nähe ist ein Monster:\n";
 			for(Monster m: this.monster) {
-				erg+=" - " + m.toString();
+				erg+=" - " + m.toString() + "\n";
 			}
 		}
 		return erg;

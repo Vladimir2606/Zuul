@@ -5,7 +5,6 @@ import zuul.Kampf;
 import zuul.Raum;
 import zuul.Monster;
 import zuul.Spieler;
-import zuul.WorldGenerator;
 
 public class GoCommand implements CommandFunction {
     private Spieler spieler;

@@ -1,5 +1,5 @@
 
-package zuul;
+package zuul.items;
 
 public class Gegenstand {
 

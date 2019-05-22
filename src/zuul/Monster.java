@@ -1,6 +1,9 @@
 package zuul;
 
 import java.util.List;
+
+import zuul.items.Gegenstand;
+
 import java.util.ArrayList;
 
 public class Monster {

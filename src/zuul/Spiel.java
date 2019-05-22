@@ -28,7 +28,6 @@ public class Spiel
     private Spieler spieler;
     private HashMap<String, CommandFunction> commands;
     private boolean beendet;
-	private Spiel spiel;
 
     /**
      * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
@@ -51,13 +50,19 @@ public class Spiel
         this.commands.put("quit", new QuitCommand(this));
         this.commands.put("sleep", new SleepCommand(this.spieler));
         this.commands.put("equipe", new EquipeCommand(this.spieler));
-        this.commands.put("fight", new FightCommand(this.spiel));
+        this.commands.put("fight", new FightCommand(this));
+        this.commands.put("use", new UseCommand(this.spieler));
     }
     
     public void kampfAnlegen() {
     	Monster erg;
         Kampf kampf;
+        System.out.println("test");
         Raum naechsterRaum = this.spieler.getAktuellerRaum();
+        if (naechsterRaum == null) {
+        	System.out.println("test");
+        }
+        System.out.println(naechsterRaum.getLangeBeschreibung());
     	erg = naechsterRaum.sucheMonster();
         kampf = new Kampf(spieler, erg, naechsterRaum);
         kampf.kaempfen();
