@@ -1,16 +1,13 @@
 
 package zuul;
 
-import zuul.items.Essen;
-import zuul.items.Gegenstand;
-import zuul.items.Heilungstraenke;
-import zuul.items.Krafttraenke;
 import zuul.rüstung.Brust;
 import zuul.rüstung.Helm;
 import zuul.rüstung.Hose;
 import zuul.rüstung.Schuhe;
-
 import java.util.ArrayList;
+import zuul.items.Essen;
+import zuul.items.Gegenstand;
 
 public class Spieler {
 
@@ -26,7 +23,7 @@ public class Spieler {
 	private Helm helm;
 	private Schuhe schuhe;
 	private int ruestung;
-	private double schaden;
+
 	/** @param tragkraft = das maximalgewicht in kg das getragen werden kann
 	 *	@param hunger = die hungerpunkte des spielers, wie satt er ist
 	 *	@param lebenspunkte = wie viel leben der spieler hat
@@ -38,19 +35,26 @@ public class Spieler {
 		this.hunger = 10;
 		this.lebenspunkte = 20;
 		this.auszuhaltendeKaelte = 12;
-
+		this.ruestung = 0;
+		this.spiel = spiel;
 	}
 
-
-
+	/**
+	 * 
+	 */
 	public void frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
 			this.lebenspunkte -= 0.5;
 			System.out.println("Du frierst!");
 		}
-
 	}
 
+	/**
+	 * Nach jedem GoCommand wird ein Hungerpunkt
+	 * abgezogen falls die Hungerpunkte auf 0 sind
+	 * wird ein Lebenspunkt abgezogen.
+	 * Wenn der Spieler keine Leben hat startet das Spiel neu.
+	 */
 	public void hungern() {
 		this.hunger -= 1;
 		if (this.hunger <= 0) {
@@ -62,23 +66,20 @@ public class Spieler {
 			spiel.quit();
 		}
 	}
-
+	
+	/**
+	 * Das Gesamtgewicht was der Spieler noch tragen kann.
+	 * @return
+	 */
 	public int ermittleGewicht() {
 		int gesamtgewicht=0;
-
-		// this.gegenstaende wird durchlaufen
-		// Jeder Gegenstand in der Liste wird einmal
-		// in der Variablen g abgespeichert
 		for(Gegenstand g: this.gegenstaende) {
-			// a = a + b oder a+=b
 			gesamtgewicht += g.getGewicht();
 		}
 		return gesamtgewicht;
 	}
 
-
 	/**
-
 	 *
 	 * Dieser Gegenstand sollte dann im aktuellen Raum
 	 * gesucht werden (Methode dafür erstellen!).
@@ -109,54 +110,65 @@ public class Spieler {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public boolean gegenstandAblegen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
 				this.gegenstaende.remove(g);
 				this.aktuellerRaum.gegenstandAblegen(g);
 				return true;
-				// Methode wird abgebrochen (damit auch die Schleife)
 			}
 		}
-		// Falls das hier erreicht wird, wurde der Gegenstand
-		// nicht gefunden
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String zeigeStatus() {
-		String erg = "Ich kann insgesamt ";
+		String erg="Ich kann insgesamt ";
 		erg += this.tragkraft + "kg tragen\n";
-		for (Gegenstand g : this.gegenstaende) {
-			erg += " - " + g.getName() + " " + g.getGewicht() + "kg\n";
+		for(Gegenstand g: this.gegenstaende) {
+			erg += " - " + g.getName() + " " + g.getGewicht()+"kg\n";
 		}
 		erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n";
-		erg += "Ich habe noch ";
-		erg += this.hunger + " Hungerpunkte\n";
-		erg += "Ich habe noch ";
-		erg += this.lebenspunkte + " Lebenspunkte\n";
-		erg += "Ich habe ";
-		erg += this.schaden +"Schaden\n";
-		erg += "Ich habe ";
+		erg += "Ich habe noch\n ";
+		erg += this.hunger + " Hungerpunkte\n ";
+		erg += this.lebenspunkte +" Lebenspunkte\n ";
 		erg += this.ruestung + " Rüstungspunkte\n";
+		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte;
+
 		return erg;
 	}
 
-
+	/**
+	 * 
+	 * @param raum
+	 */
 	public void geheZu(Raum raum) {
 		this.aktuellerRaum=raum;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Raum getAktuellerRaum() {
 		return aktuellerRaum;
 	}
 
-	/** 
+	/**
+	 * 
+	 * @param name
 	 */
 	public void essen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
-				// Ist g ein Objekt vom Typ Essen
 				if(g instanceof Essen) {
 					Essen e=(Essen)g;
 					this.tragkraft+=e.getBonus();
@@ -168,68 +180,120 @@ public class Spieler {
 		}
 	}
 
-	public void benutzen(String name) {
-		for(Gegenstand g: this.gegenstaende) {
-			if(g.getName().equalsIgnoreCase(name)) {
-				// Ist t ein Objekt vom Typ traenke
-				if(g instanceof Heilungstraenke) {
-					Heilungstraenke t=(Heilungstraenke)g;
-					this.lebenspunkte+=t.getHeilungsBonus();
-					this.gegenstaende.remove(g);
-					return;
-				} else if (g instanceof Krafttraenke) {
-					Krafttraenke t=(Krafttraenke)g;
-					this.tragkraft+=t.getKraftBonus();
-					this.gegenstaende.remove(g);
-					return;
-				}
-			}
-		}
-	}
-
+	/**
+	 * 
+	 */
 	public void sleep() {
-
 		System.out.println("Ich schlaf dann mal");
 	}
-
+	
+	/**
+	 * Die Methode bestimmt die maximale Punktzahl der Rüstung.
+	 */
 	public void ruesten() {
 		if (this.ruestung > 15) {
 			System.out.println("Du kannst keine Rüstung mehr ausrüsten!");
 		}
 	}
 
-
+	/**
+	 * Man kann Rüstungen ausrüsten und 
+	 * bekommt Rüstungspunkte und die 
+	 * Rüstung sorgt dafür das der Spieler mehr 
+	 * Kaelte aushalten kann.
+	 * @param name
+	 */
 	public void ruestung(String name) {
 		Gegenstand g = getGegenstandByName(name);
-		if (g instanceof Helm) {
-			Helm he = (Helm) g;
-			this.ruestung += he.getRuestung();
+		if (this.helm == null) {
+			if (g instanceof Helm) {
+				this.helm = (Helm) g;
+				this.ruestung += this.helm.getRuestung();
+				this.auszuhaltendeKaelte -= 1;
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			}
 		}
-		if (g instanceof Brust) {
-			Brust b = (Brust) g;
-			this.ruestung += b.getRuestung();
-
+		if (this.brust == null) {
+			if (g instanceof Brust) {
+				this.brust = (Brust) g;
+				this.ruestung += this.brust.getRuestung();
+				this.auszuhaltendeKaelte -= 4;
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			}
 		}
-		if (g instanceof Hose) {
-			Hose ho = (Hose) g;
-			this.ruestung += ho.getRuestung();
+		if (this.hose == null) {
+			if (g instanceof Hose) {
+				this.hose = (Hose) g;
+				this.ruestung += this.hose.getRuestung();
+				this.auszuhaltendeKaelte -= 3;
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			}
 		}
-		if (g instanceof Schuhe) {
-			Schuhe s = (Schuhe) g;
-			this.ruestung += s.getRuestung();
+		if (this.schuhe == null) {
+			if (g instanceof Schuhe) {
+				this.schuhe = (Schuhe) g;
+				this.ruestung += this.schuhe.getRuestung();
+				this.auszuhaltendeKaelte -= 2;
+				System.out.println("Rüstungsstück wurde ausgerüstet!");
+			}
 		}
 	}
-
-	public void schaden(String name) {
-		Gegenstand g= getGegenstandByName(name);
-		if (g instanceof Waffen) {
-			Waffen wa = (Waffen) g;
-			this.schaden += wa.getSchaden();
+	
+	/**
+	 * Die Methode sorgt dafür das man
+	 * die Rüstung ausziehen kann.
+	 * @param name
+	 * @return
+	 */
+	public boolean entrüsten(String name) {
+		for(Gegenstand g: this.gegenstaende) {
+			if(g.getName().equalsIgnoreCase(name)) {
+				if(g instanceof Helm) {
+					this.helm = null;
+					this.auszuhaltendeKaelte += 1;
+				} else if (this.helm != null) {
+					System.out.println("Du kannst nur einen Helm ausrüsten!");
+				}
+				if(g instanceof Brust) {
+					this.brust = null;
+					this.auszuhaltendeKaelte += 4;
+				} else if (this.brust != null) {
+					System.out.println("Du kannst nur eine Brust ausrüsten!");
+				}
+				if(g instanceof Hose) {
+					this.hose = null;
+					this.auszuhaltendeKaelte += 3;
+				} else if (this.hose != null) {
+					System.out.println("Du kannst nur eine Hose ausrüsten!");
+				}
+				if(g instanceof Schuhe) {
+					this.schuhe = null;
+					this.auszuhaltendeKaelte += 2;
+				} else if (this.schuhe != null) {
+					System.out.println("Du kannst nur ein paar Schuhe ausrüsten!");
+				}
+				this.gegenstaende.remove(g);
+				this.aktuellerRaum.gegenstandAblegen(g);
+				this.ruestung -= ruestung;
+				return true;
+			}
 		}
+		return false;
 	}
-
-
-
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Gegenstand> getGegenstand() {
+		return this.gegenstaende;
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	private Gegenstand getGegenstandByName(String name) {
 		for (Gegenstand g : this.gegenstaende) {
 			if (g.getName().equalsIgnoreCase(name)) {
