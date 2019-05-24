@@ -52,6 +52,7 @@ public class Spiel
         this.commands.put("equipe", new EquipeCommand(this.spieler));
         this.commands.put("fight", new FightCommand(this));
         this.commands.put("use", new UseCommand(this.spieler));
+        this.commands.put("deequipe", new DeequipeCommand(this.spieler));
     }
     
     public void kampfAnlegen() {
