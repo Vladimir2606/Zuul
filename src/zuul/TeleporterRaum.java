@@ -4,8 +4,8 @@ public class TeleporterRaum extends Raum {
 
 	private WorldGenerator worldGenerator;
 
-	public TeleporterRaum(String beschreibung, int temperatur, WorldGenerator worldGenerator) {
-		super(beschreibung, temperatur);
+	public TeleporterRaum(String beschreibung, int temperatur, int raumgruppe, WorldGenerator worldGenerator) {
+		super(beschreibung, temperatur, raumgruppe);
 		this.worldGenerator = worldGenerator;
 	}
 

@@ -4,14 +4,32 @@ import java.util.ArrayList;
 
 public class Raumgruppe {
 	
-	private ArrayList<Raum> raeume;
-	public Raumgruppe(ArrayList<Raum> raeume, Ausgang ausgang, Raum eingang) {
-		super();
-		this.raeume = raeume;
-		this.ausgang = ausgang;
-		this.eingang = eingang;
+	private ArrayList<EinUndAusgang> einUndAusgaenge;
+	
+	public Raumgruppe() {
+		
+		this.einUndAusgaenge = new ArrayList<>();
+		
 	}
-	private Ausgang ausgang;
-	private Raum eingang;
+	
+	public ArrayList<EinUndAusgang> getEinUndAusgaenge() {
+		return this.einUndAusgaenge;
+	}
+	
+	public void addEinAusgang(EinUndAusgang ea) {
+		this.einUndAusgaenge.add(ea);
+	}
+	
+	public EinUndAusgang getRandomEinAusgang() {
+		
+		EinUndAusgang rEinAusgang = getEinUndAusgaenge().get((int) (Math.random()*einUndAusgaenge.size()));
+		
+		return rEinAusgang;
+	}
+	
+	public ArrayList getRaumgruppe() {
+		return einUndAusgaenge;
+	}
+	
 
 }

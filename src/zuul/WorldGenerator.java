@@ -38,26 +38,26 @@ public class WorldGenerator {
 	 */
 	private void raeumeAnlegen() {
 
-		this.alleRaume.put("lichtung", new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12));
-		this.alleRaume.put("waldstueck", new Raum("im dunklen Wald", 13));
-		this.alleRaume.put("taverne", new Raum("in der Taverne, mit zwielichten Gestalten an der Theke", 20));
-		this.alleRaume.put("hexenhaus", new Raum("im Hexenhaus, mit einem größem Symbol auf dem Boden", 18));
-		this.alleRaume.put("dorfplatz", new Raum("auf dem Dorfplatz", 15));
-		this.alleRaume.put("piratenHoehle", new Raum("in einer kalten und nassen alten Piratenhöhle", 4));
-		this.alleRaume.put("kellerDerTaverne", new Raum("im Keller der Taverne", 9));
-		this.alleRaume.put("geheimgang", new Raum("in einem schmalen modrigen Geheimgang", 7));
-		this.alleRaume.put("taverneErsterStock", new Raum("bei den Gästezimmern im ersten Stock der Taverne", 20));
-		this.alleRaume.put("teleporter", new TeleporterRaum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3, this));
-		this.alleRaume.put("trophäenHalle", new Raum("in einer großen Halle voller Trophäen", 21));
-		this.alleRaume.put("gefängnis", new Raum("in dem Gefängnis von Zuul", 17));
-		this.alleRaume.put("zelle1", new Raum("in einer leeren Zelle", 13));
-		this.alleRaume.put("zelle2", new Raum("in einer kleine leeren Zelle", 13));
-		this.alleRaume.put("gartenDerTaverne", new Raum("in einm kleinem Garten", 14));
-		this.alleRaume.put("kirche", new Raum("in der heiligen Kirche", 19));
-		this.alleRaume.put("hotel", new Raum("im Hotel des Dorfes", 20));
-		this.alleRaume.put("strandweg", new Raum("auf einem Weg am Strand", 12));
-		this.alleRaume.put("strand", new Raum("am Strand", 9));
-		this.alleRaume.put("hotelErsterStock", new Raum("im erstem Stock des Hotels", 19));
+		this.alleRaume.put("lichtung", new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12, 1));
+		this.alleRaume.put("waldstueck", new Raum("im dunklen Wald", 13, 2));
+		this.alleRaume.put("taverne", new Raum("in der Taverne, mit zwielichten Gestalten an der Theke", 20, 3));
+		this.alleRaume.put("hexenhaus", new Raum("im Hexenhaus, mit einem größem Symbol auf dem Boden", 18, 2));
+		this.alleRaume.put("dorfplatz", new Raum("auf dem Dorfplatz", 15, 2));
+		this.alleRaume.put("piratenHoehle", new Raum("in einer kalten und nassen alten Piratenhöhle", 4, 1));
+		this.alleRaume.put("kellerDerTaverne", new Raum("im Keller der Taverne", 9, 3));
+		this.alleRaume.put("geheimgang", new Raum("in einem schmalen modrigen Geheimgang", 7, 1));
+		this.alleRaume.put("taverneErsterStock", new Raum("bei den Gästezimmern im ersten Stock der Taverne", 20, 3));
+		this.alleRaume.put("teleporter", new TeleporterRaum("in einem kleinem kaltem Raum mit einem größem Symbol auf dem Boden", 3, 1, this));
+		this.alleRaume.put("trophäenHalle", new Raum("in einer großen Halle voller Trophäen", 21, 6));
+		this.alleRaume.put("gefängnis", new Raum("in dem Gefängnis von Zuul", 17, 4));
+		this.alleRaume.put("zelle1", new Raum("in einer leeren Zelle", 13, 4));
+		this.alleRaume.put("zelle2", new Raum("in einer kleinen leeren Zelle", 13, 4));
+		this.alleRaume.put("gartenDerTaverne", new Raum("in einm kleinem Garten", 14, 3));
+		this.alleRaume.put("kirche", new Raum("in der heiligen Kirche", 19, 5));
+		this.alleRaume.put("hotel", new Raum("im Hotel des Dorfes", 20, 6));
+		this.alleRaume.put("strandweg", new Raum("auf einem Weg am Strand", 12, 5));
+		this.alleRaume.put("strand", new Raum("am Strand", 9, 5));
+		this.alleRaume.put("hotelErsterStock", new Raum("im erstem Stock des Hotels", 19, 6));
 
 		/*
 		 * lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
@@ -81,69 +81,31 @@ public class WorldGenerator {
 	 */ 
 	private void setzeAusgaenge() {
 		Raum zufaelligerRaum = getZufaelligerRaum();
-
-		
-		
-		ArrayList<Raum> gefRaume=new ArrayList<Raum>();
-		gefRaume.add(new Raum("Gefängnis", 15));
-		
-		Raumgruppe gefaengnis=new Raumgruppe(gefRaume, new Ausgang(gefa));
-
-
-		//		this.alleRaume.get("lichtung").setAusgang("down", this.alleRaume.get("piratenHoehle"));
-		//		this.alleRaume.get("lichtung").setAusgang("east", this.alleRaume.get("waldstueck"));
-		//		this.alleRaume.get("lichtung").setAusgang("north", this.alleRaume.get("kirche"));
-		//		this.alleRaume.get("lichtung").setAusgang("west", this.alleRaume.get("hotel"));
-		//		this.alleRaume.get("waldstueck").setAusgang("west", this.alleRaume.get("lichtung"));
-		//		this.alleRaume.get("waldstueck").setAusgang("south", this.alleRaume.get("dorfplatz"));
-		//		this.alleRaume.get("dorfplatz").setAusgang("west", this.alleRaume.get("hexenhaus"));
-		//		this.alleRaume.get("dorfplatz").setAusgang("north", this.alleRaume.get("waldstueck"));
-		//		this.alleRaume.get("dorfplatz").setAusgang("south", this.alleRaume.get("taverne"));
-		//		this.alleRaume.get("dorfplatz").setAusgang("east", this.alleRaume.get("trophäenHalle"));
-		//		this.alleRaume.get("hexenhaus").setAusgang("east", this.alleRaume.get("dorfplatz"));
-		//		this.alleRaume.get("hexenhaus").setAusgang("south", this.alleRaume.get("gefängnis"));
-		//		this.alleRaume.get("hexenhaus").setAusgang("teleport", zufaelligerRaum);
-		//		this.alleRaume.get("taverne").setAusgang("north", this.alleRaume.get("dorfplatz"));
-		//		this.alleRaume.get("taverne").setAusgang("up", this.alleRaume.get("taverneErsterStock"));
-		//		this.alleRaume.get("taverne").setAusgang("down", this.alleRaume.get("kellerDerTaverne"));
-		//		this.alleRaume.get("taverne").setAusgang("hintertür", this.alleRaume.get("gartenDerTaverne"));
-		//		this.alleRaume.get("taverneErsterStock").setAusgang("down", this.alleRaume.get("taverne"));
-		//		this.alleRaume.get("taverneErsterStock").setAusgang("window", this.alleRaume.get("dorfplatz"));
-		//		this.alleRaume.get("kellerDerTaverne").setAusgang("up", this.alleRaume.get("taverne"));
-		//		this.alleRaume.get("kellerDerTaverne").setAusgang("north", this.alleRaume.get("geheimgang"));
-		//		this.alleRaume.get("gartenDerTaverne").setAusgang("hintertür", this.alleRaume.get("taverne"));
-		//		this.alleRaume.get("geheimgang").setAusgang("south", this.alleRaume.get("kellerDerTaverne"));
-		//		this.alleRaume.get("geheimgang").setAusgang("east", this.alleRaume.get("piratenHoehle"));
-		//		this.alleRaume.get("geheimgang").setAusgang("north", this.alleRaume.get("teleporter"));
-		//		this.alleRaume.get("piratenHoehle").setAusgang("west",this.alleRaume.get("geheimgang"));
-		//		this.alleRaume.get("piratenHoehle").setAusgang("up", this.alleRaume.get("lichtung"));
-		//		this.alleRaume.get("teleporter").setAusgang("south", this.alleRaume.get("geheimgang"));
-		//		this.alleRaume.get("teleporter").setAusgang("teleport", zufaelligerRaum);
-		//		this.alleRaume.get("trophäenHalle").setAusgang("west", this.alleRaume.get("dorfplatz"));
-		//		this.alleRaume.get("gefängnis").setAusgang("north", this.alleRaume.get("hexenhaus"));
-		//		this.alleRaume.get("gefängnis").setAusgang("zelle1", this.alleRaume.get("zelle1"));
-		//		this.alleRaume.get("gefängnis").setAusgang("zelle2", this.alleRaume.get("zelle2"));
-		//		this.alleRaume.get("zelle1").setAusgang("vorraum", this.alleRaume.get("gefängnis"));
-		//		this.alleRaume.get("zelle2").setAusgang("vorraum", this.alleRaume.get("gefängnis"));
-		//		this.alleRaume.get("kirche").setAusgang("south", this.alleRaume.get("lichtung"));
-		//		this.alleRaume.get("kirche").setAusgang("north", this.alleRaume.get("strandweg"));
-		//		this.alleRaume.get("strandweg").setAusgang("south", this.alleRaume.get("kirche"));
-		//		this.alleRaume.get("strandweg").setAusgang("east", this.alleRaume.get("strand"));
-		//		this.alleRaume.get("strand").setAusgang("west", this.alleRaume.get("strandweg"));
-		//		this.alleRaume.get("hotel").setAusgang("east", this.alleRaume.get("lichtung"));
-		//		this.alleRaume.get("hotel").setAusgang("up", this.alleRaume.get("hotelErsterStock"));
-		//		this.alleRaume.get("hotelErsterStock").setAusgang("down", this.alleRaume.get("hotel"));
+		// Benutzte Gruppen-verbindungswörter:	Steinbrücke, Wanderweg, Steinweg, Tannenpfad, Wanderpfad, Seeweg, Feldweg,
+		//										Holzbrücke, Hängebrücke, Waldweg, Tunnel,
 
 		// Raumgruppe 1
+		Raumgruppe raumgruppe1 = new Raumgruppe();
+
+		raumgruppe1.addEinAusgang(new EinUndAusgang(this.alleRaume.get("lichtung"), "Steinbrücke"));
+		raumgruppe1.addEinAusgang(new EinUndAusgang(this.alleRaume.get("lichtung"), "Wanderweg"));
+
 		this.alleRaume.get("lichtung").setAusgang("down", this.alleRaume.get("piratenHoehle"));
 		this.alleRaume.get("piratenHoehle").setAusgang("up", this.alleRaume.get("lichtung"));
 		this.alleRaume.get("piratenHoehle").setAusgang("west",this.alleRaume.get("geheimgang"));
 		this.alleRaume.get("geheimgang").setAusgang("east", this.alleRaume.get("piratenHoehle"));
 		this.alleRaume.get("geheimgang").setAusgang("north", this.alleRaume.get("teleporter"));
+		this.alleRaume.get("geheimgang").setAusgang("south", this.alleRaume.get("kellerDerTaverne"));
 		this.alleRaume.get("teleporter").setAusgang("south", this.alleRaume.get("geheimgang"));
 		this.alleRaume.get("teleporter").setAusgang("teleport", zufaelligerRaum);
 
+
 		// Raumgruppe 2
+		Raumgruppe raumgruppe2 = new Raumgruppe();
+
+		raumgruppe2.addEinAusgang(new EinUndAusgang(this.alleRaume.get("waldstueck"), "Steinweg"));
+		raumgruppe2.addEinAusgang(new EinUndAusgang(this.alleRaume.get("hexenhaus"), "Tannenpfad"));
+
 		this.alleRaume.get("dorfplatz").setAusgang("west", this.alleRaume.get("hexenhaus"));
 		this.alleRaume.get("dorfplatz").setAusgang("north", this.alleRaume.get("waldstueck"));
 		this.alleRaume.get("hexenhaus").setAusgang("east", this.alleRaume.get("dorfplatz"));
@@ -152,6 +114,11 @@ public class WorldGenerator {
 
 
 		// Raumgruppe 3
+		Raumgruppe raumgruppe3 = new Raumgruppe();
+
+		raumgruppe3.addEinAusgang(new EinUndAusgang(this.alleRaume.get("gartenDerTaverne"), "Wanderpfad"));
+		raumgruppe3.addEinAusgang(new EinUndAusgang(this.alleRaume.get("taverne"), "Seeweg"));
+
 		this.alleRaume.get("taverneErsterStock").setAusgang("down", this.alleRaume.get("taverne"));
 		this.alleRaume.get("taverneErsterStock").setAusgang("window", this.alleRaume.get("dorfplatz"));
 		this.alleRaume.get("kellerDerTaverne").setAusgang("up", this.alleRaume.get("taverne"));
@@ -160,51 +127,76 @@ public class WorldGenerator {
 		this.alleRaume.get("taverne").setAusgang("up", this.alleRaume.get("taverneErsterStock"));
 		this.alleRaume.get("taverne").setAusgang("down", this.alleRaume.get("kellerDerTaverne"));
 		this.alleRaume.get("taverne").setAusgang("hintertür", this.alleRaume.get("gartenDerTaverne"));
-		this.alleRaume.get("geheimgang").setAusgang("south", this.alleRaume.get("kellerDerTaverne"));
 
 
 		// Raumgruppe 4
+		Raumgruppe raumgruppe4 = new Raumgruppe();
+
+		raumgruppe4.addEinAusgang(new EinUndAusgang(this.alleRaume.get("gefängnis"), "Feldweg"));
+
 		this.alleRaume.get("gefängnis").setAusgang("zelle1", this.alleRaume.get("zelle1"));
 		this.alleRaume.get("gefängnis").setAusgang("zelle2", this.alleRaume.get("zelle2"));
 		this.alleRaume.get("zelle1").setAusgang("vorraum", this.alleRaume.get("gefängnis"));
 		this.alleRaume.get("zelle2").setAusgang("vorraum", this.alleRaume.get("gefängnis"));
 
+
 		// Raumgruppe 5
+		Raumgruppe raumgruppe5 = new Raumgruppe();
+
+		raumgruppe5.addEinAusgang(new EinUndAusgang(this.alleRaume.get("kirche"), "Holzbrücke"));
+		raumgruppe5.addEinAusgang(new EinUndAusgang(this.alleRaume.get("strand"), "Hängebrücke"));
+
 		this.alleRaume.get("strandweg").setAusgang("east", this.alleRaume.get("strand"));
 		this.alleRaume.get("strandweg").setAusgang("south", this.alleRaume.get("kirche"));
 		this.alleRaume.get("strand").setAusgang("west", this.alleRaume.get("strandweg"));
 		this.alleRaume.get("kirche").setAusgang("north", this.alleRaume.get("strandweg"));
 
+
 		// Raumgruppe 6
+		Raumgruppe raumgruppe6 = new Raumgruppe();
+
+		raumgruppe6.addEinAusgang(new EinUndAusgang(this.alleRaume.get("hotel"), "Waldweg"));
+		raumgruppe6.addEinAusgang(new EinUndAusgang(this.alleRaume.get("trophäenHalle"), "Tunnel"));
+
 		this.alleRaume.get("hotel").setAusgang("up", this.alleRaume.get("hotelErsterStock"));
+		this.alleRaume.get("hotel").setAusgang("south", this.alleRaume.get("trophäenHalle"));
 		this.alleRaume.get("hotelErsterStock").setAusgang("down", this.alleRaume.get("hotel"));
+		this.alleRaume.get("trophäenHalle").setAusgang("west", this.alleRaume.get("hotel"));
+
+		ArrayList<Raumgruppe> gruppen=new ArrayList<Raumgruppe>();
+		gruppen.add(raumgruppe1);
+		gruppen.add(raumgruppe2);
+		gruppen.add(raumgruppe3);
+		gruppen.add(raumgruppe4);
+		gruppen.add(raumgruppe5);
+		gruppen.add(raumgruppe6);
+
+		//Das muss hier bleiben, damit der Startraum zu 100% verbunden ist
+
+		EinUndAusgang ea1=gruppen.get(0).getRandomEinAusgang();
+		EinUndAusgang eaZ=gruppen.get((int)(Math.random()*gruppen.size())).getRandomEinAusgang();
+		String weg=Math.random()<0.5?ea1.getBezeichnung():eaZ.getBezeichnung();
+		ea1.getRaum().setAusgang(weg, eaZ.getRaum());
+		eaZ.getRaum().setAusgang(weg, ea1.getRaum());
+
+		//Hier die Schleife für die Raumverbindungen
 
 
-		this.alleRaume.get("dorfplatz").setAusgang("east", this.alleRaume.get("trophäenHalle"));
-		this.alleRaume.get("hexenhaus").setAusgang("south", this.alleRaume.get("gefängnis"));
+		for (int i = 0; i < gruppen.size(); i++) {
+			EinUndAusgang eaX = gruppen.get((int) (Math.random()*gruppen.size())).getRandomEinAusgang();
+			EinUndAusgang eaY = gruppen.get((int) (Math.random()*gruppen.size())).getRandomEinAusgang();
+
+			if(eaX != eaY&& eaX.getRaum().getRaumgruppe() != eaY.getRaum().getRaumgruppe()) {
 
 
+				eaX=gruppen.get((int)(Math.random()*gruppen.size())).getRandomEinAusgang();
+				eaY=gruppen.get((int)(Math.random()*gruppen.size())).getRandomEinAusgang();
+				String wege=Math.random()<0.5?eaX.getBezeichnung():eaY.getBezeichnung();
+				eaX.getRaum().setAusgang(wege, eaY.getRaum());
+				eaY.getRaum().setAusgang(wege, eaX.getRaum());
+			}
 
-		this.alleRaume.get("trophäenHalle").setAusgang("west", this.alleRaume.get("dorfplatz"));
-		this.alleRaume.get("gefängnis").setAusgang("north", this.alleRaume.get("hexenhaus"));
-
-
-
-
-
-		//*** Die Ausgaenge die zufällig gemacht werden sollen
-		this.alleRaume.get("lichtung").setAusgang("east", this.alleRaume.get("waldstueck"));
-		this.alleRaume.get("waldstueck").setAusgang("west", this.alleRaume.get("lichtung"));
-
-		this.alleRaume.get("lichtung").setAusgang("west", this.alleRaume.get("hotel"));
-		this.alleRaume.get("hotel").setAusgang("east", this.alleRaume.get("lichtung"));
-
-		this.alleRaume.get("dorfplatz").setAusgang("south", this.alleRaume.get("taverne"));
-		this.alleRaume.get("taverne").setAusgang("north", this.alleRaume.get("dorfplatz"));
-
-		this.alleRaume.get("kirche").setAusgang("south", this.alleRaume.get("lichtung"));
-		this.alleRaume.get("lichtung").setAusgang("north", this.alleRaume.get("kirche"));
-		//for (int i = 0; i < alleRaume.size(); i++)
+		}
 	}
 
 	/** erstellt Gegenstaende und legt sie in einem Raum ab
