@@ -11,8 +11,8 @@ public class DeequipeCommand implements CommandFunction {
     }
 	
 	@Override
-	public void execute(Befehl befehl) {
-		this.spieler.entrüsten(befehl.gibZweitesWort());
+	public String execute(Befehl befehl) {
+		return this.spieler.entrüsten(befehl.gibZweitesWort());
 	}
 
 }

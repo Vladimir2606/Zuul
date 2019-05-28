@@ -11,7 +11,7 @@ public class EatCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        this.spieler.essen(befehl.gibZweitesWort());
+    public String execute(Befehl befehl) {
+        return this.spieler.essen(befehl.gibZweitesWort());
     }
 }

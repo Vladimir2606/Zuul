@@ -11,12 +11,12 @@ public class LookCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        umsehen();
+    public String execute(Befehl befehl) {
+        return umsehen();
     }
 
-    private void umsehen() {
+    private String umsehen() {
 
-        System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung()+"\n");
+        return this.spieler.getAktuellerRaum().getLangeBeschreibung()+"\n";
     }
 }

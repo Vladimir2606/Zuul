@@ -14,18 +14,17 @@ public class GoCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        wechsleRaum(befehl);
+    public String execute(Befehl befehl) {
+        return wechsleRaum(befehl);
     }
 
-    private void wechsleRaum(Befehl befehl)
+    private String wechsleRaum(Befehl befehl)
     {
     	Monster erg;
         Kampf kampf;
         if(!befehl.hatZweitesWort()) {
             // Gibt es kein zweites Wort, wissen wir nicht, wohin...
-            System.out.println("Wohin möchten Sie gehen?\n");
-            return;
+            return "Wohin möchten Sie gehen?\n";
         }
 
         String richtung = befehl.gibZweitesWort();
@@ -47,6 +46,7 @@ public class GoCommand implements CommandFunction {
             spieler.hungern();
             spieler.frieren();
         }
+		return richtung;
     }
 
     private void raumInfoAusgeben() {

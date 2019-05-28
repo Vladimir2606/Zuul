@@ -66,12 +66,15 @@ public class Monster {
      * @param raum
      * @author tiago
      */
-    public void dropItem(Raum raum) {
+    public String dropItem(Raum raum) {
+    	String erg;
     	for(int i = 0; i<= gegenstaende.size(); i++) {
     		raum.gegenstandAblegen(gegenstaende.get(i));
-    		System.out.println("Das Monster hat ein/ne " + gegenstaende.get(i).getName() + " gedroppt ");
+    		erg = "Das Monster hat ein/ne " + gegenstaende.get(i).getName() + " gedroppt ";
     		this.gegenstaende.remove(gegenstaende.get(i));
+    		return erg;
     	}
+		return null;
     }
     
     /**
