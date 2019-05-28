@@ -277,9 +277,14 @@ public class WorldGenerator {
 		return this.alleRaume.get("lichtung");
 	}
 	
+	/**
+	 * erstellt Monster und legt sie in einem Raum ab
+	 */
 	private void addMonster() {
     	this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, false);
-    	this.alleRaume.get("waldstueck").setMonster(harald);
+    	this.alleRaume.get("lichtung").setMonster(harald);
     	this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
     }
+	
+	
 }

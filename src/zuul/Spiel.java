@@ -60,9 +60,6 @@ public class Spiel
         Kampf kampf;
         System.out.println("test");
         Raum naechsterRaum = this.spieler.getAktuellerRaum();
-        if (naechsterRaum == null) {
-        	System.out.println("test");
-        }
         System.out.println(naechsterRaum.getLangeBeschreibung());
     	erg = naechsterRaum.sucheMonster();
         kampf = new Kampf(spieler, erg, naechsterRaum);
