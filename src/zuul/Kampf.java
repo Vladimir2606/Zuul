@@ -17,9 +17,10 @@ public class Kampf {
 	 * 
 	 * @author tiago
 	 */
-	public void kaempfen() {
-		System.out.println("Kampf beginnt");
-		System.out.println("Leben vom Spieler: " + spieler.getLeben() + "	Leben vom Monster: " + monster.getLeben());
+	public String kaempfen() {
+		String erg = "Kampf beginnt";
+		erg += "Leben vom Spieler: " + spieler.getLeben() + "	Leben vom Monster: " + monster.getLeben();
+		erg += "Leben vom Spieler: " + spieler.getLeben();
 		if(monster.testAgro()) {
 			angreifer = false;
 		}
@@ -27,8 +28,8 @@ public class Kampf {
 			angriff();
 			angreifer = !angreifer;
 		}
-		System.out.println("Leben vom Spieler: " + spieler.getLeben());
 		nachDemKampf();
+		return erg;
 	}
 	
 	/**

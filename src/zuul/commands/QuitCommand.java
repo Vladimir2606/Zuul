@@ -13,18 +13,19 @@ public class QuitCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        beenden(befehl);
+    public String execute(Befehl befehl) {
+        return beenden(befehl);
 
     }
 
-    private void beenden(Befehl befehl)
+    private String beenden(Befehl befehl)
     {
         if(befehl.hatZweitesWort()) {
-            System.out.println("Was soll beendet werden?\n");
+            return "Was soll beendet werden?\n";
         }
         else {
             this.spiel.quit();
         }
+		return null;
     }
 }

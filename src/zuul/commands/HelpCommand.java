@@ -12,8 +12,8 @@ public class HelpCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        hilfstextAusgeben();
+    public String execute(Befehl befehl) {
+        return hilfstextAusgeben();
     }
 
     /**
@@ -21,14 +21,12 @@ public class HelpCommand implements CommandFunction {
      * Hier geben wir eine etwas alberne und unklare Beschreibung
      * aus, sowie eine Liste der Befehlswörter.
      */
-    private void hilfstextAusgeben()
-    {
+    private String hilfstextAusgeben() {
     	String erg = "";
         erg += "Sie haben sich verlaufen. Sie sind allein.";
         erg += "\nSie irren in der Welt von Zuul herum";
         erg += "\nIhnen stehen folgende Befehle zur Verfügung:";
         erg += "\n   " + this.parser.getAlleBefehle()+"\n";
-       
-        System.out.println(erg);
+        return erg;
     }
 }
