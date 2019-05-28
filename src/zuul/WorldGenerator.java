@@ -15,10 +15,8 @@ import java.util.HashMap;
 public class WorldGenerator {
 
 	HashMap<String, Raum> alleRaume;
-	
 	private Monster harald;
         
-
 	public WorldGenerator() {
 		this.alleRaume = new HashMap<>();
 		this.raeumeAnlegen();

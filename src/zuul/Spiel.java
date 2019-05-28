@@ -74,6 +74,22 @@ public class Spiel
         this.beendet=true;
     }
 
+    /*
+     * !go west
+     * 
+     * ---> Sie sind in einem dunklen.....
+     */
+    
+    
+    public String getResponse(String befehlsstring) {
+    	befehlsstring = befehlsstring.substring(1);
+    	String[] befehleAlsArray = befehlsstring.split(" ");   //   ["go", "west"] 
+    	
+    	Befehl befehl = befehleAlsArray[verarbeiteBefehl(befehlsstring)];
+    	
+    	
+    }
+     
     /**
      * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels
      * in einer Schleife.

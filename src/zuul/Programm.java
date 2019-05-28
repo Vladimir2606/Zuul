@@ -10,6 +10,8 @@ public class Programm {
 		Spiel meinSpiel = new Spiel();
 		meinSpiel.spielen();
 
+		
+		
 	}
 
 }
