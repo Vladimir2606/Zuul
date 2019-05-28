@@ -25,6 +25,7 @@ public class Raum
 	private ArrayList<Gegenstand> gegenstaende;
 	private ArrayList<Monster> monster;
 	private int temperatur;
+	private int raumgruppe;
 
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum
@@ -33,13 +34,14 @@ public class Raum
 	 *        "in einer Küche" oder "auf einem Sportplatz".
 	 * @param temperatur ist die Temperatur die jeder Raum hat.
 	 */
-	public Raum(String beschreibung, int temperatur)
+	public Raum(String beschreibung, int temperatur, int raumgruppe)
 	{
 		this.gegenstaende=new ArrayList<>();
 		this.monster= new ArrayList<>();
 		this.ausgaenge=new HashMap<>();
 		this.beschreibung = beschreibung;
 		this.temperatur = temperatur;
+		this.raumgruppe = raumgruppe;
 	}
 
 	public void gegenstandAblegen(Gegenstand neuerGegenstand) {
@@ -51,11 +53,11 @@ public class Raum
 	}
 
 	public void setAusgang(String richtung, Raum nachbar) {
-		this.ausgaenge.put(richtung, nachbar);
+		this.ausgaenge.put(richtung.toLowerCase(), nachbar);
 	}
 
 	public Raum getAusgang(String name) {
-		return this.ausgaenge.get(name);
+		return this.ausgaenge.get(name.toLowerCase());
 	}
 
 	public String getLangeBeschreibung() {
@@ -125,5 +127,10 @@ public class Raum
 
 	public void monsterEntfernen(Monster m) {
 		monster.remove(m);
+	}
+	
+	public int getRaumgruppe() {
+		return this.raumgruppe;
+
 	}
 }
