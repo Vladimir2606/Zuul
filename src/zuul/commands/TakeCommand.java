@@ -11,17 +11,17 @@ public class TakeCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        gegenstandAufnehmen(befehl);
+    public String execute(Befehl befehl) {
+       return gegenstandAufnehmen(befehl);
     }
 
-    private void gegenstandAufnehmen(Befehl befehl) {
+    private String gegenstandAufnehmen(Befehl befehl) {
 
         boolean geklappt=this.spieler.gegenstandAufnehmen(befehl.gibZweitesWort());
         if(geklappt) {
-            System.out.println("Gegenstand aufgenommen\n");
+            return "Gegenstand aufgenommen\n";
         } else {
-            System.out.println("Gegenstand konnte nicht aufgenommen werden\n");
+            return "Gegenstand konnte nicht aufgenommen werden\n";
         }
     }
 }

@@ -16,7 +16,7 @@ public class WorldGenerator {
 
 	HashMap<String, Raum> alleRaume;
 	
-	private Monster harald;
+	private Monster harald, gollum, riese;
         
 
 	public WorldGenerator() {
@@ -284,7 +284,18 @@ public class WorldGenerator {
     	this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, false);
     	this.alleRaume.get("lichtung").setMonster(harald);
     	this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
+    	
+    	this.gollum = new Monster("Gollum", "ist ein kleier agressiever Gnom", 1, 1, 1, true);
+    	this.alleRaume.get("geheimgang").setMonster(gollum);
+    	this.gollum.gegenstandAufnehmen(new Gegenstand("Goldtaler", "ein goldener Taler", 1));
+    	
+    	this.riese = new Monster("Riese", "ein gefährlich aussehender Riese", 1, 1, 1, false);
+    	this.alleRaume.get("strand").setMonster(riese);
+    	this.riese.gegenstandAufnehmen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
     }
 	
+
 	
 }
+
+

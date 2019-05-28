@@ -51,19 +51,18 @@ public class Spiel
         this.commands.put("sleep", new SleepCommand(this.spieler));
         this.commands.put("equipe", new EquipeCommand(this.spieler));
         this.commands.put("fight", new FightCommand(this));
-        this.commands.put("use", new UseCommand(this.spieler));
+        //this.commands.put("use", new UseCommand(this.spieler));
         this.commands.put("deequipe", new DeequipeCommand(this.spieler));
     }
     
-    public void kampfAnlegen() {
+    public String kampfAnlegen() {
     	Monster erg;
         Kampf kampf;
-        System.out.println("test");
         Raum naechsterRaum = this.spieler.getAktuellerRaum();
         System.out.println(naechsterRaum.getLangeBeschreibung());
     	erg = naechsterRaum.sucheMonster();
         kampf = new Kampf(spieler, erg, naechsterRaum);
-        kampf.kaempfen();
+        return kampf.kaempfen();
     }
 
     private void raeumeAnlegen()
@@ -88,7 +87,8 @@ public class Spiel
 
         while (! beendet) {
             Befehl befehl = parser.liefereBefehl();
-            verarbeiteBefehl(befehl);
+            String response = verarbeiteBefehl(befehl);
+            System.out.println(response);
         }
         System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
     }
@@ -106,14 +106,15 @@ public class Spiel
         raumInfoAusgeben();
     }
 
-    private void verarbeiteBefehl(Befehl befehl)
-    {
-        if(befehl.istUnbekannt()) {
-            System.out.println("Ich weiß nicht, was Sie meinen...");
-
+    private String verarbeiteBefehl(Befehl befehl) {
+    	String erg;
+    	if(befehl.istUnbekannt()) {
+    		erg = "Ich weiß nicht was Sie meinen...";
+    		return erg;
         } else {
             String befehlswort = befehl.gibBefehlswort();
-            this.commands.get(befehlswort).execute(befehl);
+            String response=this.commands.get(befehlswort).execute(befehl);
+            return response;
         }
     }
 

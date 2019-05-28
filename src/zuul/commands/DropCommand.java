@@ -11,16 +11,16 @@ public class DropCommand implements CommandFunction{
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        gegenstandAblegen(befehl);
+    public String execute(Befehl befehl) {
+        return gegenstandAblegen(befehl);
     }
 
-    private void gegenstandAblegen(Befehl befehl) {
+    private String gegenstandAblegen(Befehl befehl) {
         boolean geklappt=this.spieler.gegenstandAblegen(befehl.gibZweitesWort());
         if(geklappt) {
-            System.out.println("Gegenstand abgelegt");
+            return "Gegenstand abgelegt";
         } else {
-            System.out.println("Gegenstand konnte nicht abgelegt werden");
+            return "Gegenstand konnte nicht abgelegt werden";
         }
     }
 }

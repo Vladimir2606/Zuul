@@ -11,11 +11,11 @@ public class StatusCommand implements CommandFunction {
     }
 
     @Override
-    public void execute(Befehl befehl) {
-        status();
+    public String execute(Befehl befehl) {
+       return status();
     }
 
-    private void status() {
-        System.out.println(this.spieler.zeigeStatus()+"\n");
+    private String status() {
+        return this.spieler.zeigeStatus()+"\n";
     }
 }
