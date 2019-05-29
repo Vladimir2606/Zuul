@@ -3,6 +3,7 @@ package zuul;
 import zuul.rüstung.Helm;
 import zuul.items.Essen;
 import zuul.items.Gegenstand;
+import zuul.items.HandelsWaren;
 import zuul.items.Heilungstraenke;
 import zuul.items.Krafttraenke;
 import zuul.rüstung.Brust;
@@ -289,7 +290,7 @@ public class WorldGenerator {
 	private void addHaendler() {
 		this.willi = new Haendler("Willi", "Hier kannst du gegen Goldtaler Sachen kaufen");
 		this.alleRaume.get("dorfplatz").setHaendler(willi);
-		this.willi.getVerkaufsGegenstaende().add(0, new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
+//		this.willi.getVerkaufsGegenstaende(new HandelsWaren(new Waffe()));		//TODO
 		
 	}
 	

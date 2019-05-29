@@ -48,4 +48,9 @@ public class Haendler {
 		// Gegenstand gefunden
 		return null;
 	}
+	
+	public void gegenstandAufnehmen(HandelsWaren neuerGegenstand) {
+		this.verkaufsGegenstaende.add(neuerGegenstand);
+	}
+	
 }

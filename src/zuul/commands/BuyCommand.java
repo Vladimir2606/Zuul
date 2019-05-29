@@ -13,7 +13,7 @@ public class BuyCommand implements CommandFunction {
 
 	@Override
 	public void execute(Befehl befehl) {
-
+		gegenstandKaufen(befehl);
 	}
 
 	private String gegenstandKaufen(Befehl befehl) {
