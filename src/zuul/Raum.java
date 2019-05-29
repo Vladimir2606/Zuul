@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import zuul.items.Gegenstand;
+import zuul.items.HandelsWaren;
 
 public class Raum
 {
@@ -24,6 +25,7 @@ public class Raum
 	protected HashMap<String, Raum> ausgaenge;
 	private ArrayList<Gegenstand> gegenstaende;
 	private ArrayList<Monster> monster;
+	private ArrayList<Haendler> haendler;
 	private int temperatur;
 	private int raumgruppe;
 
@@ -50,6 +52,14 @@ public class Raum
 
 	public void setMonster(Monster neuesMonster) {
 		this.monster.add(neuesMonster);
+	}
+
+	public void setHaendler(Haendler neuerHaendler) {
+		this.haendler.add(neuerHaendler);
+	}
+
+	public Haendler getHaendler() {
+		return this.getHaendler();
 	}
 
 	public void setAusgang(String richtung, Raum nachbar) {
@@ -97,6 +107,10 @@ public class Raum
 	public void entferneGegenstand(Gegenstand gesucht) {
 		this.gegenstaende.remove(gesucht);
 	}
+	
+	public void entferneVerkaufsGegenstand(HandelsWaren gesucht) {
+		this.getHaendler().getVerkaufsGegenstaende().remove(gesucht);
+	}
 
 
 	public Gegenstand sucheGegenstand(String name) {
@@ -128,7 +142,7 @@ public class Raum
 	public void monsterEntfernen(Monster m) {
 		monster.remove(m);
 	}
-	
+
 	public int getRaumgruppe() {
 		return this.raumgruppe;
 

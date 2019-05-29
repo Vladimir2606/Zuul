@@ -8,6 +8,10 @@ import zuul.rüstung.Schuhe;
 import java.util.ArrayList;
 import zuul.items.Essen;
 import zuul.items.Gegenstand;
+import zuul.items.HandelsWaren;
+import zuul.items.Heilungstraenke;
+import zuul.items.Krafttraenke;
+import zuul.items.traenke;
 
 public class Spieler {
 
@@ -24,6 +28,7 @@ public class Spieler {
 	private Schuhe schuhe;
 	private int ruestung;
 	private int schaden;
+	private int goldtaler;
 
 	/** @param tragkraft = das maximalgewicht in kg das getragen werden kann
 	 *	@param hunger = die hungerpunkte des spielers, wie satt er ist
@@ -40,6 +45,7 @@ public class Spieler {
 		this.ruestung = 0;
 		this.spiel = spiel;
 		this.schaden = 1;
+		this.goldtaler = 50;
 	}
 
 
@@ -114,6 +120,25 @@ public class Spieler {
 			}
 		}
 	}
+	
+	
+	public boolean gegenstandKaufen(String name) {
+		HandelsWaren gesucht=this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name);
+		if(gesucht==null) {
+			return false;
+		} else {
+			if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
+					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
+				
+				this.goldtaler -= gesucht.getPreis();
+				this.gegenstaende.add(gesucht.getGegenstand());			//***********************TODO
+				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
+				return true;
+			} else {
+				return false;
+			}
+		}				
+	}
 
 	/**
 	 * 
@@ -187,6 +212,24 @@ public class Spieler {
 					Essen e=(Essen)g;
 					this.tragkraft+=e.getBonus();
 					this.hunger += e.getEssen();
+					this.gegenstaende.remove(g);
+					return;
+				}
+			}
+		}
+	}
+
+	public void benutzen(String name) {
+		for(Gegenstand g: this.gegenstaende) {
+			if(g.getName().equalsIgnoreCase(name)) {
+				if(g instanceof Heilungstraenke) {
+					Heilungstraenke h=(Heilungstraenke)g;
+					this.lebenspunkte +=h.getBonus();
+					this.gegenstaende.remove(g);
+					return;
+				} else if (g instanceof Krafttraenke) {
+					Krafttraenke k=(Krafttraenke)g;
+					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
 					return;
 				}
@@ -313,5 +356,14 @@ public class Spieler {
 	public ArrayList<Gegenstand> getGegenstand() {
 		return this.gegenstaende;
 	}
+	
+	public int getTragkraft() {
+		return this.tragkraft;
+	}
+	
+	public int getGoldtaler() {
+		return this.goldtaler;
+	}
+
 }
 

@@ -17,8 +17,8 @@ public class WorldGenerator {
 	HashMap<String, Raum> alleRaume;
 	
 	private Monster harald, gollum, riese;
-        
-
+	private Haendler willi;
+	
 	public WorldGenerator() {
 		this.alleRaume = new HashMap<>();
 		this.raeumeAnlegen();
@@ -28,7 +28,8 @@ public class WorldGenerator {
 		this.addWaffen();
 		this.addRuestungen();
 		this.addMonster();
-		addTraenke();
+		this.addTraenke();
+		addHaendler();
 	}
 
 	private Raum getZufaelligerRaum() {
@@ -191,7 +192,6 @@ public class WorldGenerator {
 
 			if(eaX != eaY&& eaX.getRaum().getRaumgruppe() != eaY.getRaum().getRaumgruppe()) {
 
-
 				eaX=gruppen.get((int)(Math.random()*gruppen.size())).getRandomEinAusgang();
 				eaY=gruppen.get((int)(Math.random()*gruppen.size())).getRandomEinAusgang();
 				String wege=Math.random()<0.5?eaX.getBezeichnung():eaY.getBezeichnung();
@@ -205,11 +205,10 @@ public class WorldGenerator {
 	/** erstellt Gegenstaende und legt sie in einem Raum ab
 	 */
 	private void addGegenstaende() {
-
 		this.alleRaume.get("taverne").gegenstandAblegen(new Gegenstand("Bierkrug", "ein leckeres dunkles Pils in einem edlen Krug", 2));
 		this.alleRaume.get("taverne").gegenstandAblegen(new Gegenstand("Teller", "ein Teller mit deftigem Wildschweinfleisch mit Soße", 5));
 		this.alleRaume.get("strand").gegenstandAblegen(new Gegenstand("Schatztruhe", "eine mit Gold gefüllte Holzkiste", 40));
-		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Gegenstand("Schwert", "das Schwert des alten PiratenkapitÃ¤ns", 10));
+		this.alleRaume.get("piratenHoehle").gegenstandAblegen(new Gegenstand("Deko-Schwert", "das Schwert des alten PiratenkapitÃ¤ns", 10));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Gegenstand("Korb", "ein Weidenkorb gefüllt mit Brot", 4));
 		this.alleRaume.get("kirche").gegenstandAblegen(new Gegenstand("Kerzenständer", "ein mit Gold verzierter Kerzenständer", 5));
 	}
@@ -217,7 +216,6 @@ public class WorldGenerator {
 	/** erstellt Essen und legt sie in einem Raum ab
 	 */
 	private void addEssen() {
-
 		this.alleRaume.get("waldstueck").gegenstandAblegen(new Essen("Pilz", "ein seltsam-magisch aussehender Pilz", 1, 20, 0));
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Essen("Muffin", "lecker lecker", 1, 5, 20));
 		this.alleRaume.get("dorfplatz").gegenstandAblegen(new Essen("Steak", "fügt 4 Hungerpunkte hinzu", 1, 0, 4));
@@ -228,7 +226,6 @@ public class WorldGenerator {
 	}
 
 	private void addTraenke() {
-
 		this.alleRaume.get("kirche").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
 		this.alleRaume.get("taverneErsterStock").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
 		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
@@ -245,7 +242,6 @@ public class WorldGenerator {
 	/** erstellt Waffen und legt sie in einem Raum ab
 	 */
 	private void addWaffen() {
-
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Waffen("Dolch", "ein spitzer Dolch", 3, 3));
 		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
 		this.alleRaume.get("trophäenHalle").gegenstandAblegen(new Waffen("ThorsHammer", "Der mächtige Hammer Thors durchströmt von Blitzen", 25, 15));
@@ -256,7 +252,6 @@ public class WorldGenerator {
 	/** erstellt Rüstungen und legt sie in einem Raum ab
 	 */
 	private void addRuestungen() {
-
 		this.alleRaume.get("lichtung").gegenstandAblegen(new Helm("Stahlhelm", "ein massiver Stahlhelm", 6, 3));
 		this.alleRaume.get("hotel").gegenstandAblegen(new Helm("Holzhaube", "einfach aber schützend", 3, 2));
 		this.alleRaume.get("trophäenHalle").gegenstandAblegen(new Helm("LokisHelm", "ein magisch glänzender Helm aus Plastahl", 9, 7));
@@ -282,13 +277,20 @@ public class WorldGenerator {
     	this.alleRaume.get("waldstueck").setMonster(harald);
     	this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
     	
-    	this.gollum = new Monster("Gollum", "ist ein kleier agressiever Gnom", 1, 1, 1, true);
+    	this.gollum = new Monster("Gollum", "ist ein kleier hässlicher und agressiever Gnom", 1, 1, 1, true);
     	this.alleRaume.get("geheimgang").setMonster(gollum);
-    	this.gollum.gegenstandAufnehmen(new Gegenstand("Goldtaler", "ein goldener Taler", 1));
+    	this.gollum.gegenstandAufnehmen(new Gegenstand("Goldstück", "ein goldener Taler", 1));
     	
     	this.riese = new Monster("Riese", "ein gefährlich aussehender Riese", 1, 1, 1, false);
     	this.alleRaume.get("strand").setMonster(riese);
     	this.riese.gegenstandAufnehmen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
     }
+	
+	private void addHaendler() {
+		this.willi = new Haendler("Willi", "Hier kannst du gegen Goldtaler Sachen kaufen");
+		this.alleRaume.get("dorfplatz").setHaendler(willi);
+		this.willi.getVerkaufsGegenstaende().add(0, new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
+		
+	}
 	
 }	

@@ -1,18 +1,16 @@
 package zuul.items;
 
-public class Krafttraenke extends Gegenstand {
+public class Krafttraenke extends traenke {
 
-	private int kraftbonus;
-
-	public Krafttraenke(String name, String beschreibung, int gewicht, int kraftbonus) {
-		super(name, beschreibung, gewicht);
-		this.kraftbonus = kraftbonus;
+	public Krafttraenke(String name, String beschreibung, int gewicht, int bonus) {
+		super(name, beschreibung, gewicht, bonus);
+		
 	}
 	
 	/** @return gibt die kraftbonuspunkte wieder
 	 */
-	public int getKraftBonus() {
-		return this.kraftbonus;
+	public int getBonus() {
+		return this.bonus;
 	}
 	
 }

@@ -12,7 +12,8 @@ public class Befehlswoerter
 {
     // ein konstantes Array mit den gültigen Befehlswörtern
     private static final String gueltigeBefehle[] = {
-        "go", "look", "quit", "help", "take", "drop", "status", "eat", "sleep" , "equipe", "fight", "use", "deequipe"
+        "go", "look", "quit", "help", "take", "drop", "status", "eat", "sleep" , "equipe",
+        "fight", "use", "deequipe", "buy"
     };
 
     /**
