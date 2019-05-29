@@ -176,7 +176,7 @@ public class Spieler {
 		return erg;
 	}
 
-	/**
+	/**foo
 	 * 
 	 * @param raum
 	 */
