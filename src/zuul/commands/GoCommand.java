@@ -8,6 +8,7 @@ import zuul.Monster;
 import zuul.Spieler;
 
 public class GoCommand implements CommandFunction {
+	
 	private Spieler spieler;
 	private Spiel spiel;
 
@@ -17,18 +18,17 @@ public class GoCommand implements CommandFunction {
 	}
 
 	@Override
-	public void execute(Befehl befehl) {
-		wechsleRaum(befehl);
+	public String execute(Befehl befehl) {
+		return wechsleRaum(befehl);
 	}
 
-	private void wechsleRaum(Befehl befehl)
+	private String wechsleRaum(Befehl befehl)
 	{
 		Monster erg;
 		Kampf kampf;
 		if(!befehl.hatZweitesWort()) {
 			// Gibt es kein zweites Wort, wissen wir nicht, wohin...
-			System.out.println("Wohin möchten Sie gehen?\n");
-			return;
+			return "Wohin möchten Sie gehen?\n";
 		}
 
 		String richtung = befehl.gibZweitesWort();
@@ -37,7 +37,7 @@ public class GoCommand implements CommandFunction {
 		Raum naechsterRaum = this.spieler.getAktuellerRaum().getAusgang(richtung);
 
 		if (naechsterRaum == null) {
-			System.out.println("Dort ist kein Weg!\n");
+			return("Dort ist kein Weg!\n");
 		}
 		else {
 			this.spieler.geheZu(naechsterRaum);
@@ -53,10 +53,10 @@ public class GoCommand implements CommandFunction {
 			spieler.frieren();
 			spiel.handelPassivSetzen();
 		}
+		return richtung;
 	}
 
-	private void raumInfoAusgeben() {
-		System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
+	private String raumInfoAusgeben() {
+		return this.spieler.getAktuellerRaum().getLangeBeschreibung();
 	}
-
 }

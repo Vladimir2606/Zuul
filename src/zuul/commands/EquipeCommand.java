@@ -11,8 +11,8 @@ public class EquipeCommand implements CommandFunction {
     }
 	
 	@Override
-	public void execute(Befehl befehl) {
-		this.spieler.ruestung(befehl.gibZweitesWort());
+	public String execute(Befehl befehl) {
+		return this.spieler.ruestung(befehl.gibZweitesWort());
 	}
 
 }

@@ -12,7 +12,7 @@ public class FightCommand implements CommandFunction {
     }
 
 	@Override
-	public void execute(Befehl befehl) {
-		spiel.kampfAnlegen();
+	public String execute(Befehl befehl) {
+		return spiel.kampfAnlegen();
 	}
 }

@@ -11,8 +11,8 @@ public class TradeCommand implements CommandFunction {
 	}
 
 	@Override
-	public void execute(Befehl befehl) {
-		System.out.println(spiel.handelAnlegen());
+	public String execute(Befehl befehl) {
+		return spiel.handelAnlegen();
 	}
 
 }

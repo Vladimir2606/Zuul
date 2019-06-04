@@ -15,8 +15,8 @@ public class BuyCommand implements CommandFunction {
 	}
 
 	@Override
-	public void execute(Befehl befehl) {
-		gegenstandKaufen(befehl);
+	public String execute(Befehl befehl) {
+		return gegenstandKaufen(befehl);
 	}
 
 	private String gegenstandKaufen(Befehl befehl) {
