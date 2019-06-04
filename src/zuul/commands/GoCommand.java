@@ -37,7 +37,7 @@ public class GoCommand implements CommandFunction {
 		Raum naechsterRaum = this.spieler.getAktuellerRaum().getAusgang(richtung);
 
 		if (naechsterRaum == null) {
-			return("Dort ist kein Weg!\n");
+			System.out.println("Dort ist kein Weg!\n");
 		}
 		else {
 			this.spieler.geheZu(naechsterRaum);
@@ -53,10 +53,10 @@ public class GoCommand implements CommandFunction {
 			spieler.frieren();
 			spiel.handelPassivSetzen();
 		}
-		return richtung;
+		return"";
 	}
 
-	private String raumInfoAusgeben() {
-		return this.spieler.getAktuellerRaum().getLangeBeschreibung();
+	private void raumInfoAusgeben() {
+		System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
 	}
 }
