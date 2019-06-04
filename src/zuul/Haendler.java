@@ -23,7 +23,7 @@ public class Haendler {
 
 		String erg = "";
 		for (int i = 0; i < verkaufsGegenstaende.size(); i++) {
-			erg += verkaufsGegenstaende.get(i).getName()+",\tfür"+verkaufsGegenstaende.get(i).getPreis()+"Goldtaler\n";
+			erg += verkaufsGegenstaende.get(i).getName()+",     für "+verkaufsGegenstaende.get(i).getPreis()+" Goldtaler\n";
 		}
 		return erg;
 	}

@@ -24,123 +24,123 @@ import java.util.HashMap;
 
 public class Spiel
 {
-    private Parser parser;
-    private Spieler spieler;
-    private HashMap<String, CommandFunction> commands;
-    private boolean beendet;
-    private boolean handelAktiv = false;
+	private Parser parser;
+	private Spieler spieler;
+	private HashMap<String, CommandFunction> commands;
+	private boolean beendet;
+	private boolean handelAktiv = false;
 
-    /**
-     * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
-     */
-    public Spiel()
-    {
-        this.beendet=false;
-        this.spieler=new Spieler(this);
-        raeumeAnlegen();
-        parser = new Parser();
-        this.commands=new HashMap<>();
+	/**
+	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
+	 */
+	public Spiel()
+	{
+		this.beendet=false;
+		this.spieler=new Spieler(this);
+		raeumeAnlegen();
+		parser = new Parser();
+		this.commands=new HashMap<>();
 
-        this.commands.put("go", new GoCommand(this.spieler, this));
-        this.commands.put("help", new HelpCommand(this.parser));
-        this.commands.put("look", new LookCommand(this.spieler));
-        this.commands.put("status", new StatusCommand(this.spieler));
-        this.commands.put("take", new TakeCommand(this.spieler));
-        this.commands.put("drop", new DropCommand(this.spieler));
-        this.commands.put("eat", new EatCommand(this.spieler));
-        this.commands.put("quit", new QuitCommand(this));
-        this.commands.put("sleep", new SleepCommand(this.spieler));
-        this.commands.put("equipe", new EquipeCommand(this.spieler));
-        this.commands.put("fight", new FightCommand(this));
-        //this.commands.put("use", new UseCommand(this.spieler));
-        this.commands.put("deequipe", new DeequipeCommand(this.spieler));
-        this.commands.put("buy", new BuyCommand(this.spieler, this));
-        this.commands.put("trade", new TradeCommand(this));
+		this.commands.put("go", new GoCommand(this.spieler, this));
+		this.commands.put("help", new HelpCommand(this.parser));
+		this.commands.put("look", new LookCommand(this.spieler));
+		this.commands.put("status", new StatusCommand(this.spieler));
+		this.commands.put("take", new TakeCommand(this.spieler));
+		this.commands.put("drop", new DropCommand(this.spieler));
+		this.commands.put("eat", new EatCommand(this.spieler));
+		this.commands.put("quit", new QuitCommand(this));
+		this.commands.put("sleep", new SleepCommand(this.spieler));
+		this.commands.put("equipe", new EquipeCommand(this.spieler));
+		this.commands.put("fight", new FightCommand(this));
+		//this.commands.put("use", new UseCommand(this.spieler));
+		this.commands.put("deequipe", new DeequipeCommand(this.spieler));
+		this.commands.put("buy", new BuyCommand(this.spieler, this));
+		this.commands.put("trade", new TradeCommand(this, this.spieler));
 
-    }
-    
-    public String kampfAnlegen() {
-    	Monster erg;
-        Kampf kampf;
-        Raum naechsterRaum = this.spieler.getAktuellerRaum();
-    	erg = naechsterRaum.sucheMonster();
-        kampf = new Kampf(spieler, erg, naechsterRaum);
-        return kampf.kaempfen();
-    }
-    
-    public String handelAnlegen() {
-    	handelAktiv = true;
-    	Haendler erg;
-    	Handel handel;
-    	Raum naechsterRaum = this.spieler.getAktuellerRaum();
-    	erg = naechsterRaum.sucheHaendler();
-    	handel = new Handel(erg, spieler, naechsterRaum);
-    	return handel.handelAusgeben();
-    }
-    
-    public void handelPassivSetzen() {
-    	handelAktiv = false;
-    }
-    
-    public boolean istHandelAktiv() {
-    	return handelAktiv;
-    }
+	}
 
-    private void raeumeAnlegen()
-    {
-        this.spieler.geheZu(new WorldGenerator().getStartRaum());  // das Spiel startet auf der Lichtung
-    }
+	public String kampfAnlegen() {
+		Monster erg;
+		Kampf kampf;
+		Raum naechsterRaum = this.spieler.getAktuellerRaum();
+		erg = naechsterRaum.sucheMonster();
+		kampf = new Kampf(spieler, erg, naechsterRaum);
+		return kampf.kaempfen();
+	}
 
-    public void quit() {
-        this.beendet=true;
-    }
+	public String handelAnlegen() {
+		handelAktiv = true;
+		Haendler erg;
+		Handel handel;
+		Raum naechsterRaum = this.spieler.getAktuellerRaum();
+		erg = naechsterRaum.sucheHaendler();
+		handel = new Handel(erg, spieler, naechsterRaum);
+		return handel.handelAusgeben();
+	}
 
-    /**
-     * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels
-     * in einer Schleife.
-     */
-    public void spielen()
-    {
-        willkommenstextAusgeben();
+	public void handelPassivSetzen() {
+		handelAktiv = false;
+	}
 
-        // Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
-        // und führen sie aus, bis das Spiel beendet wird.
+	public boolean istHandelAktiv() {
+		return handelAktiv;
+	}
 
-        while (! beendet) {
-            Befehl befehl = parser.liefereBefehl();
-            String response = verarbeiteBefehl(befehl);
-            System.out.println(response);
-        }
-        System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
-    }
+	private void raeumeAnlegen()
+	{
+		this.spieler.geheZu(new WorldGenerator().getStartRaum());  // das Spiel startet auf der Lichtung
+	}
 
-    /**
-     * Einen Begrüßungstext für den Spieler ausgeben.
-     */
-    private void willkommenstextAusgeben()
-    {
-        System.out.println();
-        System.out.println("Willkommen zu Zuul!");
-        System.out.println("Entdecke die Welt von Zuul. Doch Vorsicht, überall lauern Gefahren!");
-        System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
-        System.out.println();
-        raumInfoAusgeben();
-    }
+	public void quit() {
+		this.beendet=true;
+	}
 
-    private String verarbeiteBefehl(Befehl befehl) {
-    	String erg;
-    	if(befehl.istUnbekannt()) {
-    		erg = "Ich weiß nicht was Sie meinen...";
-    		return erg;
-        } else {
-            String befehlswort = befehl.gibBefehlswort();
-            String response=this.commands.get(befehlswort).execute(befehl);
-            return response;
-        }
-    }
+	/**
+	 * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels
+	 * in einer Schleife.
+	 */
+	public void spielen()
+	{
+		willkommenstextAusgeben();
 
-    private void raumInfoAusgeben() {
-        System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
-    }
+		// Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
+		// und führen sie aus, bis das Spiel beendet wird.
+
+		while (! beendet) {
+			Befehl befehl = parser.liefereBefehl();
+			String response = verarbeiteBefehl(befehl);
+			System.out.println(response);
+		}
+		System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
+	}
+
+	/**
+	 * Einen Begrüßungstext für den Spieler ausgeben.
+	 */
+	private void willkommenstextAusgeben()
+	{
+		System.out.println();
+		System.out.println("Willkommen zu Zuul!");
+		System.out.println("Entdecke die Welt von Zuul. Doch Vorsicht, überall lauern Gefahren!");
+		System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
+		System.out.println();
+		raumInfoAusgeben();
+	}
+
+	private String verarbeiteBefehl(Befehl befehl) {
+		String erg;
+		if(befehl.istUnbekannt()) {
+			erg = "Ich weiß nicht was Sie meinen...";
+			return erg;
+		} else {
+			String befehlswort = befehl.gibBefehlswort();
+			String response=this.commands.get(befehlswort).execute(befehl);
+			return response;
+		}
+	}
+
+	private void raumInfoAusgeben() {
+		System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
+	}
 
 }

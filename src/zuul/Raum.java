@@ -62,6 +62,14 @@ public class Raum
 	public Haendler getHaendler() {
 		return this.haendler.get(0);
 	}
+	
+	public boolean haendlerImRaum() {
+		if(this.haendler.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public void setAusgang(String richtung, Raum nachbar) {
 		this.ausgaenge.put(richtung.toLowerCase(), nachbar);

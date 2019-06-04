@@ -21,6 +21,7 @@ public class BuyCommand implements CommandFunction {
 
 	private String gegenstandKaufen(Befehl befehl) {
 		if (spiel.istHandelAktiv()) {
+			if (befehl.hatZweitesWort()) {
 			//spieler.getAktuellerRaum().getHaendler().sucheVerkaufsGegenstand(befehl.gibZweitesWort()) *falls kaufsgegenstand nicht geht*
 			HandelsWaren kaufsgegenstand = spieler.getAktuellerRaum().getHaendler().sucheVerkaufsGegenstand(befehl.gibZweitesWort());
 			String kaufsgegenstandsName = kaufsgegenstand.getName();
@@ -43,6 +44,8 @@ public class BuyCommand implements CommandFunction {
 				}
 			}
 			return ausgabe;
+		}
+			return "Was soll möchtest du kaufen?";
 		}
 		return "Kein Handel aktiv";
 	}
