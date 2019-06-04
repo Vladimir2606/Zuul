@@ -1,7 +1,6 @@
 package zuul;
 
 import java.util.ArrayList;
-import zuul.items.Gegenstand;
 import zuul.items.HandelsWaren;
 
 public class Haendler {
@@ -29,7 +28,7 @@ public class Haendler {
 		return erg;
 	}
 
-	public ArrayList getVerkaufsGegenstaende() {
+	public ArrayList<HandelsWaren> getVerkaufsGegenstaende() {
 		return this.verkaufsGegenstaende;
 	}
 

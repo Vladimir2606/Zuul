@@ -28,6 +28,7 @@ public class Spiel
     private Spieler spieler;
     private HashMap<String, CommandFunction> commands;
     private boolean beendet;
+    private boolean handelAktiv = false;
 
     /**
      * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
@@ -40,7 +41,7 @@ public class Spiel
         parser = new Parser();
         this.commands=new HashMap<>();
 
-        this.commands.put("go", new GoCommand(this.spieler));
+        this.commands.put("go", new GoCommand(this.spieler, this));
         this.commands.put("help", new HelpCommand(this.parser));
         this.commands.put("look", new LookCommand(this.spieler));
         this.commands.put("status", new StatusCommand(this.spieler));
@@ -53,23 +54,36 @@ public class Spiel
         this.commands.put("fight", new FightCommand(this));
         this.commands.put("use", new UseCommand(this.spieler));
         this.commands.put("deequipe", new DeequipeCommand(this.spieler));
-        this.commands.put("buy", new BuyCommand(this.spieler));
-        this.commands.put("trader", new TraderCommand(this.spieler));
+        this.commands.put("buy", new BuyCommand(this.spieler, this));
+        this.commands.put("trade", new TradeCommand(this));
 
     }
     
     public void kampfAnlegen() {
     	Monster erg;
         Kampf kampf;
-        System.out.println("test");
         Raum naechsterRaum = this.spieler.getAktuellerRaum();
-        if (naechsterRaum == null) {
-        	System.out.println("test");
-        }
-        System.out.println(naechsterRaum.getLangeBeschreibung());
     	erg = naechsterRaum.sucheMonster();
         kampf = new Kampf(spieler, erg, naechsterRaum);
         kampf.kaempfen();
+    }
+    
+    public String handelAnlegen() {
+    	handelAktiv = true;
+    	Haendler erg;
+    	Handel handel;
+    	Raum naechsterRaum = this.spieler.getAktuellerRaum();
+    	erg = naechsterRaum.sucheHaendler();
+    	handel = new Handel(erg, spieler, naechsterRaum);
+    	return handel.handelAusgeben();
+    }
+    
+    public void handelPassivSetzen() {
+    	handelAktiv = false;
+    }
+    
+    public boolean istHandelAktiv() {
+    	return handelAktiv;
     }
 
     private void raeumeAnlegen()

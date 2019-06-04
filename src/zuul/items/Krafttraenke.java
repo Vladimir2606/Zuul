@@ -1,6 +1,6 @@
 package zuul.items;
 
-public class Krafttraenke extends traenke {
+public class Krafttraenke extends Traenke {
 
 	public Krafttraenke(String name, String beschreibung, int gewicht, int bonus) {
 		super(name, beschreibung, gewicht, bonus);

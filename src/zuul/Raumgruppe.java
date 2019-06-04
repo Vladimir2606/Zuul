@@ -27,7 +27,7 @@ public class Raumgruppe {
 		return rEinAusgang;
 	}
 	
-	public ArrayList getRaumgruppe() {
+	public ArrayList<EinUndAusgang> getRaumgruppe() {
 		return einUndAusgaenge;
 	}
 	

@@ -41,6 +41,7 @@ public class Raum
 		this.gegenstaende=new ArrayList<>();
 		this.monster= new ArrayList<>();
 		this.ausgaenge=new HashMap<>();
+		this.haendler=new ArrayList<>();
 		this.beschreibung = beschreibung;
 		this.temperatur = temperatur;
 		this.raumgruppe = raumgruppe;
@@ -59,7 +60,7 @@ public class Raum
 	}
 
 	public Haendler getHaendler() {
-		return this.getHaendler();
+		return this.haendler.get(0);
 	}
 
 	public void setAusgang(String richtung, Raum nachbar) {
@@ -83,6 +84,12 @@ public class Raum
 			erg+="\nIn deiner nähe ist ein Monster:\n";
 			for(Monster m: this.monster) {
 				erg+=" - " + m.toString() + "\n";
+			}
+		}
+		if(this.haendler.size()>0) {
+			erg+="\nIn deiner nähe ist ein Haedler:\n";
+			for(Haendler h: this.haendler) {
+				erg+=" - " + h.toString() + "\n";
 			}
 		}
 		return erg;
@@ -135,6 +142,13 @@ public class Raum
 	public Monster sucheMonster() {
 		if(!monster.isEmpty()) {
 			return monster.get(0);
+		}
+		return null;
+	}
+	
+	public Haendler sucheHaendler() {
+		if(!haendler.isEmpty()) {
+			return haendler.get(0);
 		}
 		return null;
 	}

@@ -11,7 +11,6 @@ import zuul.items.Gegenstand;
 import zuul.items.HandelsWaren;
 import zuul.items.Heilungstraenke;
 import zuul.items.Krafttraenke;
-import zuul.items.traenke;
 
 public class Spieler {
 
@@ -171,8 +170,8 @@ public class Spieler {
 		erg += this.hunger + " Hungerpunkte\n ";
 		erg += this.lebenspunkte +" Lebenspunkte\n ";
 		erg += this.ruestung + " Rüstungspunkte\n";
+		erg += this.goldtaler +" Goldtaler\n";
 		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte;
-
 		return erg;
 	}
 

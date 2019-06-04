@@ -1,6 +1,6 @@
 package zuul.items;
 
-public class Heilungstraenke extends traenke{
+public class Heilungstraenke extends Traenke{
 	
 	public Heilungstraenke(String name, String beschreibung, int gewicht, int bonus) {
 		super(name, beschreibung, gewicht, bonus);

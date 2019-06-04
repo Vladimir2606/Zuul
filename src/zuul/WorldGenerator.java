@@ -289,9 +289,11 @@ public class WorldGenerator {
 	
 	private void addHaendler() {
 		this.willi = new Haendler("Willi", "Hier kannst du gegen Goldtaler Sachen kaufen");
-		this.alleRaume.get("dorfplatz").setHaendler(willi);
-//		this.willi.getVerkaufsGegenstaende(new HandelsWaren(new Waffe()));		//TODO
-		
+		this.alleRaume.get("lichtung").setHaendler(willi);
+		this.willi.gegenstandAufnehmen(new HandelsWaren(new Waffen("Messer", "Ein altes verrostetes Messer", 3, 2), 5));
+		this.willi.gegenstandAufnehmen(new HandelsWaren(new Gegenstand("Löffel", "Ein alte Löffel", 1), 1));
+		this.willi.gegenstandAufnehmen(new HandelsWaren(new Hose("Stoffhose", "schützt ein wenig vor Angriffen", 1, 1), 5));
+		this.willi.gegenstandAufnehmen(new HandelsWaren(new Heilungstraenke("Heilungstrank", "ein großer Trank der das leben viel auffüllt", 5, 10), 5));
 	}
 	
 }	
