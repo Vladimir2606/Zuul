@@ -55,7 +55,16 @@ public class Spieler {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
 			this.lebenspunkte -= 0.5;
 		}
+		nochAmLeben();
 		return "Du frierst!";
+	}
+	
+	public String nochAmLeben() {
+		if (this.lebenspunkte <= 0) {
+			spiel.quit();
+			return "Du bist gestorben!";
+		}
+		return "";
 	}
 
 	/**
@@ -70,10 +79,7 @@ public class Spieler {
 			this.hunger = 0;
 			this.lebenspunkte -= 1;
 		}
-		if (this.lebenspunkte <= 0) {
-			spiel.quit();
-			return "Du bist gestorben!";
-		}
+		nochAmLeben();
 		return "Du bist noch am Leben!";
 	}
 

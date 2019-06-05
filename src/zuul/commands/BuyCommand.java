@@ -19,14 +19,22 @@ public class BuyCommand implements CommandFunction {
 	public String execute(Befehl befehl) {
 		return gegenstandKaufen(befehl);
 	}
-
+	/**
+	 * In dieser Methode wird geguckt, ob ein Handel aktiv ist,
+	 * welchen Gegenstand der Spieler kaufen möchte,
+	 * ob es gewünschten Gegenstand beim Händler gibt
+	 * und ob der Spieler genug GoldTaler hat.
+	 * 
+	 * @param befehl um auf gibZweitesWort() zugreifen zu können
+	 * 
+	 * @return gib einen String wieder ob der Kauf geklappt hat, oder der Spieler nicht genügend GoldTaler hat usw..
+	 */
 	private String gegenstandKaufen(Befehl befehl) {
 		if (spiel.istHandelAktiv()) {
 			if (befehl.hatZweitesWort()) {
 
 				for(HandelsWaren hw: this.spieler.getAktuellerRaum().getHaendler().getVerkaufsGegenstaende()) {
-					if(hw.getName().equalsIgnoreCase(befehl.hatZweitesWort())) {
-
+					if(hw.getName().equalsIgnoreCase(befehl.gibZweitesWort())) {
 						//spieler.getAktuellerRaum().getHaendler().sucheVerkaufsGegenstand(befehl.gibZweitesWort()) *falls kaufsgegenstand nicht geht*
 						HandelsWaren kaufsgegenstand = spieler.getAktuellerRaum().getHaendler().sucheVerkaufsGegenstand(befehl.gibZweitesWort());
 						String kaufsgegenstandsName = kaufsgegenstand.getName();
