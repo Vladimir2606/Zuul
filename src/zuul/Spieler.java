@@ -29,6 +29,9 @@ public class Spieler {
 	private int ruestung;
 	private int schaden;
 	private int goldtaler;
+	private int level;
+	private int levelpukte;
+
 
 	/** @param tragkraft = das maximalgewicht in kg das getragen werden kann
 	 *	@param hunger = die hungerpunkte des spielers, wie satt er ist
@@ -36,7 +39,7 @@ public class Spieler {
 	 *	@param auszuhaltendeKaelte = die niedrichste temperatur, welche er aushält ohne schaden zuzunehmen
 	 * @return 
 	 */
-	public  Spieler(Spiel spiel) {
+	public Spieler(Spiel spiel) {
 		this.gegenstaende=new ArrayList<>();
 		this.tragkraft = 30;
 		this.hunger = 10;
@@ -45,11 +48,62 @@ public class Spieler {
 		this.ruestung = 0;
 		this.spiel = spiel;
 		this.schaden = 1;
-		this.goldtaler = 50;
+		this.goldtaler = 25;
+		this.level = 0;
+		this.levelpukte = 0;
 	}
 
+	public String leveln() {
+
+		if (levelpukte > 3 && level==0) {
+			this.tragkraft += 1;
+			this.level += 1;
+			return "<<<Level 1>>>";
+
+		} else if (levelpukte > 6 && level ==1) {
+			this.lebenspunkte += 1;
+			this.level += 1;
+			return "<<<Level 2>>>";
+
+		} else if (levelpukte > 10 && level ==2) {
+			this.lebenspunkte += 1;
+			this.tragkraft += 1;
+			this.level += 1;
+			return "<<<Level 3>>>";
+
+		} else if (levelpukte > 10 && level ==3) {
+			this.lebenspunkte += 1;
+			this.auszuhaltendeKaelte += 1;
+			this.level += 1;
+			return "<<<Level 4>>>";
+			
+		} else if (levelpukte > 10 && level ==4) {
+			this.lebenspunkte += 1;
+			this.goldtaler += 5;
+			this.level += 1;
+			return "<<<Level 5>>>";
+
+		} else if (levelpukte > 10 && level ==5) {
+			this.lebenspunkte += 1;
+			this.schaden += 2;
+			this.level += 1;
+			return "<<<Level 6>>>";
+
+		} else if (levelpukte > 10 && level ==5) {
+			this.lebenspunkte += 1;
+			this.goldtaler += 7;
+			this.tragkraft += 1;
+			this.auszuhaltendeKaelte += 2;
+			this.level += 1;
+			return "<<<Level 7>>>";
+		}
+		return "";						//TODO******** Die Methode aufrufen nach Kampf un evt. bei Raumwchsel..******
+	}
+
+
 	/**
-	 * 
+	 * Wird beim Raumwchsel aufgerufe und zieht 0,5 lebenspunkte ab
+	 * @return Gibt einen String wieder
 	 */
 	public String frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
@@ -58,7 +112,10 @@ public class Spieler {
 		nochAmLeben();
 		return "Du frierst!";
 	}
-	
+	/**
+	 * 
+	 * @return überprüft ob man stirbt und gibt dann einen String zurück
+	 */
 	public String nochAmLeben() {
 		if (this.lebenspunkte <= 0) {
 			spiel.quit();
@@ -125,8 +182,8 @@ public class Spieler {
 			}
 		}
 	}
-	
-	
+
+
 	public boolean gegenstandKaufen(String name) {
 		HandelsWaren gesucht=this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name);
 		if(gesucht==null) {
@@ -134,7 +191,7 @@ public class Spieler {
 		} else {
 			if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
 					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
-				
+
 				this.goldtaler -= gesucht.getPreis();
 				this.gegenstaende.add(gesucht.getGegenstand());			//***********************TODO
 				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
@@ -359,11 +416,11 @@ public class Spieler {
 	public ArrayList<Gegenstand> getGegenstand() {
 		return this.gegenstaende;
 	}
-	
+
 	public int getTragkraft() {
 		return this.tragkraft;
 	}
-	
+
 	public int getGoldtaler() {
 		return this.goldtaler;
 	}
