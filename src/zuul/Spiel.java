@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 public class Spiel
 {
+
 	private Parser parser;
 	private Spieler spieler;
 	private HashMap<String, CommandFunction> commands;
@@ -143,4 +144,22 @@ public class Spiel
 		System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
 	}
 
+    /*
+     * !go west
+     * 
+     * ---> Sie sind in einem dunklen.....
+     */
+    public String getResponse(String befehlsstring) {
+    	befehlsstring = befehlsstring.substring(1);
+    	String[] befehleAlsArray = befehlsstring.split(" ");   //   ["go", "west"] 
+    	Befehl befehl=null;
+    	if (befehleAlsArray.length>0) {
+    		if(befehleAlsArray.length>1) {
+    			befehl = new Befehl(befehleAlsArray[0], befehleAlsArray[1]);
+    		} else {
+    			befehl = new Befehl(befehleAlsArray[0], null);
+    		}
+    	}
+    	return verarbeiteBefehl(befehl);
+   }
 }
