@@ -3,7 +3,6 @@ package zuul.commands;
 import zuul.Befehl;
 import zuul.Spiel;
 import zuul.Spieler;
-import zuul.items.Gegenstand;
 import zuul.items.HandelsWaren;
 
 public class BuyCommand implements CommandFunction {
@@ -44,7 +43,8 @@ public class BuyCommand implements CommandFunction {
 						if (befehl.hatZweitesWort()) {
 							boolean geklappt=this.spieler.gegenstandKaufen(befehl.gibZweitesWort());
 							if(geklappt) {
-								ausgabe = kaufsgegenstandsName+" für "+kaufsgegenstandsPreis+"\n";
+								ausgabe = kaufsgegenstandsName+" für "+kaufsgegenstandsPreis+" Goldtaler gekauft\n";
+								ausgabe += "Du hast noch: "+spieler.getGoldtaler()+" Goldtaler übrig";
 							} else {
 								if(this.spieler.ermittleGewicht()+kaufsgegenstand.getGewicht() > spieler.getTragkraft()) {
 									ausgabe = "Du kannst nicht so viel tragen!";

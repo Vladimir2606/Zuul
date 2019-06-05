@@ -95,7 +95,7 @@ public class Raum
 			}
 		}
 		if(this.haendler.size()>0) {
-			erg+="\nIn deiner nähe ist ein Haedler:\n";
+			erg+="\nIn deiner nähe ist ein Händler:\n";
 			for(Haendler h: this.haendler) {
 				erg+=" - " + h.toString() + "\n";
 			}
