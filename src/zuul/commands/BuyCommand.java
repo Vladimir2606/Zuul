@@ -59,7 +59,7 @@ public class BuyCommand implements CommandFunction {
 						return ausgabe;
 					}
 				}
-				return "Diesen Gegenstand gibt es hier nicht"
+				return "Diesen Gegenstand gibt es hier nicht";
 			}
 			return "Was soll möchtest du kaufen?";
 		}
