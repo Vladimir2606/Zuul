@@ -79,23 +79,25 @@ public class Spiel
      * 
      * ---> Sie sind in einem dunklen.....
      */
-    
-    
     public String getResponse(String befehlsstring) {
     	befehlsstring = befehlsstring.substring(1);
     	String[] befehleAlsArray = befehlsstring.split(" ");   //   ["go", "west"] 
-    	
-    	Befehl befehl = befehleAlsArray[verarbeiteBefehl(befehlsstring)];
-    	
-    	
-    }
+    	Befehl befehl=null;
+    	if (befehleAlsArray.length>0) {
+    		if(befehleAlsArray.length>1) {
+    			befehl = new Befehl(befehleAlsArray[0], befehleAlsArray[1]);
+    		} else {
+    			befehl = new Befehl(befehleAlsArray[0], null);
+    		}
+    	}
+    	return verarbeiteBefehl(befehl);
+   }
      
     /**
      * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels
      * in einer Schleife.
      */
-    public void spielen()
-    {
+    public void spielen() {
         willkommenstextAusgeben();
 
         // Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
