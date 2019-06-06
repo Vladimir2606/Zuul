@@ -55,49 +55,57 @@ public class Spieler {
 
 	public String leveln() {
 
-		if (levelpukte > 3 && level==0) {
+		if (levelpukte > 5 && level==0) {
 			this.tragkraft += 1;
 			this.level += 1;
-			return "<<<Level 1>>>";
+			return "<<<Level 1>>>\n";
 
-		} else if (levelpukte > 6 && level ==1) {
+		} else if (levelpukte > 10 && level ==1) {
 			this.lebenspunkte += 1;
 			this.level += 1;
-			return "<<<Level 2>>>";
+			return "<<<Level 2>>>\n";
 
-		} else if (levelpukte > 10 && level ==2) {
+		} else if (levelpukte > 17 && level ==2) {
 			this.lebenspunkte += 1;
 			this.tragkraft += 1;
 			this.level += 1;
-			return "<<<Level 3>>>";
+			return "<<<Level 3>>>\n";
 
-		} else if (levelpukte > 10 && level ==3) {
+		} else if (levelpukte > 28 && level ==3) {
 			this.lebenspunkte += 1;
 			this.auszuhaltendeKaelte += 1;
 			this.level += 1;
-			return "<<<Level 4>>>";
+			return "<<<Level 4>>>\n";
 			
-		} else if (levelpukte > 10 && level ==4) {
+		} else if (levelpukte > 40 && level ==4) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 5;
 			this.level += 1;
-			return "<<<Level 5>>>";
+			return "<<<Level 5>>>\n";
 
-		} else if (levelpukte > 10 && level ==5) {
+		} else if (levelpukte > 55 && level ==5) {
 			this.lebenspunkte += 1;
 			this.schaden += 2;
 			this.level += 1;
-			return "<<<Level 6>>>";
+			return "<<<Level 6>>>\n";
 
-		} else if (levelpukte > 10 && level ==5) {
+		} else if (levelpukte > 76 && level ==6) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 7;
 			this.tragkraft += 1;
 			this.auszuhaltendeKaelte += 2;
 			this.level += 1;
-			return "<<<Level 7>>>";
+			return "<<<Level 7>>>\n";
+			
+		} else if (levelpukte > 100 && level ==7) {
+			this.lebenspunkte += 1;
+			this.goldtaler += 7;
+			this.tragkraft += 1;
+			this.auszuhaltendeKaelte += 2;
+			this.level += 1;
+			return "<<<Level 8>>>\n<<<Level Max>>>\n";
 		}
-		return "";						//TODO******** Die Methode aufrufen nach Kampf un evt. bei Raumwchsel..******
+		return "";						//TODO******** Die Methode aufrufen nach Kampf und evt. bei Raumwchsel..******
 	}
 
 
@@ -193,7 +201,7 @@ public class Spieler {
 					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
 
 				this.goldtaler -= gesucht.getPreis();
-				this.gegenstaende.add(gesucht.getGegenstand());			//***********************TODO
+				this.gegenstaende.add(gesucht.getGegenstand());
 				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
 				return true;
 			} else {
@@ -228,13 +236,13 @@ public class Spieler {
 		for(Gegenstand g: this.gegenstaende) {
 			erg += " - " + g.getName() + " " + g.getGewicht()+"kg\n";
 		}
-		erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n";
-		erg += "Ich habe noch\n ";
-		erg += this.hunger + " Hungerpunkte\n ";
-		erg += this.lebenspunkte +" Lebenspunkte\n ";
-		erg += this.ruestung + " Rüstungspunkte\n";
-		erg += this.goldtaler +" Goldtaler\n";
-		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte;
+		erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n\n";
+		erg += "Ich habe noch:\n";
+		erg += this.lebenspunkte +" Lebenspunkte,\n";
+		erg += this.ruestung + " Rüstungspunkte,\n";
+		erg += this.hunger + " Hungerpunkte,\n\n";
+		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte+",\t\t"+this.goldtaler +" Goldtaler\n";
+		erg += "Level: "+this.level;
 		return erg;
 	}
 
@@ -282,22 +290,23 @@ public class Spieler {
 		return "Diesen Gegenstand gibt es nicht!";
 	}
 
-	public void benutzen(String name) {
+	public String benutzen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
 				if(g instanceof Heilungstraenke) {
 					Heilungstraenke h=(Heilungstraenke)g;
 					this.lebenspunkte +=h.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "Heilungstrank eingenommen";
 				} else if (g instanceof Krafttraenke) {
 					Krafttraenke k=(Krafttraenke)g;
 					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "Krafttrank eingenommen";
 				}
 			}
 		}
+		return "Das habe ich leider nicht";
 	}
 
 	/**
@@ -398,12 +407,16 @@ public class Spieler {
 		return "Diese Rüstung gibt es nicht";
 	}
 
-	public int getLeben() {
-		return (int) lebenspunkte;
+	public double getLeben() {
+		return this.lebenspunkte;
 	}
 
 	public int getSchaden() {
-		return schaden;
+		return this.schaden;
+	}
+	
+	public void setLevelpunkte(int Auflevelpunkte) {
+		this.levelpukte += Auflevelpunkte;
 	}
 
 	public void reduziereLeben(int schaden) {

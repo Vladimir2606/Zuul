@@ -47,11 +47,11 @@ public class Monster {
 	}
 
 	public int getLeben() {
-		return lebenspunkte;
+		return this.lebenspunkte;
 	}
 
 	public int getSchaden() {
-		return schaden;
+		return this.schaden;
 	}
 
 	/**
@@ -60,12 +60,12 @@ public class Monster {
 	 * @author tiago
 	 */
 	public void reduziereLeben(int schaden) {
-		lebenspunkte-=schaden;
+		this.lebenspunkte-=schaden;
 	}
 
-	/** Droppt das item in Raum
+	/** Droppt das item im Raum
 	 * 
-	 * @param raum
+	 * @param raum: der Raum wird übergeben um das Item darin zu Droppen
 	 * @author tiago
 	 */
 	public String dropItem(Raum raum) {
@@ -86,5 +86,9 @@ public class Monster {
 	 */
 	public void gegenstandAufnehmen(Gegenstand neuerGegenstand) {
 		this.gegenstaende.add(neuerGegenstand);
+	}
+	
+	public int getLevelpunkte() {
+		return this.levelpunkte;
 	}
 }
