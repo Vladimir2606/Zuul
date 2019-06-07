@@ -149,14 +149,14 @@ public class Raum
 
 	public Monster sucheMonster() {
 		if(!monster.isEmpty()) {
-			return monster.get(0);
+			return this.monster.get(0);
 		}
 		return null;
 	}
 	
 	public Haendler sucheHaendler() {
 		if(!haendler.isEmpty()) {
-			return haendler.get(0);
+			return this.haendler.get(0);
 		}
 		return null;
 	}

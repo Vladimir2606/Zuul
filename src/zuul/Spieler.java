@@ -105,7 +105,7 @@ public class Spieler {
 			this.level += 1;
 			return "<<<Level 8>>>\n<<<Level Max>>>\n";
 		}
-		return "";						//TODO******** Die Methode aufrufen nach Kampf und evt. bei Raumwchsel..******
+		return "";
 	}
 
 

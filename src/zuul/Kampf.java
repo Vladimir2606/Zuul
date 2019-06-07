@@ -21,6 +21,7 @@ public class Kampf {
 		String erg = "Kampf beginnt";
 		erg += "Leben vom Spieler: "+spieler.getLeben()+"	Leben vom Monster: "+monster.getLeben();
 		if(monster.testAgro()) {
+			angriff();
 			angreifer = false;
 		}
 		while(beideAmLeben()){

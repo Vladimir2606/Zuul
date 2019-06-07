@@ -61,11 +61,11 @@ public class Spiel
 	}
 
 	public String kampfAnlegen() {
-		Monster erg;
+		Monster m;
 		Kampf kampf;
 		Raum naechsterRaum = this.spieler.getAktuellerRaum();
-		erg = naechsterRaum.sucheMonster();
-		kampf = new Kampf(spieler, erg, naechsterRaum);
+		m = naechsterRaum.sucheMonster();
+		kampf = new Kampf(spieler, m, naechsterRaum);
 		return kampf.kaempfen();
 	}
 

@@ -46,7 +46,7 @@ public class Monster {
 		return agro;
 	}
 
-	public int getLeben() {
+	public double getLeben() {
 		return this.lebenspunkte;
 	}
 
