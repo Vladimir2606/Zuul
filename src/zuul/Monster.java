@@ -12,17 +12,15 @@ public class Monster {
 	private String beschreibung;
 	private int schaden;
 	private int lebenspunkte;
-	private int rüstung;
 	private boolean agro;
 	private List<Gegenstand> gegenstaende = new ArrayList<>();
 	private int levelpunkte;
 
-	public Monster(String name, String beschreibung, int lebenspunkte, int rüstung,
+	public Monster(String name, String beschreibung, int lebenspunkte,
 			int schaden, int levelpunkte, boolean agro) {
 		this.name=name;
 		this.beschreibung=beschreibung;
 		this.lebenspunkte=lebenspunkte;
-		this.rüstung=rüstung;
 		this.schaden=schaden;
 		this.agro=agro;
 		this.levelpunkte = levelpunkte;
@@ -30,7 +28,7 @@ public class Monster {
 
 	@Override
 	public String toString() {
-		return name + ", " + this.beschreibung + ", " + this.schaden + " dmg" + ", " + this.lebenspunkte + " HP" + ", " + this.rüstung +" Rüstung";
+		return name + ", " + this.beschreibung + ", " + this.schaden + " dmg" + ", " + this.lebenspunkte + " HP";
 	}
 
 	public String getName(){

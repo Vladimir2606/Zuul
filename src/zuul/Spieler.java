@@ -12,6 +12,7 @@ import zuul.items.Gegenstand;
 import zuul.items.HandelsWaren;
 import zuul.items.Heilungstraenke;
 import zuul.items.Krafttraenke;
+import zuul.items.Schriftrolle;
 
 public class Spieler {
 
@@ -55,41 +56,41 @@ public class Spieler {
 
 	public String leveln() {
 
-		if (levelpukte > 5 && level==0) {
+		if (levelpukte > 5 && level==1) {
 			this.tragkraft += 1;
 			this.level += 1;
 			return "<<<Level 1>>>\n";
 
-		} else if (levelpukte > 10 && level ==1) {
+		} else if (levelpukte > 10 && level ==2) {
 			this.lebenspunkte += 1;
 			this.level += 1;
 			return "<<<Level 2>>>\n";
 
-		} else if (levelpukte > 17 && level ==2) {
+		} else if (levelpukte > 17 && level ==3) {
 			this.lebenspunkte += 1;
 			this.tragkraft += 1;
 			this.level += 1;
 			return "<<<Level 3>>>\n";
 
-		} else if (levelpukte > 28 && level ==3) {
+		} else if (levelpukte > 28 && level ==4) {
 			this.lebenspunkte += 1;
 			this.auszuhaltendeKaelte += 1;
 			this.level += 1;
 			return "<<<Level 4>>>\n";
 			
-		} else if (levelpukte > 40 && level ==4) {
+		} else if (levelpukte > 40 && level ==5) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 5;
 			this.level += 1;
 			return "<<<Level 5>>>\n";
 
-		} else if (levelpukte > 55 && level ==5) {
+		} else if (levelpukte > 55 && level ==6) {
 			this.lebenspunkte += 1;
 			this.schaden += 2;
 			this.level += 1;
 			return "<<<Level 6>>>\n";
 
-		} else if (levelpukte > 76 && level ==6) {
+		} else if (levelpukte > 76 && level ==7) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 7;
 			this.tragkraft += 1;
@@ -97,7 +98,7 @@ public class Spieler {
 			this.level += 1;
 			return "<<<Level 7>>>\n";
 			
-		} else if (levelpukte > 100 && level ==7) {
+		} else if (levelpukte > 100 && level ==8) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 7;
 			this.tragkraft += 1;
@@ -240,6 +241,7 @@ public class Spieler {
 		erg += "Ich habe noch:\n";
 		erg += this.lebenspunkte +" Lebenspunkte,\n";
 		erg += this.ruestung + " Rüstungspunkte,\n";
+		erg += this.schaden + " Schadenspunkte,\n";
 		erg += this.hunger + " Hungerpunkte,\n\n";
 		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte+",\t\t"+this.goldtaler +" Goldtaler\n";
 		erg += "Level: "+this.level;
@@ -303,6 +305,11 @@ public class Spieler {
 					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
 					return "Krafttrank eingenommen";
+				} else if (g instanceof Schriftrolle) {
+					Schriftrolle s=(Schriftrolle)g;
+					this.schaden +=s.getBonusKraft();
+					this.gegenstaende.remove(g);
+					return "Schriftrolle benutzt";
 				}
 			}
 		}
@@ -313,6 +320,7 @@ public class Spieler {
 	 * 
 	 */
 	public String sleep() {
+		this.lebenspunkte += 0.2;
 		return "Ich schlaf dann mal";
 	}
 
