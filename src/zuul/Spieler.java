@@ -26,6 +26,7 @@ public class Spieler {
 	private Brust brust;
 	private Helm helm;
 	private Schuhe schuhe;
+	private Waffen waffen;
 	private int ruestung;
 	private int schaden;
 	private int goldtaler;
@@ -58,7 +59,7 @@ public class Spieler {
 		nochAmLeben();
 		return "Du frierst!";
 	}
-	
+
 	public String nochAmLeben() {
 		if (this.lebenspunkte <= 0) {
 			spiel.quit();
@@ -125,8 +126,8 @@ public class Spieler {
 			}
 		}
 	}
-	
-	
+
+
 	public boolean gegenstandKaufen(String name) {
 		HandelsWaren gesucht=this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name);
 		if(gesucht==null) {
@@ -134,7 +135,7 @@ public class Spieler {
 		} else {
 			if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
 					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
-				
+
 				this.goldtaler -= gesucht.getPreis();
 				this.gegenstaende.add(gesucht.getGegenstand());			//***********************TODO
 				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
@@ -259,6 +260,42 @@ public class Spieler {
 		}
 		return "Rüstung erfolgreich ausgerüstet";
 	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public String bewaffnen(String name) {
+		Gegenstand g = getGegenstandByName(name);
+		if (this.waffen == null) {
+			if (g instanceof Waffen) {
+				this.waffen = (Waffen) g;
+				return "Waffe wurde aufgehoben!";
+			}
+		}
+		return "Diese Waffe gibt es nicht";
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public String entwaffnen(String name) {
+		for(Gegenstand g: this.gegenstaende) {
+			if(g.getName().equalsIgnoreCase(name)) {
+				this.gegenstaende.remove(g);
+				this.aktuellerRaum.gegenstandAblegen(g);
+				this.schaden -= ((Waffen)g).getSchaden();
+				if(g instanceof Waffen) {
+					this.waffen = null;
+					return "Waffe wurde entfernt";
+				}
+			}
+		}
+		return "Du hast keine Waffe bei dir!";
+	}
 
 	/**
 	 * Man kann Rüstungen ausrüsten und 
@@ -349,8 +386,72 @@ public class Spieler {
 		return schaden;
 	}
 
-	public void reduziereLeben(int schaden) {
-		lebenspunkte-=schaden;
+	public String reduziereLeben(int schaden) {
+		if (ruestung >= 10) {
+			if (schaden - 2.5 >= 0) {
+				lebenspunkte -= (schaden - 2.5);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 9) {
+			if (schaden - 2.25 >= 0) {
+				lebenspunkte -= (schaden - 2.25);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 8) {
+			if (schaden - 2 >= 0) {
+				lebenspunkte -= (schaden - 2);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 7) {
+			if (schaden - 1.75 >= 0) {
+				lebenspunkte -= (schaden - 1.75);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 6) {
+			if (schaden - 1.5 >= 0) {
+				lebenspunkte -= (schaden - 1.5);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 5) {
+			if (schaden - 1.25 >= 0) {
+				lebenspunkte -= (schaden - 1.25);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 4) {
+			if (schaden - 1 >= 0) {
+				lebenspunkte -= (schaden - 1);
+				return "";
+			} else {
+				lebenspunkte -= 0.25;
+			}
+		}
+		if (ruestung >= 3) {
+			lebenspunkte -= (schaden - 0.75);
+			return "";
+		}
+		if (ruestung >= 2) {
+			lebenspunkte -= (schaden - 0.5);
+			return "";
+		}
+		return "Sie haben nicht genug Rüstungspunkte";
 	}
 	/**
 	 * 
@@ -359,14 +460,13 @@ public class Spieler {
 	public ArrayList<Gegenstand> getGegenstand() {
 		return this.gegenstaende;
 	}
-	
+
 	public int getTragkraft() {
 		return this.tragkraft;
 	}
-	
+
 	public int getGoldtaler() {
 		return this.goldtaler;
 	}
 
 }
-
