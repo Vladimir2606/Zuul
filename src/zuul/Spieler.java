@@ -77,7 +77,7 @@ public class Spieler {
 			this.auszuhaltendeKaelte += 1;
 			this.level += 1;
 			return "<<<Level 4>>>\n";
-			
+
 		} else if (levelpukte > 40 && level ==5) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 5;
@@ -97,7 +97,7 @@ public class Spieler {
 			this.auszuhaltendeKaelte += 2;
 			this.level += 1;
 			return "<<<Level 7>>>\n";
-			
+
 		} else if (levelpukte > 100 && level ==8) {
 			this.lebenspunkte += 1;
 			this.goldtaler += 7;
@@ -198,17 +198,30 @@ public class Spieler {
 		if(gesucht==null) {
 			return false;
 		} else {
-			if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
-					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
+			if (gesucht.getGegenstand() instanceof Waffen && waffenImInventar() == false) {
+				if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
+						this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
 
-				this.goldtaler -= gesucht.getPreis();
-				this.gegenstaende.add(gesucht.getGegenstand());
-				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
-				return true;
-			} else {
-				return false;
+					this.goldtaler -= gesucht.getPreis();
+					this.gegenstaende.add(gesucht.getGegenstand());
+					this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
+					return true;
+				} else {
+					return false;
+				}
+				
 			}
-		}				
+			return false;
+		}
+	}
+
+	public boolean waffenImInventar() {
+		for (int i = 0; i < gegenstaende.size(); i++) {
+			if (gegenstaende.get(i) instanceof Waffen) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -422,7 +435,7 @@ public class Spieler {
 	public int getSchaden() {
 		return this.schaden;
 	}
-	
+
 	public void setLevelpunkte(int Auflevelpunkte) {
 		this.levelpukte += Auflevelpunkte;
 	}

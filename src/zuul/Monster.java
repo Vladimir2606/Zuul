@@ -58,7 +58,7 @@ public class Monster {
 	 * @author tiago
 	 */
 	public void reduziereLeben(int schaden) {
-		this.lebenspunkte-=schaden;
+		this.lebenspunkte-= schaden;
 	}
 
 	/** Droppt das item im Raum
