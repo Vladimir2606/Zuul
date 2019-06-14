@@ -84,7 +84,7 @@ public class Raum
 		if(this.gegenstaende.size()>0) {
 			erg+="\nGegenstände in diesem Umgebung:\n";
 			for(Gegenstand g: this.gegenstaende) {
-				erg+=" - " + g.toString();
+				erg+=" - " + g.toString() + "\n";
 			}
 			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad" + "\n";
 		}
@@ -95,7 +95,7 @@ public class Raum
 			}
 		}
 		if(this.haendler.size()>0) {
-			erg+="\nIn deiner nähe ist ein Haedler:\n";
+			erg+="\nIn deiner nähe ist ein Händler:\n";
 			for(Haendler h: this.haendler) {
 				erg+=" - " + h.toString() + "\n";
 			}

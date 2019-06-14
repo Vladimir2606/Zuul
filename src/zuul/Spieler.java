@@ -48,10 +48,7 @@ public class Spieler {
 		this.schaden = 1;
 		this.goldtaler = 50;
 	}
-
-	/**
-	 * 
-	 */
+	
 	public String frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
 			this.lebenspunkte -= 0.5;
@@ -65,7 +62,8 @@ public class Spieler {
 			spiel.quit();
 			return "Du bist gestorben!";
 		}
-		return "";
+		nochAmLeben();
+		return "Du frierst!";
 	}
 
 	/**
@@ -137,7 +135,7 @@ public class Spieler {
 					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
 
 				this.goldtaler -= gesucht.getPreis();
-				this.gegenstaende.add(gesucht.getGegenstand());			//***********************TODO
+				this.gegenstaende.add(gesucht.getGegenstand());
 				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
 				return true;
 			} else {
@@ -226,22 +224,23 @@ public class Spieler {
 		return "Diesen Gegenstand gibt es nicht!";
 	}
 
-	public void benutzen(String name) {
+	public String benutzen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
 				if(g instanceof Heilungstraenke) {
 					Heilungstraenke h=(Heilungstraenke)g;
 					this.lebenspunkte +=h.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "";
 				} else if (g instanceof Krafttraenke) {
 					Krafttraenke k=(Krafttraenke)g;
 					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "";
 				}
 			}
 		}
+		return "test";
 	}
 
 	/**
@@ -259,26 +258,6 @@ public class Spieler {
 			return "Du kannst keine Rüstung mehr ausrüsten";
 		}
 		return "Rüstung erfolgreich ausgerüstet";
-	}
-
-	/**
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public String entwaffnen(String name) {
-		for(Gegenstand g: this.gegenstaende) {
-			if(g.getName().equalsIgnoreCase(name)) {
-				this.gegenstaende.remove(g);
-				this.aktuellerRaum.gegenstandAblegen(g);
-				this.schaden -= ((Waffen)g).getSchaden();
-				if(g instanceof Waffen) {
-					this.waffen = null;
-					return "Waffe wurde entfernt";
-				}
-			}
-		}
-		return "Du hast keine Waffe bei dir!";
 	}
 
 	/**

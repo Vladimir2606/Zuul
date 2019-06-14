@@ -8,7 +8,7 @@ import zuul.Monster;
 import zuul.Spieler;
 
 public class GoCommand implements CommandFunction {
-	
+
 	private Spieler spieler;
 	private Spiel spiel;
 
@@ -43,6 +43,16 @@ public class GoCommand implements CommandFunction {
 			this.spieler.geheZu(naechsterRaum);
 			raumInfoAusgeben();
 			erg = naechsterRaum.sucheMonster();
+			if(erg != null) {
+				if(erg.testAgro() ) {
+					kampf = new Kampf(spieler, erg, naechsterRaum);
+					kampf.kaempfen();
+				}
+			}
+			spieler.hungern();
+			spieler.frieren();
+		}
+			erg = naechsterRaum.sucheMonster();
 			if (erg != null) {
 				if(erg.testAgro()) {
 					kampf = new Kampf(spieler, erg, naechsterRaum);
@@ -52,11 +62,15 @@ public class GoCommand implements CommandFunction {
 			spieler.hungern();
 			spieler.frieren();
 			spiel.handelPassivSetzen();
-		}
 		return"";
-	}
+
+}
 
 	private void raumInfoAusgeben() {
 		System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
 	}
+
+
 }
+
+
