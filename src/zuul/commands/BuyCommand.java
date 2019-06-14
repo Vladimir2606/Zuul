@@ -52,7 +52,7 @@ public class BuyCommand implements CommandFunction {
 									ausgabe = "Du hast nicht genug Goldtaler!";
 
 								} else {
-									ausgabe = "Gegenstand konnte nicht gekauft werden werden\n!";
+									ausgabe = "Gegenstand konnte nicht gekauft werden!\n";
 								}
 							}
 						}

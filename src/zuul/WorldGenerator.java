@@ -6,6 +6,7 @@ import zuul.items.Gegenstand;
 import zuul.items.HandelsWaren;
 import zuul.items.Heilungstraenke;
 import zuul.items.Krafttraenke;
+import zuul.items.Schriftrolle;
 import zuul.rüstung.Brust;
 import zuul.rüstung.Hose;
 import zuul.rüstung.Schuhe;
@@ -16,8 +17,9 @@ import java.util.HashMap;
 public class WorldGenerator {
 
 	HashMap<String, Raum> alleRaume;
-	private Monster harald, hexe, piratenSkellet, gefallenerGefangener, untoterWächter, priester, clown, vergiftetePutzfrau, gollum, riese;
-	private Haendler willi;
+
+	private Monster harald, hexe1, piratenSkellet, gefallenerGefangener, untoterWächter, priester, clown, vergiftetePutzfrau, gollum, riese;
+	private Haendler willi, hexe, marian;
 
 	public WorldGenerator() {
 		this.alleRaume = new HashMap<>();
@@ -29,6 +31,7 @@ public class WorldGenerator {
 		this.addRuestungen();
 		this.addMonster();
 		this.addTraenke();
+		this.addSchriftrollen();
 		addHaendler();
 	}
 
@@ -63,7 +66,7 @@ public class WorldGenerator {
 		this.alleRaume.put("strand", new Raum("am Strand", 9, 5));
 		this.alleRaume.put("hotelErsterStock", new Raum("im erstem Stock des Hotels", 19, 6));
 
-		
+
 		/*
 		 * lichtung = new Raum("auf einer Lichtung, umgeben von dunklen Tannen", 12);
 		 * waldstueck = new Raum("im dunklen Wald", 13); taverne = new
@@ -227,17 +230,17 @@ public class WorldGenerator {
 	}
 
 	private void addTraenke() {
-		this.alleRaume.get("kirche").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
-		this.alleRaume.get("taverneErsterStock").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
-		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
-		this.alleRaume.get("strandweg").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein mittlerer Trank der das leben auffüllt", 2, 5));
-		this.alleRaume.get("gefängnis").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein mittlerer Trank der das leben auffüllt", 2, 5));
-		this.alleRaume.get("hotelErsterStock").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein großer Trank der das leben viel auffüllt", 5, 10));
-		this.alleRaume.get("zelle2").gegenstandAblegen(new Heilungstraenke("Heilungstrank", "ein großer Trank der das leben viel auffüllt", 5, 10));
-		this.alleRaume.get("hotelErsterStock").gegenstandAblegen(new Krafttraenke("Krafttrank", "ein kleiner Trank der schwerer tragen lässt", 2, 5));
-		this.alleRaume.get("strand").gegenstandAblegen(new Krafttraenke("Krafttrank", "ein kleiner Trank der schwerer tragen lässt", 2, 5));
-		this.alleRaume.get("geheimgang").gegenstandAblegen(new Krafttraenke("Krafttrank", "ein großer Trank der schwerer tragen lässt", 5, 10));
-		this.alleRaume.get("lichtung").gegenstandAblegen(new Krafttraenke("Krafttrank", "ein großer Trank der schwerer tragen lässt", 5, 10));
+		this.alleRaume.get("kirche").gegenstandAblegen(new Heilungstraenke("Heilungstrank-K", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
+		this.alleRaume.get("taverneErsterStock").gegenstandAblegen(new Heilungstraenke("Heilungstrank-K", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
+		this.alleRaume.get("hexenhaus").gegenstandAblegen(new Heilungstraenke("Heilungstrank-K", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3));
+		this.alleRaume.get("strandweg").gegenstandAblegen(new Heilungstraenke("Heilungstrank-M", "ein mittlerer Trank der das leben auffüllt", 2, 5));
+		this.alleRaume.get("gefängnis").gegenstandAblegen(new Heilungstraenke("Heilungstrank-M", "ein mittlerer Trank der das leben auffüllt", 2, 5));
+		this.alleRaume.get("hotelErsterStock").gegenstandAblegen(new Heilungstraenke("Heilungstrank-G", "ein großer Trank der das leben viel auffüllt", 5, 10));
+		this.alleRaume.get("zelle2").gegenstandAblegen(new Heilungstraenke("Heilungstrank-G", "ein großer Trank der das leben viel auffüllt", 5, 10));
+		this.alleRaume.get("hotelErsterStock").gegenstandAblegen(new Krafttraenke("Krafttrank-K", "ein kleiner Trank der schwerer tragen lässt", 2, 5));
+		this.alleRaume.get("strand").gegenstandAblegen(new Krafttraenke("Krafttrank-K", "ein kleiner Trank der schwerer tragen lässt", 2, 5));
+		this.alleRaume.get("geheimgang").gegenstandAblegen(new Krafttraenke("Krafttrank-G", "ein großer Trank der schwerer tragen lässt", 5, 10));
+		this.alleRaume.get("lichtung").gegenstandAblegen(new Krafttraenke("Krafttrank-G", "ein großer Trank der schwerer tragen lässt", 5, 10));
 	}
 
 	/** erstellt Waffen und legt sie in einem Raum ab
@@ -267,66 +270,85 @@ public class WorldGenerator {
 		this.alleRaume.get("geheimgang").gegenstandAblegen(new Schuhe("Lederschuhe", "ein paar Schuhe aus Rinderleder", 3, 2));
 	}
 
+	private void addSchriftrollen() {
+		this.alleRaume.get("zelle2").gegenstandAblegen(new Schriftrolle("Schriftrolle", "eine Schriftrolle die dein Schaden erhöht", 1, 3));
+		this.alleRaume.get("hotelErsterStock").gegenstandAblegen(new Schriftrolle("Schriftrolle", "eine Schriftrolle die dein Schaden erhöht", 1, 3));
+	}
+
 	/** @retrun gibt den Startraum wieder
 	 */
 	public Raum getStartRaum() {
 		return this.alleRaume.get("lichtung");
 	}
-	
+
+
 	/**
 	 * erstellt Monster und legt sie in einem Raum ab
 	 */
 	private void addMonster() {
-    	this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, true);
-    	this.alleRaume.get("waldstueck").setMonster(harald);
-    	this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
-    	
-    	this.gollum = new Monster("Gollum", "ist ein kleier hässlicher und agressiever Gnom", 1, 1, 1, true);
-    	this.alleRaume.get("geheimgang").setMonster(gollum);
-    	this.gollum.gegenstandAufnehmen(new Gegenstand("Goldstück", "ein goldener Taler", 1));
-    	
-    	this.riese = new Monster("Riese", "ein gefährlich aussehender Riese", 1, 1, 1, false);
-    	this.alleRaume.get("strand").setMonster(riese);
-    	this.riese.gegenstandAufnehmen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
-    	
-    	this.hexe = new Monster("Hexe", "die ihr hexenhaus beschützt", 7, 2, 4, true);
-    	this.alleRaume.get("hexenhaus").setMonster(hexe);
-    	this.hexe.gegenstandAufnehmen(new Waffen("Hexenstab", "ist ein alter Zauberstab der nicht mehr funktioniert", 3, 5));
-    	
-    	this.piratenSkellet = new Monster("Piratenskellet", "beschützt das beschädigte Pirateschiff in der Höhle", 4, 4, 3, true);
-    	this.alleRaume.get("piratenHoehle").setMonster(piratenSkellet);
-    	this.piratenSkellet.gegenstandAufnehmen(new Brust("Skelletpanzer", "ist der Oberkörper des Skellettes", 6, 8));
-    	
-    	this.gefallenerGefangener = new Monster("Gefallener Gefangener", "er ist ein gefangener der schon seit vielen jahren tot ist und noch die zelle beschützt", 8, 3, 8, false);
-    	this.alleRaume.get("zelle1").setMonster(gefallenerGefangener);
-    	this.gefallenerGefangener.gegenstandAufnehmen(new Hose("Hose", "des Gefallenen Gefangenden ", 3, 3));
-    	
-    	this.untoterWächter = new Monster("Untoterwächter", "er ist der wächter des gefängnisses und hat sich selbst in der zelle engespert", 5, 3, 7, false);
-    	this.alleRaume.get("zelle2").setMonster(untoterWächter);
-    	this.untoterWächter.gegenstandAufnehmen(new Waffen("Schlagstock", "vom Untotenwächter", 4, 8));
-    	
-    	this.priester = new Monster("Priester", "bewacht die gläubigen in dieser Welt", 12, 5, 6, false);
-    	this.alleRaume.get("kirche").setMonster(priester);
-    	this.priester.gegenstandAufnehmen(new Helm("Priesterhut", "wird dich beschützen wenn du ihn aufgesetzt hast", 2, 5));
-    	
-    	this.clown = new Monster("Clown", "ist in dem Hotel gestorben und geistert seit dem im Hotel herrum", 10, 4, 7, false);
-    	this.alleRaume.get("hotel").setMonster(clown);
-    	this.clown.gegenstandAufnehmen(new Schuhe("Clownschuhe", "sind dir viel zu groß", 2, 3));
-    	
-    	this.vergiftetePutzfrau = new Monster("Vergiftete Putzfrau", "wurde von einem Gast vergiftet", 13, 5, 8, true);
-    	this.alleRaume.get("hotelErsterStock").setMonster(vergiftetePutzfrau);
-    	this.vergiftetePutzfrau.gegenstandAufnehmen(new Waffen("Besen", "damit wurde die Vergiftete Putzfrau geschlagen", 4, 6));
-    }
-	
+		this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, true);
+		this.alleRaume.get("waldstueck").setMonster(harald);
+		this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
+
+		this.gollum = new Monster("Gollum", "ist ein kleier hässlicher und agressiever Gnom", 1, 1, 1, true);
+		this.alleRaume.get("geheimgang").setMonster(gollum);
+		this.gollum.gegenstandAufnehmen(new Gegenstand("Goldstück", "ein goldener Taler", 1));
+
+		this.riese = new Monster("Riese", "ein gefährlich aussehender Riese", 1, 1, 1, false);
+		this.alleRaume.get("strand").setMonster(riese);
+		this.riese.gegenstandAufnehmen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
+
+		this.hexe1 = new Monster("Hexe1", "die ihr hexenhaus beschützt", 7, 2, 4, true);
+		this.alleRaume.get("hexenhaus").setMonster(hexe1);
+		this.hexe1.gegenstandAufnehmen(new Waffen("Hexenstab", "ist ein alter Zauberstab der nicht mehr funktioniert", 3, 5));
+
+		this.piratenSkellet = new Monster("Piratenskellet", "beschützt das beschädigte Pirateschiff in der Höhle", 4, 4, 3, true);
+		this.alleRaume.get("piratenHoehle").setMonster(piratenSkellet);
+		this.piratenSkellet.gegenstandAufnehmen(new Brust("Skelletpanzer", "ist der Oberkörper des Skellettes", 6, 8));
+
+		this.gefallenerGefangener = new Monster("Gefallener Gefangener", "er ist ein gefangener der schon seit vielen jahren tot ist und noch die zelle beschützt", 8, 3, 8, false);
+		this.alleRaume.get("zelle1").setMonster(gefallenerGefangener);
+		this.gefallenerGefangener.gegenstandAufnehmen(new Hose("Hose", "des Gefallenen Gefangenden ", 3, 3));
+
+		this.untoterWächter = new Monster("Untoterwächter", "er ist der wächter des gefängnisses und hat sich selbst in der zelle engespert", 5, 3, 7, false);
+		this.alleRaume.get("zelle2").setMonster(untoterWächter);
+		this.untoterWächter.gegenstandAufnehmen(new Waffen("Schlagstock", "vom Untotenwächter", 4, 8));
+
+		this.priester = new Monster("Priester", "bewacht die gläubigen in dieser Welt", 12, 5, 6, false);
+		this.alleRaume.get("kirche").setMonster(priester);
+		this.priester.gegenstandAufnehmen(new Helm("Priesterhut", "wird dich beschützen wenn du ihn aufgesetzt hast", 2, 5));
+
+		this.clown = new Monster("Clown", "ist in dem Hotel gestorben und geistert seit dem im Hotel herrum", 10, 4, 7, false);
+		this.alleRaume.get("hotel").setMonster(clown);
+		this.clown.gegenstandAufnehmen(new Schuhe("Clownschuhe", "sind dir viel zu groß", 2, 3));
+
+		this.vergiftetePutzfrau = new Monster("Vergiftete Putzfrau", "wurde von einem Gast vergiftet", 13, 5, 8, true);
+		this.alleRaume.get("hotelErsterStock").setMonster(vergiftetePutzfrau);
+		this.vergiftetePutzfrau.gegenstandAufnehmen(new Waffen("Besen", "damit wurde die Vergiftete Putzfrau geschlagen", 4, 6));
+	}
 
 
 	private void addHaendler() {
-		this.willi = new Haendler("Willi", "Hier kannst du gegen Goldtaler Sachen kaufen");
+		this.willi = new Haendler("Willi", "\n   Waffenshop\n   Hier kannst du gegen Goldtaler Dinge kaufen");
 		this.alleRaume.get("lichtung").setHaendler(willi);
 		this.willi.gegenstandAufnehmen(new HandelsWaren(new Waffen("Messer", "Ein altes verrostetes Messer", 3, 2), 5));
 		this.willi.gegenstandAufnehmen(new HandelsWaren(new Gegenstand("Löffel", "Ein alte Löffel", 1), 1));
 		this.willi.gegenstandAufnehmen(new HandelsWaren(new Hose("Stoffhose", "schützt ein wenig vor Angriffen", 1, 1), 5));
-		this.willi.gegenstandAufnehmen(new HandelsWaren(new Heilungstraenke("Heilungstrank", "ein großer Trank der das leben viel auffüllt", 5, 10), 5));
+		this.willi.gegenstandAufnehmen(new HandelsWaren(new Heilungstraenke("Heilungstrank-G", "ein großer Trank der das leben viel auffüllt", 5, 10), 5));
+
+		this.hexe = new Haendler("Hexe", "\n   Traekeshop\n   Hier kannst du gegen Goldtaler Dinge kaufen");
+		this.alleRaume.get("hexenhaus").setHaendler(hexe);
+		this.hexe.gegenstandAufnehmen(new HandelsWaren(new Heilungstraenke("Heilungstrank-K", "ein kleiner Trank der das leben ein wenig auffüllt", 1, 3), 2));
+		this.hexe.gegenstandAufnehmen(new HandelsWaren(new Heilungstraenke("Heilungstrank-M", "ein mittlerer Trank der das leben auffüllt", 2, 5), 4));
+		this.hexe.gegenstandAufnehmen(new HandelsWaren(new Heilungstraenke("Heilungstrank-G", "ein großer Trank der das leben viel auffüllt", 4, 10), 8));
+		this.hexe.gegenstandAufnehmen(new HandelsWaren( new Krafttraenke("Krafttrank-K", "ein kleiner Trank der schwerer tragen lässt", 2, 5), 4));
+		this.hexe.gegenstandAufnehmen(new HandelsWaren( new Krafttraenke("Krafttrank-G", "ein großer Trank der schwerer tragen lässt", 5, 10), 8));
+
+		this.marian = new Haendler("Marian", "\n   Schriftrollenshop\n   Hier kannst du gegen Goldtaler Dinge kaufen");
+		this.alleRaume.get("kirche").setHaendler(marian);
+		this.marian.gegenstandAufnehmen(new HandelsWaren(new Schriftrolle("Schriftrolle-K", "eine Schriftrolle die dein Schaden ein wenig erhöht", 1, 3), 10));
+		this.marian.gegenstandAufnehmen(new HandelsWaren(new Schriftrolle("Schriftrolle-G", "eine Schriftrolle die dein Schaden erhöht", 1, 8), 25));
 	}
-	
-}
+
+}	
+

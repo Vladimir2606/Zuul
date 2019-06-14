@@ -49,19 +49,19 @@ public class Spiel
 		this.commands.put("sleep", new SleepCommand(this.spieler));
 		this.commands.put("equipe", new EquipeCommand(this.spieler));
 		this.commands.put("fight", new FightCommand(this));
-		//this.commands.put("use", new UseCommand(this.spieler));
+		this.commands.put("use", new UseCommand(this.spieler));
 		this.commands.put("deequipe", new DeequipeCommand(this.spieler));
 		this.commands.put("buy", new BuyCommand(this.spieler, this));
 		this.commands.put("trade", new TradeCommand(this, this.spieler));
 
 	}
-    
-    public String kampfAnlegen() {
-		Monster erg;
+
+	public String kampfAnlegen() {
+		Monster m;
 		Kampf kampf;
 		Raum naechsterRaum = this.spieler.getAktuellerRaum();
-		erg = naechsterRaum.sucheMonster();
-		kampf = new Kampf(spieler, erg, naechsterRaum);
+		m = naechsterRaum.sucheMonster();
+		kampf = new Kampf(spieler, m, naechsterRaum);
 		return kampf.kaempfen();
 	}
 

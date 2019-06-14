@@ -1,38 +1,40 @@
 package zuul;
 
 public class Kampf {
-	
+
 	private Spieler spieler;
 	private Monster monster;
 	boolean angreifer = true;
 	private Raum raum;
-	
+
 	public Kampf(Spieler spieler, Monster monster, Raum raum) {
 		this.spieler = spieler;
 		this.monster = monster;
 		this.raum = raum;
 	}
-	
+
 	/**
 	 * 
 	 * @author tiago
 	 */
 	public String kaempfen() {
+
 		String erg = "Kampf beginnt\n";
 		erg += "Leben vom Spieler: " + spieler.getLeben() + "	Leben vom Monster: " + monster.getLeben() + "\n";
-		erg += "Leben vom Spieler: " + spieler.getLeben();
 		if(monster.testAgro()) {
+			angriff();
 			angreifer = false;
 		}
 		while(beideAmLeben()){
 			angriff();
 			angreifer = !angreifer;
 		}
+		erg += "kampf ist zu ende"+ "\n" + "\n" +"Leben vom Spieler: " + spieler.getLeben();
 		nachDemKampf();
 		spieler.nochAmLeben();
 		return erg;
 	}
-	
+
 	/**
 	 * 
 	 * @author tiago
@@ -44,7 +46,7 @@ public class Kampf {
 			spieler.reduziereLeben(monster.getSchaden());
 		}
 	}
-	
+
 	/**
 	 * prüft ob Spieler und Monster am leben sind
 	 * @return
@@ -59,7 +61,8 @@ public class Kampf {
 
 	public void nachDemKampf() {
 		monster.dropItem(raum);
-		raum.monsterEntfernen(monster);
+		spieler.setLevelpunkte(monster.getLevelpunkte());
+		raum.monsterEntfernen(monster); 
 	}
-	
+
 }

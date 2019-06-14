@@ -12,9 +12,6 @@ public class UseCommand implements CommandFunction {
 
 	@Override
 	public String execute(Befehl befehl) {
-		this.spieler.benutzen(befehl.gibZweitesWort());
 		return this.spieler.benutzen(befehl.gibZweitesWort());
-
 	}
 }
-

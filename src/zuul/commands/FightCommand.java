@@ -14,6 +14,9 @@ public class FightCommand implements CommandFunction {
 
 	@Override
 	public String execute(Befehl befehl) {
+		if (befehl.hatZweitesWort()) {
+			return "Bitte nur -Fight- eingeben";
+		}
 		return spiel.kampfAnlegen();
 	}
 }

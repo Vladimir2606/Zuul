@@ -12,6 +12,7 @@ import zuul.items.Gegenstand;
 import zuul.items.HandelsWaren;
 import zuul.items.Heilungstraenke;
 import zuul.items.Krafttraenke;
+import zuul.items.Schriftrolle;
 
 public class Spieler {
 
@@ -30,6 +31,9 @@ public class Spieler {
 	private int ruestung;
 	private int schaden;
 	private int goldtaler;
+	private int level;
+	private int levelpukte;
+
 
 	/** @param tragkraft = das maximalgewicht in kg das getragen werden kann
 	 *	@param hunger = die hungerpunkte des spielers, wie satt er ist
@@ -37,7 +41,7 @@ public class Spieler {
 	 *	@param auszuhaltendeKaelte = die niedrichste temperatur, welche er aushält ohne schaden zuzunehmen
 	 * @return 
 	 */
-	public  Spieler(Spiel spiel) {
+	public Spieler(Spiel spiel) {
 		this.gegenstaende=new ArrayList<>();
 		this.tragkraft = 30;
 		this.hunger = 10;
@@ -46,7 +50,77 @@ public class Spieler {
 		this.ruestung = 0;
 		this.spiel = spiel;
 		this.schaden = 1;
-		this.goldtaler = 50;
+		this.goldtaler = 25;
+		this.level = 0;
+		this.levelpukte = 0;
+	}
+
+	public String leveln() {
+
+		if (levelpukte > 5 && level==1) {
+			this.tragkraft += 1;
+			this.level += 1;
+			return "<<<Level 1>>>\n";
+
+		} else if (levelpukte > 10 && level ==2) {
+			this.lebenspunkte += 1;
+			this.level += 1;
+			return "<<<Level 2>>>\n";
+
+		} else if (levelpukte > 17 && level ==3) {
+			this.lebenspunkte += 1;
+			this.tragkraft += 1;
+			this.level += 1;
+			return "<<<Level 3>>>\n";
+
+		} else if (levelpukte > 28 && level ==4) {
+			this.lebenspunkte += 1;
+			this.auszuhaltendeKaelte += 1;
+			this.level += 1;
+			return "<<<Level 4>>>\n";
+
+		} else if (levelpukte > 40 && level ==5) {
+			this.lebenspunkte += 1;
+			this.goldtaler += 5;
+			this.level += 1;
+			return "<<<Level 5>>>\n";
+
+		} else if (levelpukte > 55 && level ==6) {
+			this.lebenspunkte += 1;
+			this.schaden += 2;
+			this.level += 1;
+			return "<<<Level 6>>>\n";
+
+		} else if (levelpukte > 76 && level ==7) {
+			this.lebenspunkte += 1;
+			this.goldtaler += 7;
+			this.tragkraft += 1;
+			this.auszuhaltendeKaelte += 2;
+			this.level += 1;
+			return "<<<Level 7>>>\n";
+
+		} else if (levelpukte > 100 && level ==8) {
+			this.lebenspunkte += 1;
+			this.goldtaler += 7;
+			this.tragkraft += 1;
+			this.auszuhaltendeKaelte += 2;
+			this.level += 1;
+			return "<<<Level 8>>>\n<<<Level Max>>>\n";
+		}
+		return "";
+	}
+
+
+	/**
+	 * Wird beim Raumwchsel aufgerufe und zieht 0,5 lebenspunkte ab
+	 * @return Gibt einen String wieder
+	 */
+	public String nochAmLeben() {
+		if (this.lebenspunkte <= 0) {
+			spiel.quit();
+			return "Du bist gestorben!";
+		}
+		return "";
 	}
 	
 	public String frieren() {
@@ -57,14 +131,10 @@ public class Spieler {
 		return "Du frierst!";
 	}
 
-	public String nochAmLeben() {
-		if (this.lebenspunkte <= 0) {
-			spiel.quit();
-			return "Du bist gestorben!";
-		}
-		nochAmLeben();
-		return "Du frierst!";
-	}
+	/**
+	 * 
+	 * @return überprüft ob man stirbt und gibt dann einen String zurück
+	 */
 
 	/**
 	 * Nach jedem GoCommand wird ein Hungerpunkt
@@ -130,18 +200,33 @@ public class Spieler {
 		HandelsWaren gesucht=this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name);
 		if(gesucht==null) {
 			return false;
-		} else {
-			if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
-					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
+		} else { 
+			if (gesucht.getGegenstand() instanceof Waffen && waffenImInventar() == false) {
+				if(ermittleGewicht()+gesucht.getGewicht()<=this.tragkraft && this.goldtaler >= 
+						this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
 
-				this.goldtaler -= gesucht.getPreis();
-				this.gegenstaende.add(gesucht.getGegenstand());
-				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
-				return true;
-			} else {
-				return false;
+					this.goldtaler -= gesucht.getPreis();
+					this.gegenstaende.add(gesucht.getGegenstand());
+					this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
+					return true;
+				} else {
+					return false;
+				}
 			}
-		}				
+			this.goldtaler -= gesucht.getPreis();
+			this.gegenstaende.add(gesucht.getGegenstand());
+			this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
+			return true;
+		}
+	}
+
+	public boolean waffenImInventar() {
+		for (int i = 0; i < gegenstaende.size(); i++) {
+			if (gegenstaende.get(i) instanceof Waffen) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -170,13 +255,14 @@ public class Spieler {
 		for(Gegenstand g: this.gegenstaende) {
 			erg += " - " + g.getName() + " " + g.getGewicht()+"kg\n";
 		}
-		erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n";
-		erg += "Ich habe noch\n ";
-		erg += this.hunger + " Hungerpunkte\n ";
-		erg += this.lebenspunkte +" Lebenspunkte\n ";
-		erg += this.ruestung + " Rüstungspunkte\n";
-		erg += this.goldtaler +" Goldtaler\n";
-		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte;
+		erg += this.tragkraft - ermittleGewicht() + "kg kann ich noch tragen!\n\n";
+		erg += "Ich habe noch:\n";
+		erg += this.lebenspunkte +" Lebenspunkte,\n";
+		erg += this.ruestung + " Rüstungspunkte,\n";
+		erg += this.schaden + " Schadenspunkte,\n";
+		erg += this.hunger + " Hungerpunkte,\n\n";
+		erg += "Auszuhaltende Kälte: "+this.auszuhaltendeKaelte+",\t\t"+this.goldtaler +" Goldtaler\n";
+		erg += "Level: "+this.level;
 		return erg;
 	}
 
@@ -231,22 +317,29 @@ public class Spieler {
 					Heilungstraenke h=(Heilungstraenke)g;
 					this.lebenspunkte +=h.getBonus();
 					this.gegenstaende.remove(g);
-					return "";
+					return "Heilungstrank eingenommen";
 				} else if (g instanceof Krafttraenke) {
 					Krafttraenke k=(Krafttraenke)g;
 					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
-					return "";
+					return "Krafttrank eingenommen";
+				} else if (g instanceof Schriftrolle) {
+					Schriftrolle s=(Schriftrolle)g;
+					this.schaden +=s.getBonusKraft();
+					this.gegenstaende.remove(g);
+					return "Schriftrolle benutzt";
 				}
 			}
 		}
-		return "test";
+
+		return "Das habe ich leider nicht";
 	}
 
 	/**
 	 * 
 	 */
 	public String sleep() {
+		this.lebenspunkte += 0.2;
 		return "Ich schlaf dann mal";
 	}
 
@@ -356,12 +449,16 @@ public class Spieler {
 		return "Diesen Gegenstand gibt es nicht!";
 	}
 
-	public int getLeben() {
-		return (int) lebenspunkte;
+	public double getLeben() {
+		return this.lebenspunkte;
 	}
 
 	public int getSchaden() {
-		return schaden;
+		return this.schaden;
+	}
+
+	public void setLevelpunkte(int Auflevelpunkte) {
+		this.levelpukte += Auflevelpunkte;
 	}
 
 	public String reduziereLeben(int schaden) {
