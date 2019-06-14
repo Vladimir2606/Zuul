@@ -229,19 +229,19 @@ public class Spieler {
 		return "Diesen Gegenstand gibt es nicht!";
 	}
 
-	public void benutzen(String name) {
+	public String benutzen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
 				if(g instanceof Heilungstraenke) {
 					Heilungstraenke h=(Heilungstraenke)g;
 					this.lebenspunkte +=h.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "";
 				} else if (g instanceof Krafttraenke) {
 					Krafttraenke k=(Krafttraenke)g;
 					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "";
 				}
 			}
 		}
