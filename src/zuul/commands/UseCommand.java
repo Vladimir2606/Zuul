@@ -1,4 +1,4 @@
-/**package zuul.commands;
+package zuul.commands;
 
 import zuul.Befehl;
 import zuul.Spieler;
@@ -16,5 +16,5 @@ public class UseCommand implements CommandFunction {
 
 	}
 }
-*/
+
 

@@ -136,7 +136,7 @@ public class Spieler {
 					this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name).getPreis()) {
 				
 				this.goldtaler -= gesucht.getPreis();
-				this.gegenstaende.add(gesucht.getGegenstand());			//***********************TODO
+				this.gegenstaende.add(gesucht.getGegenstand());
 				this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
 				return true;
 			} else {
@@ -225,19 +225,19 @@ public class Spieler {
 		return "Diesen Gegenstand gibt es nicht!";
 	}
 
-	public void benutzen(String name) {
+	public String benutzen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
 				if(g instanceof Heilungstraenke) {
 					Heilungstraenke h=(Heilungstraenke)g;
 					this.lebenspunkte +=h.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "Heilungstrank genommen";
 				} else if (g instanceof Krafttraenke) {
 					Krafttraenke k=(Krafttraenke)g;
 					this.tragkraft +=k.getBonus();
 					this.gegenstaende.remove(g);
-					return;
+					return "Krafttrank genommen";
 				}
 			}
 		}
@@ -350,7 +350,10 @@ public class Spieler {
 	}
 
 	public void reduziereLeben(int schaden) {
+//		if(this.waffen!=null) {		//TODO
 		lebenspunkte-=schaden;
+//	} else {
+		lebenspunkte+=schaden;
 	}
 	/**
 	 * 
