@@ -260,23 +260,7 @@ public class Spieler {
 		}
 		return "Rüstung erfolgreich ausgerüstet";
 	}
-	
-	/**
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public String bewaffnen(String name) {
-		Gegenstand g = getGegenstandByName(name);
-		if (this.waffen == null) {
-			if (g instanceof Waffen) {
-				this.waffen = (Waffen) g;
-				return "Waffe wurde aufgehoben!";
-			}
-		}
-		return "Diese Waffe gibt es nicht";
-	}
-	
+
 	/**
 	 * 
 	 * @param name
@@ -306,6 +290,12 @@ public class Spieler {
 	 */
 	public String ruestung(String name) {
 		Gegenstand g = getGegenstandByName(name);
+		if (this.waffen == null) {
+			if (g instanceof Waffen) {
+				this.waffen = (Waffen) g;
+				return "Waffe wurde ausgerüstet!";
+			}
+		}
 		if (this.helm == null) {
 			if (g instanceof Helm) {
 				this.helm = (Helm) g;
@@ -338,7 +328,7 @@ public class Spieler {
 				return "Rüstungsstück wurde ausgerüstet!";
 			}
 		}
-		return "Diese Rüstung gibt es nicht!";
+		return "Du hast bereits einen Gegenstand ausgerüstet oder es gibt diese Waffe nicht!";
 	}
 
 	/**
@@ -352,30 +342,39 @@ public class Spieler {
 			if(g.getName().equalsIgnoreCase(name)) {
 				this.gegenstaende.remove(g);
 				this.aktuellerRaum.gegenstandAblegen(g);
-				this.ruestung -= ((Rüstung)g).getRuestung();
+				
+					if(g instanceof Waffen) {
+						this.schaden -= ((Waffen)g).getSchaden();
+						this.waffen = null;
+						return "Waffe wurde entfernt";
+					}
 				if(g instanceof Helm) {
+					this.ruestung -= ((Rüstung)g).getRuestung();
 					this.helm = null;
 					this.auszuhaltendeKaelte += 1;
 					return "Helm ausgezogen, es wird kälter...";
 				} 
 				if(g instanceof Brust) {
+					this.ruestung -= ((Rüstung)g).getRuestung();
 					this.brust = null;
 					this.auszuhaltendeKaelte += 4;
 					return "Brust ausgezogen, es wird kälter...";
 				} 
 				if(g instanceof Hose) {
+					this.ruestung -= ((Rüstung)g).getRuestung();
 					this.hose = null;
 					this.auszuhaltendeKaelte += 3;
 					return "Hose ausgezogen, es wird kälter...";
 				} 
 				if(g instanceof Schuhe) {
+					this.ruestung -= ((Rüstung)g).getRuestung();
 					this.schuhe = null;
 					this.auszuhaltendeKaelte += 2;
 					return "Schuhe ausgezogen, es wird kälter...";
 				} 
 			}
 		}
-		return "Diese Rüstung gibt es nicht";
+		return "Diesen Gegenstand gibt es nicht!";
 	}
 
 	public int getLeben() {
