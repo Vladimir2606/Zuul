@@ -25,7 +25,7 @@ public class HelpCommand implements CommandFunction {
     	String erg = "";
         erg += "Sie haben sich verlaufen. Sie sind allein.";
         erg += "\nSie irren in der Welt von Zuul herum";
-        erg += "\nAußerdem kann jeder Spieler nur eine/n- Helm, Brustplatte, Hose, paar Schuhe und auch nur eine Waffe tragen!";
+        erg += "\nAchtung kann jeder Spieler nur eine/n- Helm, Brustplatte, Hose, paar Schuhe und auch nur eine Waffe tragen!";
         erg += "\nAußerdem stehen Ihnen folgende Befehle zur Verfügung:";
         erg += "\n   " + this.parser.getAlleBefehle()+"\n";
         return erg;

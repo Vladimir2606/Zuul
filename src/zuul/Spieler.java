@@ -51,10 +51,18 @@ public class Spieler {
 		this.spiel = spiel;
 		this.schaden = 1;
 		this.goldtaler = 35;
-		this.level = 0;
+		this.level = 1;
 		this.levelpukte = 0;
 	}
 
+	/**	Diese methode guckt ob man genügend punkte für
+	 * 	ein level-up hat und levelt gegebenenfalls auf,
+	 * 	was die tragekraft, die auzuhaltende Kälte, 
+	 *	den Schaden und die Lebenspunkte verbessern kann,
+	 *	sowie das auktuelle goldguthaben erhöhen kann.
+	 * 
+	 * @return gibt beim aufleveln das neue Level aus.
+	 */
 	public String leveln() {
 
 		if (levelpukte > 5 && level==1) {
@@ -112,8 +120,8 @@ public class Spieler {
 
 
 	/**
-	 * Wird beim Raumwchsel aufgerufe und zieht 0,5 lebenspunkte ab
-	 * @return Gibt einen String wieder
+	 * @return Gibt einen String wieder, der falls man gestorben ist
+	 * mit gefüllt ist, sonst ist dieser leer.
 	 */
 	public String nochAmLeben() {
 		if (this.lebenspunkte <= 0) {
@@ -123,24 +131,25 @@ public class Spieler {
 		return "";
 	}
 	
+	/**Wird beim Raumwechsel aufgerufen und zieht 0,5 lebenspunkte ab,
+	 * falls es in dem Raum kälter ist als die auszuhaltende Kälte.
+	 * 
+	 * @return einen String, der gegebenenfalls "Du Frierst!" beinhaltet oder leer ist.
+	 */
 	public String frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
 			this.lebenspunkte -= 0.5;
+			return "Du frierst!";
 		}
 		nochAmLeben();
-		return "Du frierst!";
+		return "";
 	}
-
-	/**
-	 * 
-	 * @return überprüft ob man stirbt und gibt dann einen String zurück
-	 */
 
 	/**
 	 * Nach jedem GoCommand wird ein Hungerpunkt
 	 * abgezogen falls die Hungerpunkte auf 0 sind
 	 * wird ein Lebenspunkt abgezogen.
-	 * Wenn der Spieler keine Leben hat startet das Spiel neu.
+	 * @return einen String der Leer ist
 	 */
 	public String hungern() {
 		this.hunger -= 1;
@@ -149,12 +158,12 @@ public class Spieler {
 			this.lebenspunkte -= 1;
 		}
 		nochAmLeben();
-		return "Du bist noch am Leben!";
+		return "";
 	}
 
 	/**
 	 * Das Gesamtgewicht was der Spieler noch tragen kann.
-	 * @return
+	 * @return int das gesamtgewicht das der spieler garde trägt.
 	 */
 	public int ermittleGewicht() {
 		int gesamtgewicht=0;
@@ -195,7 +204,14 @@ public class Spieler {
 		}
 	}
 
-
+	/**Diese methode "kauft" dinge, bzw. zieht geld ab, packt den
+	 * gegenstand in den spieler und entfernt ihn aus dem händler.
+	 * 
+	 * Diese methode wird im BuyCommand aufgerufen.
+	 * 
+	 * @param name der name eines gegenstandes der gekauft werden soll wird übergeben.
+	 * @return boolean ob der kauf erfolgreich war.
+	 */
 	public boolean gegenstandKaufen(String name) {
 		HandelsWaren gesucht=this.aktuellerRaum.getHaendler().sucheVerkaufsGegenstand(name);
 		if(gesucht==null) {
@@ -220,6 +236,10 @@ public class Spieler {
 		}
 	}
 
+	/**Diese Methode guckt ob bereits eine Waffe im Inventar ist.
+	 * 
+	 * @return boolean, ob man eine Waffe im Inventar hat.
+	 */
 	public boolean waffenImInventar() {
 		for (int i = 0; i < gegenstaende.size(); i++) {
 			if (gegenstaende.get(i) instanceof Waffen) {
@@ -230,9 +250,8 @@ public class Spieler {
 	}
 
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 * @param name, der name das abzulegenden Gegenstandes wird überben.
+	 * @return boolean, ob das ablegen erfolgreich war.
 	 */
 	public boolean gegenstandAblegen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
@@ -247,7 +266,7 @@ public class Spieler {
 
 	/**
 	 * 
-	 * @return
+	 * @return String erg wo alle wichtigen Daten des Spielers dirnne stehen.
 	 */
 	public String zeigeStatus() {
 		String erg="Ich kann insgesamt ";
@@ -266,9 +285,9 @@ public class Spieler {
 		return erg;
 	}
 
-	/**foo
+	/**
 	 * 
-	 * @param raum
+	 * @param raum der Raum wird übergeben.
 	 */
 	public void geheZu(Raum raum) {
 		this.aktuellerRaum=raum;
@@ -276,12 +295,17 @@ public class Spieler {
 
 	/**
 	 * 
-	 * @return
+	 * @return den aktuellen Raum.
 	 */
 	public Raum getAktuellerRaum() {
 		return aktuellerRaum;
 	}
-
+	
+	/**
+	 * 
+	 * @param name, der name wird übergeben.
+	 * @return Gegenstand durch den namen gesucht.
+	 */
 	private Gegenstand getGegenstandByName(String name) {
 		for (Gegenstand g : this.gegenstaende) {
 			if (g.getName().equalsIgnoreCase(name)) {
@@ -291,9 +315,12 @@ public class Spieler {
 		return null;
 	}
 
-	/**
+	/**Sucht den gegenstand am Namen und entvernt diesen aus dem
+	 * Inventar und erhöht ggf. den Hunger oder Tragkraft / oder verringert diese
 	 * 
-	 * @param name
+	 * @param name, der name wird übergeben
+	 * @return String ob man gegessen hat oder der
+	 * Gegenstand nicht gefunden werden konnte.
 	 */
 	public String essen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
@@ -310,6 +337,12 @@ public class Spieler {
 		return "Diesen Gegenstand gibt es nicht!";
 	}
 
+	/**Diese methode ist dafür da um zB. Tränke zu benutzen.
+	 * Erhöht entwerder Tragkaft, Schaden oder Leben.
+	 * 
+	 * @param name der Anme wird übergeben.
+	 * @return String was eingenommen wurde.
+	 */
 	public String benutzen(String name) {
 		for(Gegenstand g: this.gegenstaende) {
 			if(g.getName().equalsIgnoreCase(name)) {
@@ -335,8 +368,8 @@ public class Spieler {
 		return "Das habe ich leider nicht";
 	}
 
-	/**
-	 * 
+	/**Erhöht das Leben um 0,2.
+	 * @return String
 	 */
 	public String sleep() {
 		this.lebenspunkte += 0.2;
@@ -345,6 +378,7 @@ public class Spieler {
 
 	/**
 	 * Die Methode bestimmt die maximale Punktzahl der Rüstung.
+	 * @return String ob das rüsten erfolgreich war.
 	 */
 	public String ruesten() {
 		if (this.ruestung > 15) {
@@ -359,6 +393,7 @@ public class Spieler {
 	 * Rüstung sorgt dafür das der Spieler mehr 
 	 * Kaelte aushalten kann.
 	 * @param name
+	 * @return String was ausgerüstet wurde.
 	 */
 	public String ruestung(String name) {
 		Gegenstand g = getGegenstandByName(name);
@@ -528,7 +563,7 @@ public class Spieler {
 			lebenspunkte -= (schaden - 0.5);
 			return "";
 		}
-		return "Sie haben nicht genug Rüstungspunkte";
+		return "";
 	}
 	/**
 	 * 

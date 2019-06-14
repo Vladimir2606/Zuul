@@ -286,7 +286,7 @@ public class WorldGenerator {
 	 * erstellt Monster und legt sie in einem Raum ab
 	 */
 	private void addMonster() {
-		this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 1, true);
+		this.harald = new Monster("Harald", "ist ein Org und beschützt das wladstück", 3, 1, 2, true);
 		this.alleRaume.get("waldstueck").setMonster(harald);
 		this.harald.gegenstandAufnehmen(new Gegenstand("Ring", "des bösen Orgs Harald", 1));
 
@@ -298,11 +298,11 @@ public class WorldGenerator {
 		this.alleRaume.get("strand").setMonster(riese);
 		this.riese.gegenstandAufnehmen(new Waffen("Pizzaroller", "ein gefählicher und tötlicher Pizzaroller", 5, 7));
 
-		this.hexe1 = new Monster("Hexe1", "die ihr hexenhaus beschützt", 7, 2, 4, true);
+		this.hexe1 = new Monster("Hexe1", "die ihr hexenhaus beschützt", 7, 2, 9, true);
 		this.alleRaume.get("hexenhaus").setMonster(hexe1);
 		this.hexe1.gegenstandAufnehmen(new Waffen("Hexenstab", "ist ein alter Zauberstab der nicht mehr funktioniert", 3, 5));
 
-		this.piratenSkellet = new Monster("Piratenskellet", "beschützt das beschädigte Pirateschiff in der Höhle", 4, 4, 3, true);
+		this.piratenSkellet = new Monster("Piratenskellet", "beschützt das beschädigte Pirateschiff in der Höhle", 4, 4, 6, true);
 		this.alleRaume.get("piratenHoehle").setMonster(piratenSkellet);
 		this.piratenSkellet.gegenstandAufnehmen(new Brust("Skelletpanzer", "ist der Oberkörper des Skellettes", 6, 8));
 
@@ -314,15 +314,15 @@ public class WorldGenerator {
 		this.alleRaume.get("zelle2").setMonster(untoterWächter);
 		this.untoterWächter.gegenstandAufnehmen(new Waffen("Schlagstock", "vom Untotenwächter", 4, 8));
 
-		this.priester = new Monster("Priester", "bewacht die gläubigen in dieser Welt", 12, 5, 6, false);
+		this.priester = new Monster("Priester", "bewacht die gläubigen in dieser Welt", 12, 5, 15, false);
 		this.alleRaume.get("kirche").setMonster(priester);
 		this.priester.gegenstandAufnehmen(new Helm("Priesterhut", "wird dich beschützen wenn du ihn aufgesetzt hast", 2, 5));
 
-		this.clown = new Monster("Clown", "ist in dem Hotel gestorben und geistert seit dem im Hotel herrum", 10, 4, 7, false);
+		this.clown = new Monster("Clown", "ist in dem Hotel gestorben und geistert seit dem im Hotel herrum", 10, 4, 11, false);
 		this.alleRaume.get("hotel").setMonster(clown);
 		this.clown.gegenstandAufnehmen(new Schuhe("Clownschuhe", "sind dir viel zu groß", 2, 3));
 
-		this.vergiftetePutzfrau = new Monster("Vergiftete Putzfrau", "wurde von einem Gast vergiftet", 13, 5, 8, true);
+		this.vergiftetePutzfrau = new Monster("Vergiftete Putzfrau", "wurde von einem Gast vergiftet", 13, 5, 12, true);
 		this.alleRaume.get("hotelErsterStock").setMonster(vergiftetePutzfrau);
 		this.vergiftetePutzfrau.gegenstandAufnehmen(new Waffen("Besen", "damit wurde die Vergiftete Putzfrau geschlagen", 4, 6));
 	}
