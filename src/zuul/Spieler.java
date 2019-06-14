@@ -46,9 +46,21 @@ public class Spieler {
 	/**
 	 * 
 	 */
+	public String nochAmLeben() {
+		if (this.lebenspunkte <= 0) {
+			spiel.quit();
+			return "Du bist gestorben!";
+		}
+		return "";
+	}
+	
 	public String frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
 			this.lebenspunkte -= 0.5;
+		}
+		if (this.lebenspunkte <= 0) {
+			spiel.quit();
+			return "Du bist gestorben!";
 		}
 		return "Du frierst!";
 	}

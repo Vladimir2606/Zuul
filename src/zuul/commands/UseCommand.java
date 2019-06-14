@@ -11,7 +11,8 @@ public class UseCommand implements CommandFunction {
 	}
 
 	@Override
-	public void execute(Befehl befehl) {
+	public String execute(Befehl befehl) {
+		return null;
 		//this.spieler.benutzen(befehl.gibZweitesWort());
 	}
 }

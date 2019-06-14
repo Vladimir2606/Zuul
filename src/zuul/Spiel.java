@@ -59,10 +59,10 @@ public class Spiel
     	Monster erg;
         Kampf kampf;
         Raum naechsterRaum = this.spieler.getAktuellerRaum();
-        System.out.println(naechsterRaum.getLangeBeschreibung());
     	erg = naechsterRaum.sucheMonster();
         kampf = new Kampf(spieler, erg, naechsterRaum);
-        return kampf.kaempfen();
+        kampf.kaempfen();
+        return "";
     }
 
     private void raeumeAnlegen()
