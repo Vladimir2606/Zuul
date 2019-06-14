@@ -20,7 +20,7 @@ public class Kampf {
 	public String kaempfen() {
 		String erg = "Kampf beginnt\n";
 		erg += "Leben vom Spieler: " + spieler.getLeben() + "	Leben vom Monster: " + monster.getLeben() + "\n";
-		erg += "Leben vom Spieler: " + spieler.getLeben();
+		
 		if(monster.testAgro()) {
 			angreifer = false;
 		}
@@ -28,6 +28,7 @@ public class Kampf {
 			angriff();
 			angreifer = !angreifer;
 		}
+		erg += "kampf ist zu ende"+ "\n" + "\n" +"Leben vom Spieler: " + spieler.getLeben();
 		nachDemKampf();
 		spieler.nochAmLeben();
 		return erg;

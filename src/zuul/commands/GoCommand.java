@@ -24,6 +24,7 @@ public class GoCommand implements CommandFunction {
 
 	private String wechsleRaum(Befehl befehl)
 	{
+		String ergKampf = "";
 		Monster erg;
 		Kampf kampf;
 		if(!befehl.hatZweitesWort()) {
@@ -40,29 +41,23 @@ public class GoCommand implements CommandFunction {
 			System.out.println("Dort ist kein Weg!\n");
 		}
 		else {
+			
 			this.spieler.geheZu(naechsterRaum);
 			raumInfoAusgeben();
 			erg = naechsterRaum.sucheMonster();
 			if(erg != null) {
-				if(erg.testAgro() ) {
+				if(erg.testAgro()) {
+					
 					kampf = new Kampf(spieler, erg, naechsterRaum);
-					kampf.kaempfen();
+					ergKampf += kampf.kaempfen();
 				}
 			}
-			spieler.hungern();
-			spieler.frieren();
-		}
-			erg = naechsterRaum.sucheMonster();
-			if (erg != null) {
-				if(erg.testAgro()) {
-					kampf = new Kampf(spieler, erg, naechsterRaum);
-					kampf.kaempfen();
-				}
+			
 			}
 			spieler.hungern();
 			spieler.frieren();
 			spiel.handelPassivSetzen();
-		return"";
+		return ergKampf;
 
 }
 
