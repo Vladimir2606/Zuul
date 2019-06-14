@@ -24,46 +24,46 @@ import java.util.HashMap;
 
 public class Spiel
 {
-    private Parser parser;
-    private Spieler spieler;
-    private HashMap<String, CommandFunction> commands;
-    private boolean beendet;
+
 
     /**
      * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
      */
+    
     public Spiel()
-    {
-        this.beendet=false;
-        this.spieler=new Spieler(this);
-        raeumeAnlegen();
-        parser = new Parser();
-        this.commands=new HashMap<>();
+	{
+		this.beendet=false;
+		this.spieler=new Spieler(this);
+		raeumeAnlegen();
+		parser = new Parser();
+		this.commands=new HashMap<>();
 
-        this.commands.put("go", new GoCommand(this.spieler));
-        this.commands.put("help", new HelpCommand(this.parser));
-        this.commands.put("look", new LookCommand(this.spieler));
-        this.commands.put("status", new StatusCommand(this.spieler));
-        this.commands.put("take", new TakeCommand(this.spieler));
-        this.commands.put("drop", new DropCommand(this.spieler));
-        this.commands.put("eat", new EatCommand(this.spieler));
-        this.commands.put("quit", new QuitCommand(this));
-        this.commands.put("sleep", new SleepCommand(this.spieler));
-        this.commands.put("equipe", new EquipeCommand(this.spieler));
-        this.commands.put("fight", new FightCommand(this));
-        //this.commands.put("use", new UseCommand(this.spieler));
-        this.commands.put("deequipe", new DeequipeCommand(this.spieler));
-    }
+		this.commands.put("go", new GoCommand(this.spieler, this));
+		this.commands.put("help", new HelpCommand(this.parser));
+		this.commands.put("look", new LookCommand(this.spieler));
+		this.commands.put("status", new StatusCommand(this.spieler));
+		this.commands.put("take", new TakeCommand(this.spieler));
+		this.commands.put("drop", new DropCommand(this.spieler));
+		this.commands.put("eat", new EatCommand(this.spieler));
+		this.commands.put("quit", new QuitCommand(this));
+		this.commands.put("sleep", new SleepCommand(this.spieler));
+		this.commands.put("equipe", new EquipeCommand(this.spieler));
+		this.commands.put("fight", new FightCommand(this));
+		//this.commands.put("use", new UseCommand(this.spieler));
+		this.commands.put("deequipe", new DeequipeCommand(this.spieler));
+		this.commands.put("buy", new BuyCommand(this.spieler, this));
+		this.commands.put("trade", new TradeCommand(this, this.spieler));
+
+	}
     
     public String kampfAnlegen() {
-    	Monster erg;
-        Kampf kampf;
-        Raum naechsterRaum = this.spieler.getAktuellerRaum();
-    	erg = naechsterRaum.sucheMonster();
-        kampf = new Kampf(spieler, erg, naechsterRaum);
-        kampf.kaempfen();
-        return "";
-    }
+		Monster erg;
+		Kampf kampf;
+		Raum naechsterRaum = this.spieler.getAktuellerRaum();
+		erg = naechsterRaum.sucheMonster();
+		kampf = new Kampf(spieler, erg, naechsterRaum);
+		return kampf.kaempfen();
+	}
 
     private void raeumeAnlegen()
     {
@@ -122,4 +122,52 @@ public class Spiel
         System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
     }
 
+	private Parser parser;
+	private Spieler spieler;
+	private HashMap<String, CommandFunction> commands;
+	private boolean beendet;
+	private boolean handelAktiv = false;
+
+	/**
+	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
+	 */
+	
+
+	public String handelAnlegen() {
+		handelAktiv = true;
+		Haendler erg;
+		Handel handel;
+		Raum naechsterRaum = this.spieler.getAktuellerRaum();
+		erg = naechsterRaum.sucheHaendler();
+		handel = new Handel(erg, spieler, naechsterRaum);
+		return handel.handelAusgeben();
+	}
+
+	public void handelPassivSetzen() {
+		handelAktiv = false;
+	}
+
+	public boolean istHandelAktiv() {
+		return handelAktiv;
+	}
+	
+
+    /*
+     * !go west
+     * 
+     * ---> Sie sind in einem dunklen.....
+     */
+    public String getResponse(String befehlsstring) {
+    	befehlsstring = befehlsstring.substring(1);
+    	String[] befehleAlsArray = befehlsstring.split(" ");   //   ["go", "west"] 
+    	Befehl befehl=null;
+    	if (befehleAlsArray.length>0) {
+    		if(befehleAlsArray.length>1) {
+    			befehl = new Befehl(befehleAlsArray[0], befehleAlsArray[1]);
+    		} else {
+    			befehl = new Befehl(befehleAlsArray[0], null);
+    		}
+    	}
+    	return verarbeiteBefehl(befehl);
+   }
 }

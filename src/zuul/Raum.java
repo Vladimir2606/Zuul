@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import zuul.items.Gegenstand;
+import zuul.items.HandelsWaren;
 
 public class Raum
 {
@@ -24,6 +25,7 @@ public class Raum
 	protected HashMap<String, Raum> ausgaenge;
 	private ArrayList<Gegenstand> gegenstaende;
 	private ArrayList<Monster> monster;
+	private ArrayList<Haendler> haendler;
 	private int temperatur;
 	private int raumgruppe;
 
@@ -39,6 +41,7 @@ public class Raum
 		this.gegenstaende=new ArrayList<>();
 		this.monster= new ArrayList<>();
 		this.ausgaenge=new HashMap<>();
+		this.haendler=new ArrayList<>();
 		this.beschreibung = beschreibung;
 		this.temperatur = temperatur;
 		this.raumgruppe = raumgruppe;
@@ -50,6 +53,22 @@ public class Raum
 
 	public void setMonster(Monster neuesMonster) {
 		this.monster.add(neuesMonster);
+	}
+
+	public void setHaendler(Haendler neuerHaendler) {
+		this.haendler.add(neuerHaendler);
+	}
+
+	public Haendler getHaendler() {
+		return this.haendler.get(0);
+	}
+	
+	public boolean haendlerImRaum() {
+		if(this.haendler.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void setAusgang(String richtung, Raum nachbar) {
@@ -75,6 +94,12 @@ public class Raum
 				erg+=" - " + m.toString() + "\n";
 			}
 		}
+		if(this.haendler.size()>0) {
+			erg+="\nIn deiner nähe ist ein Händler:\n";
+			for(Haendler h: this.haendler) {
+				erg+=" - " + h.toString() + "\n";
+			}
+		}
 		return erg;
 	}
 
@@ -96,6 +121,10 @@ public class Raum
 
 	public void entferneGegenstand(Gegenstand gesucht) {
 		this.gegenstaende.remove(gesucht);
+	}
+	
+	public void entferneVerkaufsGegenstand(HandelsWaren gesucht) {
+		this.getHaendler().getVerkaufsGegenstaende().remove(gesucht);
 	}
 
 
@@ -124,11 +153,18 @@ public class Raum
 		}
 		return null;
 	}
+	
+	public Haendler sucheHaendler() {
+		if(!haendler.isEmpty()) {
+			return haendler.get(0);
+		}
+		return null;
+	}
 
 	public void monsterEntfernen(Monster m) {
 		monster.remove(m);
 	}
-	
+
 	public int getRaumgruppe() {
 		return this.raumgruppe;
 

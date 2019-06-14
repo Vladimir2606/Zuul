@@ -3,14 +3,18 @@ package zuul.commands;
 import zuul.Befehl;
 import zuul.Kampf;
 import zuul.Raum;
+import zuul.Spiel;
 import zuul.Monster;
 import zuul.Spieler;
 
 public class GoCommand implements CommandFunction {
-	private Spieler spieler;
 
-	public GoCommand(Spieler spieler) {
+	private Spieler spieler;
+	private Spiel spiel;
+
+	public GoCommand(Spieler spieler, Spiel spiel) {
 		this.spieler = spieler;
+		this.spiel = spiel;
 	}
 
 	@Override
@@ -48,11 +52,25 @@ public class GoCommand implements CommandFunction {
 			spieler.hungern();
 			spieler.frieren();
 		}
-		return richtung;
-	}
+			erg = naechsterRaum.sucheMonster();
+			if (erg != null) {
+				if(erg.testAgro()) {
+					kampf = new Kampf(spieler, erg, naechsterRaum);
+					kampf.kaempfen();
+				}
+			}
+			spieler.hungern();
+			spieler.frieren();
+			spiel.handelPassivSetzen();
+		return"";
+
+}
 
 	private void raumInfoAusgeben() {
 		System.out.println(this.spieler.getAktuellerRaum().getLangeBeschreibung());
 	}
 
+
 }
+
+

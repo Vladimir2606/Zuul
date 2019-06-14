@@ -1,18 +1,16 @@
 package zuul.items;
 
-public class Heilungstraenke extends Gegenstand{
-
-	private int heilungsbonus;
+public class Heilungstraenke extends Traenke{
 	
-	public Heilungstraenke(String name, String beschreibung, int gewicht, int heilungsbonus) {
-		super(name, beschreibung, gewicht);
-		this.heilungsbonus = heilungsbonus;
+	public Heilungstraenke(String name, String beschreibung, int gewicht, int bonus) {
+		super(name, beschreibung, gewicht, bonus);
+		
 	}
 	
 	/** @return gibt die Heilungsbonuspunkte wieder
 	 */
-    public int getHeilungsBonus() {
-        return this.heilungsbonus;
+    public int getBonus() {
+        return this.bonus;
     }
-
+    
 }
