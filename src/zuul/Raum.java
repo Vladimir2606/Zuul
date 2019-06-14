@@ -84,7 +84,7 @@ public class Raum
 		if(this.gegenstaende.size()>0) {
 			erg+="\nGegenstände in diesem Umgebung:\n";
 			for(Gegenstand g: this.gegenstaende) {
-				erg+=" - " + g.toString()+"\n";
+				erg+=" - " + g.toString() + "\n";
 			}
 			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad" + "\n";
 		}

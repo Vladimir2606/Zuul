@@ -15,5 +15,3 @@ public class UseCommand implements CommandFunction {
 		return this.spieler.benutzen(befehl.gibZweitesWort());
 	}
 }
-
-

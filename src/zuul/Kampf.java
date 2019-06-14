@@ -29,6 +29,7 @@ public class Kampf {
 			angreifer = !angreifer;
 		}
 		nachDemKampf();
+		spieler.nochAmLeben();
 		return erg;
 	}
 	

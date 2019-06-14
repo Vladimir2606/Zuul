@@ -114,6 +114,14 @@ public class Spieler {
 	 * Wird beim Raumwchsel aufgerufe und zieht 0,5 lebenspunkte ab
 	 * @return Gibt einen String wieder
 	 */
+	public String nochAmLeben() {
+		if (this.lebenspunkte <= 0) {
+			spiel.quit();
+			return "Du bist gestorben!";
+		}
+		return "";
+	}
+	
 	public String frieren() {
 		if (aktuellerRaum.getTemperatur() <= auszuhaltendeKaelte) {
 			this.lebenspunkte -= 0.5;
@@ -125,13 +133,6 @@ public class Spieler {
 	 * 
 	 * @return überprüft ob man stirbt und gibt dann einen String zurück
 	 */
-	public String nochAmLeben() {
-		if (this.lebenspunkte <= 0) {
-			spiel.quit();
-			return "Du bist gestorben!";
-		}
-		return "";
-	}
 
 	/**
 	 * Nach jedem GoCommand wird ein Hungerpunkt
@@ -210,7 +211,10 @@ public class Spieler {
 					return false;
 				}
 			}
-			return false;
+			this.goldtaler -= gesucht.getPreis();
+			this.gegenstaende.add(gesucht.getGegenstand());
+			this.aktuellerRaum.entferneVerkaufsGegenstand(gesucht);
+			return true;
 		}
 	}
 
