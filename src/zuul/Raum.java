@@ -80,11 +80,11 @@ public class Raum
 	}
 
 	public String getLangeBeschreibung() {
-		String erg=  "\nSie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString();
+		String erg=  "\nSie sind " + this.beschreibung + "\nAusgänge: " + this.ausgaengeToString()+"\n";
 		if(this.gegenstaende.size()>0) {
 			erg+="\nGegenstände in diesem Umgebung:\n";
 			for(Gegenstand g: this.gegenstaende) {
-				erg+=" - " + g.toString();
+				erg+=" - " + g.toString()+"\n";
 			}
 			erg+="\nTemperatur in dieser Umgebung: "+this.temperatur+" grad" + "\n";
 		}
@@ -106,7 +106,7 @@ public class Raum
 	public String ausgaengeToString() {
 		String erg="";
 		for(String richtung: ausgaenge.keySet()) {
-			erg+=richtung + " ";
+			erg+=richtung + ",     ";
 		}
 		return erg;
 	}
@@ -149,14 +149,14 @@ public class Raum
 
 	public Monster sucheMonster() {
 		if(!monster.isEmpty()) {
-			return monster.get(0);
+			return this.monster.get(0);
 		}
 		return null;
 	}
 	
 	public Haendler sucheHaendler() {
 		if(!haendler.isEmpty()) {
-			return haendler.get(0);
+			return this.haendler.get(0);
 		}
 		return null;
 	}

@@ -19,9 +19,9 @@ public class Kampf {
 	 */
 	public String kaempfen() {
 		String erg = "Kampf beginnt";
-		erg += "Leben vom Spieler: " + spieler.getLeben() + "	Leben vom Monster: " + monster.getLeben();
-		erg += "Leben vom Spieler: " + spieler.getLeben();
+		erg += "Leben vom Spieler: "+spieler.getLeben()+"	Leben vom Monster: "+monster.getLeben();
 		if(monster.testAgro()) {
+			angriff();
 			angreifer = false;
 		}
 		while(beideAmLeben()){
@@ -58,7 +58,8 @@ public class Kampf {
 
 	public void nachDemKampf() {
 		monster.dropItem(raum);
-		raum.monsterEntfernen(monster);
+		spieler.setLevelpunkte(monster.getLevelpunkte());
+		raum.monsterEntfernen(monster); 
 	}
 	
 }
