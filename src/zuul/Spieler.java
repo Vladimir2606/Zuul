@@ -50,7 +50,7 @@ public class Spieler {
 		this.ruestung = 0;
 		this.spiel = spiel;
 		this.schaden = 1;
-		this.goldtaler = 25;
+		this.goldtaler = 35;
 		this.level = 0;
 		this.levelpukte = 0;
 	}
@@ -365,7 +365,8 @@ public class Spieler {
 		if (this.waffen == null) {
 			if (g instanceof Waffen) {
 				this.waffen = (Waffen) g;
-				return "Waffe wurde ausgerüstet!";
+				this.schaden+=((Waffen) g).getSchaden();
+				return "Waffe ausgerüstet!";
 			}
 		}
 		if (this.helm == null) {
@@ -373,7 +374,7 @@ public class Spieler {
 				this.helm = (Helm) g;
 				this.ruestung += this.helm.getRuestung();
 				this.auszuhaltendeKaelte -= 1;
-				return "Rüstungsstück wurde ausgerüstet!";
+				return "Helm ausgerüstet!";
 			}
 		}
 		if (this.brust == null) {
@@ -381,7 +382,7 @@ public class Spieler {
 				this.brust = (Brust) g;
 				this.ruestung += this.brust.getRuestung();
 				this.auszuhaltendeKaelte -= 4;
-				return "Rüstungsstück wurde ausgerüstet!";
+				return "Brustplatte ausgerüstet!";
 			}
 		}
 		if (this.hose == null) {
@@ -389,7 +390,7 @@ public class Spieler {
 				this.hose = (Hose) g;
 				this.ruestung += this.hose.getRuestung();
 				this.auszuhaltendeKaelte -= 3;
-				return "Rüstungsstück wurde ausgerüstet!";
+				return "Hose ausgerüstet!";
 			}
 		}
 		if (this.schuhe == null) {
@@ -397,10 +398,10 @@ public class Spieler {
 				this.schuhe = (Schuhe) g;
 				this.ruestung += this.schuhe.getRuestung();
 				this.auszuhaltendeKaelte -= 2;
-				return "Rüstungsstück wurde ausgerüstet!";
+				return "Schuhe ausgerüstet!";
 			}
 		}
-		return "Du hast bereits einen Gegenstand ausgerüstet oder es gibt diese Waffe nicht!";
+		return "Du hast bereits einen Gegenstand ausgerüstet oder es gibt diesn Gegenstand nicht!";
 	}
 
 	/**
@@ -418,7 +419,8 @@ public class Spieler {
 					if(g instanceof Waffen) {
 						this.schaden -= ((Waffen)g).getSchaden();
 						this.waffen = null;
-						return "Waffe wurde entfernt";
+						this.schaden-=((Waffen) g).getSchaden();
+						return "Waffe abgelegt";
 					}
 				if(g instanceof Helm) {
 					this.ruestung -= ((Rüstung)g).getRuestung();
